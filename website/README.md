@@ -57,6 +57,32 @@ npm run build        # registry → rescript → vite build  →  dist/
 npm run preview      # serve the production build
 ```
 
+## Deploy (GitHub Pages)
+
+The site deploys automatically via
+[`.github/workflows/deploy-pages.yml`](../.github/workflows/deploy-pages.yml)
+on every push to the deploy branch that touches `website/`, `archetypes/`, or
+the workflow itself. It builds with `BASE_PATH=/<repo>/`, adds a `404.html`
+SPA fallback and `.nojekyll`, and publishes `website/dist`.
+
+**One-time setup:** in the repository, go to **Settings → Pages** and set
+**Source** to **GitHub Actions**. After the first successful run the site is
+live at:
+
+```
+https://brnrdog.github.io/ux-archetypes/
+```
+
+Notes:
+
+- The build injects the base path; `Router.init(~basePath=…)` reads Vite's
+  `BASE_URL`, so client-side routing and deep links resolve under the subpath.
+- Deep links (e.g. `/ux-archetypes/a/button`) are served through `404.html`
+  (a copy of `index.html`), which boots the app and lets the router take over —
+  the standard SPA pattern for a static host.
+- For a custom domain / user site served from `/`, no base is needed; the same
+  build works with `BASE_PATH=/` (the default).
+
 ## Verify (optional)
 
 ```bash
