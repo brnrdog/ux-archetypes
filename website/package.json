@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "registry": "node scripts/generate-registry.mjs",
+    "snippets": "node scripts/generate-snippets.mjs",
+    "gen": "npm run registry && npm run snippets",
     "res:build": "rescript",
     "res:clean": "rescript clean",
     "res:dev": "rescript -w",
-    "dev": "npm run registry && npm run res:build && vite",
-    "build": "npm run registry && npm run res:build && vite build",
+    "dev": "npm run gen && npm run res:build && vite",
+    "build": "npm run gen && npm run res:build && vite build",
     "preview": "vite preview",
     "smoke": "node scripts/smoke-all.mjs"
   },

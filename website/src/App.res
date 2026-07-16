@@ -224,6 +224,70 @@ module NotFound = {
     </div>
 }
 
+module ExampleBlock = {
+  @jsx.component
+  let make = (~a: archetype) => {
+    let mode = Signal.make("preview")
+    let copied = Signal.make(false)
+    let snippet = ExampleSource.get(a.id)
+    let tabCls = target =>
+      Computed.make(() =>
+        "rounded-md px-3 py-1 text-xs font-medium transition-colors " ++ (
+          Signal.get(mode) == target ? "bg-neutral-900 text-white" : "text-neutral-600 hover:text-neutral-900"
+        )
+      )
+    let isPreview = Computed.make(() => Signal.get(mode) == "preview")
+    let isCode = Computed.make(() => Signal.get(mode) == "code")
+    let copyLabel = Computed.make(() => Signal.get(copied) ? "Copied ✓" : "Copy")
+    <div class="mt-10">
+      <div class="mb-3 flex items-center justify-between">
+        <div class="inline-flex items-center gap-1 rounded-lg border border-neutral-200 bg-neutral-50 p-0.5">
+          <button class={Prop.signal(tabCls("preview"))} onClick={_ => Signal.set(mode, "preview")}>
+            <View.Text> "Preview" </View.Text>
+          </button>
+          {switch snippet {
+          | Some(_) =>
+            <button class={Prop.signal(tabCls("code"))} onClick={_ => Signal.set(mode, "code")}>
+              <View.Text> "Code" </View.Text>
+            </button>
+          | None => View.null()
+          }}
+        </div>
+        <a
+          class="text-xs text-neutral-400 underline underline-offset-4 hover:text-neutral-700"
+          href={docUrl(a)}
+          target="_blank">
+          <View.Text> "Read the spec ↗" </View.Text>
+        </a>
+      </div>
+      <View.Show when_={Prop.signal(isPreview)}>
+        <Preview id={a.id} />
+      </View.Show>
+      {switch snippet {
+      | Some(code) =>
+        <View.Show when_={Prop.signal(isCode)}>
+          <div class="relative">
+            <button
+              class="absolute right-2 top-2 z-10 rounded-md border border-neutral-700 bg-neutral-800 px-2 py-1 text-xs text-neutral-200 transition-colors hover:bg-neutral-700"
+              onClick={_ => {
+                Ui.copyToClipboard(code)
+                Signal.set(copied, true)
+                Ui.setTimeout(() => Signal.set(copied, false), 1500)
+              }}>
+              <View.Text> {copyLabel} </View.Text>
+            </button>
+            <pre
+              class="max-h-[32rem] overflow-auto rounded-lg border border-neutral-800 bg-neutral-900 p-4 text-xs leading-relaxed text-neutral-100">
+              <code class="font-mono"> <View.Text> {code} </View.Text> </code>
+            </pre>
+          </div>
+        </View.Show>
+      | None => View.null()
+      }}
+    </div>
+  }
+}
+
 module Detail = {
   @jsx.component
   let make = (~id) =>
@@ -260,15 +324,7 @@ module Detail = {
           </div>
         </View.Show>
 
-        <div class="mt-10">
-          <div class="mb-3 flex items-center justify-between">
-            <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500"> <View.Text> "Example" </View.Text> </h2>
-            <a class="text-xs text-neutral-400 underline underline-offset-4 hover:text-neutral-700" href={docUrl(a)} target="_blank">
-              <View.Text> "Read the spec ↗" </View.Text>
-            </a>
-          </div>
-          <Preview id={a.id} />
-        </div>
+        <ExampleBlock a />
 
         <div class="mt-10 grid gap-6 sm:grid-cols-3">
           <ChipRow title="Composed of" ids={a.composedOf} />
