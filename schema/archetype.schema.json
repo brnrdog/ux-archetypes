@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/brnrdog/ui-archetypes/schema/archetype.schema.json",
+  "title": "UI Archetype metadata",
+  "description": "Schema for the YAML frontmatter metadata block of an archetype document.",
+  "type": "object",
+  "required": ["id", "title", "layer", "version", "status", "summary", "since", "updated"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique kebab-case slug; must match the filename.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable name.",
+      "minLength": 1
+    },
+    "layer": {
+      "type": "string",
+      "description": "The layer this archetype belongs to.",
+      "enum": ["element", "component", "page", "flow"]
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of this archetype, independent of the collection.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "status": {
+      "type": "string",
+      "description": "Lifecycle status.",
+      "enum": ["draft", "stable", "deprecated"]
+    },
+    "summary": {
+      "type": "string",
+      "description": "One-sentence description of intent.",
+      "minLength": 1
+    },
+    "since": {
+      "type": "string",
+      "description": "Collection version in which the archetype first appeared.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "updated": {
+      "type": "string",
+      "description": "ISO date (YYYY-MM-DD) of the last meaningful change.",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Free-form keywords for discovery.",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "aliases": {
+      "type": "array",
+      "description": "Alternative names people search for.",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "composedOf": {
+      "type": "array",
+      "description": "ids of archetypes this one is built from.",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "uniqueItems": true
+    },
+    "usedBy": {
+      "type": "array",
+      "description": "ids of archetypes that commonly include this one.",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "uniqueItems": true
+    },
+    "related": {
+      "type": "array",
+      "description": "ids of adjacent archetypes worth comparing.",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "uniqueItems": true
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "People accountable for the archetype.",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    }
+  }
+}
