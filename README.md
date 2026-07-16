@@ -1,8 +1,10 @@
-# UI Archetypes
+# UX Archetypes
 
-A collection of **User Interface Archetypes** — reusable, technology-agnostic
+A collection of **User Experience (UX) Archetypes** — reusable, technology-agnostic
 definitions of UI patterns written in words, meant to be used as a shared
-reference for design and implementation by both **humans and AI agents**.
+reference for design and implementation by both **humans and AI agents**. They span
+the full experience: from the smallest interface element up to complete pages and
+flows.
 
 > An archetype is an original model, perfect example, or universal pattern upon
 > which other things are copied or based. From the Greek _archein_ (to begin)
@@ -169,7 +171,7 @@ published package metadata in `package.json`.
 ## Repository layout
 
 ```
-ui-archetypes/
+ux-archetypes/
 ├── README.md                     # this file
 ├── CONTRIBUTING.md               # how to add or change an archetype
 ├── CHANGELOG.md                  # semver history of the collection
@@ -181,14 +183,12 @@ ui-archetypes/
 ├── templates/
 │   └── ARCHETYPE_TEMPLATE.md     # canonical document pattern to copy
 └── archetypes/
-    ├── elements/                 # indivisible units
-    │   ├── button.md
-    │   └── input.md
-    ├── components/               # composed patterns
-    │   └── navbar.md
-    └── pages/                    # full-screen experiences
-        └── landing-page.md
+    ├── elements/                 # indivisible units (button, input, badge, …)
+    ├── components/               # composed patterns (navbar, card, dialog, …)
+    └── pages/                    # full-screen experiences (landing-page, …)
 ```
+
+See [`INDEX.md`](INDEX.md) for the full, current list of archetypes.
 
 ---
 

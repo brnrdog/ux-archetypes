@@ -1,7 +1,7 @@
 {
-  "name": "ui-archetypes",
-  "version": "0.1.0",
-  "description": "A technology-agnostic collection of User Interface Archetypes: reusable definitions of UI patterns for humans and AI agents, spanning elements, components, and pages.",
+  "name": "ux-archetypes",
+  "version": "0.2.0",
+  "description": "A technology-agnostic collection of User Experience Archetypes: reusable definitions of UI patterns for humans and AI agents, spanning elements, components, and pages.",
   "license": "MIT",
   "author": "brnrdog",
   "keywords": [
@@ -25,6 +25,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/brnrdog/ui-archetypes"
+    "url": "https://github.com/brnrdog/ux-archetypes"
   }
 }

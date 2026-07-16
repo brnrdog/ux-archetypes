@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/brnrdog/ui-archetypes/schema/archetype.schema.json",
+  "$id": "https://github.com/brnrdog/ux-archetypes/schema/archetype.schema.json",
   "title": "UI Archetype metadata",
   "description": "Schema for the YAML frontmatter metadata block of an archetype document.",
   "type": "object",
