@@ -9,23 +9,27 @@ let make = (
   ~description: string,
   ~icon: string="",
 ) => {
-  let tone = switch variant {
-  | #info => "border-neutral-200 bg-neutral-50 text-neutral-700"
-  | #success => "border-neutral-300 bg-neutral-100 text-neutral-800"
-  | #warning => "border-neutral-400 bg-neutral-100 text-neutral-900"
-  | #danger => "border-neutral-900 bg-neutral-900 text-neutral-100"
+  // Severity comes from the semantic status roles; the surface stays neutral so
+  // editing a status token recolors just the border + icon.
+  let border = switch variant {
+  | #info => "border-border"
+  | #success => "border-status-success"
+  | #warning => "border-status-warning"
+  | #danger => "border-status-danger"
   }
-  let titleColor = switch variant {
-  | #danger => "text-white"
-  | _ => "text-neutral-900"
+  let iconColor = switch variant {
+  | #info => "text-muted"
+  | #success => "text-status-success"
+  | #warning => "text-status-warning"
+  | #danger => "text-status-danger"
   }
-  <div role="alert" class={"flex gap-3 rounded-lg border p-4 text-sm " ++ tone}>
+  <div role="alert" class={"flex gap-3 rounded-lg border bg-surface p-4 text-sm text-ink " ++ border}>
     <View.Show when_={Prop.static(icon != "")}>
-      <span class="font-semibold"> <View.Text> icon </View.Text> </span>
+      <span class={"font-semibold " ++ iconColor}> <View.Text> icon </View.Text> </span>
     </View.Show>
     <div>
-      <p class={"font-medium " ++ titleColor}> <View.Text> title </View.Text> </p>
-      <p class="opacity-80"> <View.Text> description </View.Text> </p>
+      <p class="font-medium text-ink"> <View.Text> title </View.Text> </p>
+      <p class="text-muted"> <View.Text> description </View.Text> </p>
     </div>
   </div>
 }

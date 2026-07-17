@@ -61,20 +61,41 @@ function cssValue(type, rawValue) {
   }
 }
 
+// Aliases stay live: a token whose value is `{ref}` emits a `var(--ref)` pointing
+// at the referenced token's variable, so editing (or theming) a base token
+// cascades through the whole semantic graph at runtime. `varFor` picks the right
+// variable namespace for the reference (@theme vs --ux-*).
+function aliasRef(rawValue) {
+  return typeof rawValue === "string" && /^\{(.+)\}$/.test(rawValue) ? rawValue.slice(1, -1) : null;
+}
+function themeValueFor(tok) {
+  const ref = aliasRef(tok.value);
+  if (ref) {
+    const v = themeVarFor(ref);
+    if (v) return `var(${v})`;
+  }
+  return cssValue(tok.type, tok.value);
+}
+function uxValueFor(tok) {
+  const ref = aliasRef(tok.value);
+  if (ref) return `var(--ux-${ref.replace(/\./g, "-")})`;
+  return cssValue(tok.type, tok.value);
+}
+
 // --- Tailwind @theme mapping (drives utility classes) -----------------------
 // Any token whose path maps to a theme var (see token-vars.mjs) is emitted here,
-// so bg-neutral-*, rounded-*, shadow-*, font-*, and the spacing base all resolve
+// so bg-*, text-*, rounded-*, shadow-*, font-*, and the spacing base all resolve
 // from the tokens — and overriding the var at runtime re-themes the whole site.
 const themeLines = [];
 for (const [path, tok] of Object.entries(flat)) {
   const varName = themeVarFor(path);
-  if (varName) themeLines.push(`  ${varName}: ${cssValue(tok.type, tok.value)};`);
+  if (varName) themeLines.push(`  ${varName}: ${themeValueFor(tok)};`);
 }
 
 // --- :root mirror of every token (--ux-*) -----------------------------------
 const rootLines = [];
 for (const [path, tok] of Object.entries(flat)) {
-  rootLines.push(`  --ux-${path.replace(/\./g, "-")}: ${cssValue(tok.type, tok.value)};`);
+  rootLines.push(`  --ux-${path.replace(/\./g, "-")}: ${uxValueFor(tok)};`);
 }
 
 const out = `/* GENERATED FILE — do not edit by hand.

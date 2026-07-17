@@ -8,13 +8,13 @@ let make = (
   ~children: View.node,
 ) => {
   let tone = switch variant {
-  | #solid => "bg-neutral-900 text-white hover:bg-neutral-700"
-  | #ghost => "text-neutral-700 hover:bg-neutral-100"
+  | #solid => "bg-action text-on-action hover:bg-action-hover"
+  | #ghost => "text-ink hover:bg-action-subtle"
   }
   <button
     type_="button"
     ariaLabel=label
-    class={"inline-flex size-9 items-center justify-center rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 " ++
+    class={"inline-flex size-9 items-center justify-center rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action focus-visible:ring-offset-2 " ++
     tone}
     ?onClick>
     {children}

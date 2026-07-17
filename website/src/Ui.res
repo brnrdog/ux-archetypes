@@ -24,16 +24,18 @@ let onEscape: (unit => unit) => (unit => unit) = %raw(`(cb) => { const h = (e) =
 // Register a global ⌘K / Ctrl+K handler; returns a disposer.
 let onCmdK: (unit => unit) => (unit => unit) = %raw(`(cb) => { const h = (e) => { if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); cb(); } }; window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h); }`)
 
-// Buttons — softer, more modern radius (rounded-lg). Split into layout core,
-// size, and color so the Button component can compose variant × size.
-let btnCore = "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-40 disabled:pointer-events-none"
+// Buttons — composed from the semantic color roles (bg-action, text-on-action,
+// bg-status-danger, …) so editing those tokens re-themes every control. Split
+// into layout core, size, and color so the Button component composes variant ×
+// size.
+let btnCore = "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:opacity-40 disabled:pointer-events-none"
 let btnLg = "gap-2 px-5 py-2.5 text-base"
 let btnMd = "gap-2 px-4 py-2 text-sm"
 let btnSm = "gap-1 px-2.5 py-1 text-xs"
-let btnPrimaryColors = "bg-neutral-900 text-white hover:bg-neutral-700"
-let btnSecondaryColors = "border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-100"
-let btnGhostColors = "text-neutral-700 hover:bg-neutral-100"
-let btnDestructiveColors = "bg-neutral-900 text-white ring-1 ring-inset ring-neutral-900 hover:bg-neutral-700"
+let btnPrimaryColors = "bg-action text-on-action hover:bg-action-hover"
+let btnSecondaryColors = "border border-border bg-surface text-ink hover:bg-action-subtle"
+let btnGhostColors = "text-ink hover:bg-action-subtle"
+let btnDestructiveColors = "bg-status-danger text-on-action hover:opacity-90"
 // Convenience (medium) presets.
 let btnPrimary = btnCore ++ " " ++ btnMd ++ " " ++ btnPrimaryColors
 let btnSecondary = btnCore ++ " " ++ btnMd ++ " " ++ btnSecondaryColors
@@ -41,10 +43,10 @@ let btnGhost = btnCore ++ " " ++ btnMd ++ " " ++ btnGhostColors
 let btnDestructive = btnCore ++ " " ++ btnMd ++ " " ++ btnDestructiveColors
 
 // Surfaces
-let card = "rounded-2xl border border-neutral-200 bg-white"
-let inputBase = "w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-0"
-let label = "block text-sm font-medium text-neutral-800"
-let muted = "text-neutral-500"
+let card = "rounded-2xl border border-border bg-surface"
+let inputBase = "w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-ink placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action focus-visible:ring-offset-0"
+let label = "block text-sm font-medium text-ink"
+let muted = "text-muted"
 
 // Layer badge classes (still monochrome — differ by fill weight only)
 let layerBadge = layer =>

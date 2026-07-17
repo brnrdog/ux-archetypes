@@ -115,6 +115,17 @@ released.
 
 ### Website
 
+- **Semantic color roles as Tailwind utilities.** The generated `@theme` now
+  exposes the semantic roles — `bg-action` / `text-on-action` / `bg-action-hover`
+  / `bg-action-subtle`, `bg-status-{info,success,warning,danger}`, `text-ink` /
+  `text-muted`, `bg-surface` / `bg-paper` / `border-border`, `bg-chart-*` — so a
+  component library just uses these classes instead of hardcoded grays. Aliases
+  stay live (`--color-action: var(--color-neutral-900)`), so overriding a base
+  token cascades through the roles that reference it. The reference components
+  (`Ui.res` buttons/inputs/surfaces, `Alert`, `IconButton`, and the app chrome's
+  accents) were repointed to these roles, so editing `action` recolors every
+  control and `status.danger` recolors destructive actions and danger alerts —
+  while the monochrome default is unchanged. Documented in `tokens/README.md`.
 - **Design Tokens page + live editor.** A generated reference of every token the
   framework defines (from `tokens.json`), where each token is **editable in
   place** — colors via a picker, dimensions/fonts via text. Edits override the

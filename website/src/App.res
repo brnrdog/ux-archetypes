@@ -158,7 +158,7 @@ module SidebarGroup = {
             let cls = Computed.make(() => {
               let active = Signal.get(Router.location()).pathname == "/a/" ++ a.id
               "block rounded-lg px-2 py-1.5 text-sm transition-colors " ++ (
-                active ? "bg-neutral-900 text-white" : "text-neutral-700 hover:bg-neutral-100"
+                active ? "bg-action text-on-action" : "text-neutral-700 hover:bg-neutral-100"
               )
             })
             <li>
@@ -192,7 +192,7 @@ module TraitsGroup = {
             let cls = Computed.make(() => {
               let active = Signal.get(Router.location()).pathname == "/t/" ++ t.id
               "block rounded-lg px-2 py-1.5 text-sm transition-colors " ++ (
-                active ? "bg-neutral-900 text-white" : "text-neutral-700 hover:bg-neutral-100"
+                active ? "bg-action text-on-action" : "text-neutral-700 hover:bg-neutral-100"
               )
             })
             <li>
@@ -221,7 +221,7 @@ module Sidebar = {
           let cls = Computed.make(() => {
             let active = Signal.get(Router.location()).pathname == "/tokens"
             "mb-4 block rounded-lg px-2 py-1.5 text-sm font-medium transition-colors " ++ (
-              active ? "bg-neutral-900 text-white" : "text-neutral-700 hover:bg-neutral-100"
+              active ? "bg-action text-on-action" : "text-neutral-700 hover:bg-neutral-100"
             )
           })
           <Router.Link to="/tokens" class={Prop.signal(cls)}>
@@ -247,7 +247,7 @@ module Topbar = {
         <span class="text-lg"> <View.Text> "☰" </View.Text> </span>
       </IconButton>
       <Router.Link to="/" class="flex items-center gap-2">
-        <span class="flex size-7 items-center justify-center rounded-lg bg-neutral-900 text-xs font-bold text-white"> <View.Text> "U" </View.Text> </span>
+        <span class="flex size-7 items-center justify-center rounded-lg bg-action text-xs font-bold text-on-action"> <View.Text> "U" </View.Text> </span>
         <span class="hidden text-sm font-semibold tracking-tight text-neutral-900 sm:block"> <View.Text> "UX Archetypes" </View.Text> </span>
       </Router.Link>
       <div class="flex flex-1 justify-center">
@@ -344,7 +344,7 @@ module Spotlight = {
                   | None => false
                   }
                   "flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors " ++ (
-                    sel ? "bg-neutral-900 text-white" : "text-neutral-700 hover:bg-neutral-100"
+                    sel ? "bg-action text-on-action" : "text-neutral-700 hover:bg-neutral-100"
                   )
                 })
                 <li>
@@ -449,7 +449,7 @@ module ExampleBlock = {
     let tabCls = target =>
       Computed.make(() =>
         "rounded-md px-3 py-1 text-xs font-medium transition-colors " ++ (
-          Signal.get(mode) == target ? "bg-neutral-900 text-white" : "text-neutral-600 hover:text-neutral-900"
+          Signal.get(mode) == target ? "bg-action text-on-action" : "text-neutral-600 hover:text-neutral-900"
         )
       )
     let isPreview = Computed.make(() => Signal.get(mode) == "preview")

@@ -53,9 +53,30 @@ Because tokens are plain, standard JSON, any project can adopt them:
 - **Other stacks** — feed `tokens.json` to Style Dictionary or an equivalent to
   emit CSS variables, SCSS, Swift, Kotlin, JS objects, etc.
 
+## Building a component library on the tokens
+
+The generated `@theme` exposes the semantic roles as ordinary Tailwind utilities,
+so a new component library just uses these classes and re-themes for free — no
+hardcoded grays. Aliases stay live (`--color-action: var(--color-neutral-900)`),
+so overriding a base token cascades through everything that references it.
+
+| Role | Utilities | Use for |
+| ---- | --------- | ------- |
+| `action` / `action-hover` / `action-subtle` / `on-action` | `bg-action`, `hover:bg-action-hover`, `bg-action-subtle`, `text-on-action`, `ring-action` | interactive controls (buttons, toggles, focus rings) |
+| `status-{info,success,warning,danger}` | `bg-status-danger`, `text-status-success`, `border-status-warning` | feedback (alerts, toasts, validation) |
+| `ink` / `muted` | `text-ink`, `text-muted` | primary and secondary text |
+| `surface` / `paper` / `border` | `bg-surface`, `bg-paper`, `border-border` | cards, page background, dividers |
+| `chart-1…6` | `bg-chart-1`, `text-chart-2` | categorical data series |
+| `neutral-0…1000` | `bg-neutral-900`, `text-neutral-500` | raw ramp when no role fits |
+
+For example, the reference `Button` composes `bg-action text-on-action
+hover:bg-action-hover`, and `Alert` uses `border-status-danger` — so editing the
+`action` or `status.danger` token re-themes every button or alert instantly.
+
 ## Theming
 
 To re-skin an implementation, override token values — most usefully the
-`color.neutral` ramp and the semantic aliases. Swapping the neutral ramp for a
-tinted or fully different palette restyles everything downstream without
+`color.neutral` ramp (which the semantic roles alias by default) or the semantic
+roles themselves (`color.action.*`, `color.status.*`) for finer control.
+Swapping the ramp for a tinted palette restyles everything downstream without
 touching a single archetype or component.
