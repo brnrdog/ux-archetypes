@@ -34,7 +34,8 @@ the label/description/error associations so every control behaves consistently.
     {"name":"hint","type":"string","default":"","description":"Help or error text."}
   ],
   "slots": [
-    {"name":"control","required":true,"description":"The wrapped input/select/etc."}
+    {"name":"control","required":true,"description":"The wrapped input/select/etc."},
+    {"name":"label","required":false,"description":""}
   ],
   "a11y": {"announces":["name","description","error"]},
   "states": ["default","error"],

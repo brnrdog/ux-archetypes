@@ -32,9 +32,9 @@ Dictionary, Tokens Studio, etc.).
 
 | Group         | What it holds |
 | ------------- | ------------- |
-| `color`       | A single grayscale `neutral` ramp (0–1000) plus semantic aliases: `ink`, `paper`, `surface`, `muted`, `border`, `accent`, `accentContrast`. Monochrome by design — hierarchy comes from value, not hue. |
+| `color`       | A single grayscale `neutral` ramp (0–1000) plus semantic aliases: `ink`, `paper`, `surface`, `muted`, `border`, `accent`, `accentContrast`. **Semantic roles** the archetype contracts bind to: `action` (`default`/`hover`/`subtle`/`onAction`), `status` (`info`/`success`/`warning`/`danger`), and `chart` (`1`–`6`). Monochrome by design — hierarchy comes from value, not hue; retheme by pointing these roles at brand hues. |
 | `font`        | `family` (sans/mono), `weight`, `size` scale, `lineHeight`. |
-| `space`       | Spacing scale for padding, margin, and gaps. |
+| `space`       | Spacing scale for padding, margin, and gaps, plus semantic `inline` padding (`sm`/`md`/`lg`) for controls. |
 | `radius`      | Corner radii, `none` → `full`. |
 | `borderWidth` | Hairline / thick. |
 | `shadow`      | Elevation `sm` / `md` / `lg`. |

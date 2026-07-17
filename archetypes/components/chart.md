@@ -32,7 +32,8 @@ can interpret, supporting decisions on dashboards and reports.
   "slots": [
     {"name":"series","required":true},
     {"name":"axis","required":false},
-    {"name":"legend","required":false}
+    {"name":"legend","required":false},
+    {"name":"surface","required":false,"description":""}
   ],
   "a11y": {"role":"img","announces":["summary","data table alternative"]},
   "states": ["default","loading","empty"],

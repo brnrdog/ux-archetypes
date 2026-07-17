@@ -35,7 +35,8 @@ shortcut from anywhere in the app.
     {"name":"input","required":true},
     {"name":"group","required":false},
     {"name":"item","required":true},
-    {"name":"empty","required":false}
+    {"name":"empty","required":false},
+    {"name":"surface","required":false,"description":""}
   ],
   "events": ["onSelect"],
   "a11y": {"role":"dialog","keyboard":["Tab","ArrowDown","ArrowUp","Enter","Escape"],"announces":["active command"]},

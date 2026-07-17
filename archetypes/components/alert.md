@@ -32,7 +32,8 @@ in context; unlike an alert-dialog, it doesn't interrupt or block the user.
   "slots": [
     {"name":"icon","required":false},
     {"name":"title","required":false},
-    {"name":"description","required":true}
+    {"name":"description","required":true},
+    {"name":"actions","required":false,"description":""}
   ],
   "a11y": {"role":"alert","announces":["message"]},
   "states": ["default"],

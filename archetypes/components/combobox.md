@@ -35,7 +35,8 @@ when allowed.
   "slots": [
     {"name":"input","required":true},
     {"name":"option","required":true},
-    {"name":"empty","required":false}
+    {"name":"empty","required":false},
+    {"name":"surface","required":false,"description":""}
   ],
   "events": ["onChange","onInput"],
   "a11y": {"role":"combobox","keyboard":["ArrowDown","ArrowUp","Enter","Escape"],"announces":["expanded","active option"]},

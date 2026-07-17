@@ -33,7 +33,8 @@ ranges and formats.
   ],
   "slots": [
     {"name":"input","required":true},
-    {"name":"calendar","required":true}
+    {"name":"calendar","required":true},
+    {"name":"surface","required":false,"description":""}
   ],
   "events": ["onChange"],
   "a11y": {"role":"combobox","keyboard":["ArrowDown","Enter","Escape"],"announces":["selected date"]},

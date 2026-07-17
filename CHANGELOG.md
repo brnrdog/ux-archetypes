@@ -54,6 +54,18 @@ released.
   was missing `Tab` and `toast` was missing `Escape`; both are fixed. Trait
   pages list the required keys.
 
+- **Semantic token layer.** `tokens.json` gains the roles the contracts bind to:
+  `color.action.*`, `color.status.*`, `color.chart.*`, and `space.inline.*` —
+  all aliased into the monochrome ramp, so the baseline stays grayscale but a
+  retheme has real semantic hooks.
+- **Two more build gates.** `conformance:composition` verifies every composition
+  `ref` resolves and every `slot` is declared in the archetype's API (or the
+  page-layout vocabulary); `conformance:tokens` verifies every token role a
+  contract references exists in `tokens.json`. Both run in `npm run checks`
+  alongside prop and trait conformance. Reconciling for the composition gate
+  surfaced 13 slots that were used in composition but missing from the owning
+  API — now added.
+
 ### Changed
 
 - The conformance check is now driven by the `implementation:` frontmatter field

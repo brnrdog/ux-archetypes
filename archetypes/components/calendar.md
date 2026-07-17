@@ -31,7 +31,8 @@ date-picker wraps in a popover, but it also stands alone for scheduling views.
     {"name":"value","type":"string","default":"","description":"Selected date(s)."}
   ],
   "slots": [
-    {"name":"day","required":true}
+    {"name":"day","required":true},
+    {"name":"controls","required":false,"description":""}
   ],
   "events": ["onSelect"],
   "a11y": {"role":"grid","keyboard":["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","PageUp","PageDown","Home","End"],"announces":["selected date"]},

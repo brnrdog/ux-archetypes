@@ -31,7 +31,8 @@ than opening a page.
   "props": [],
   "slots": [
     {"name":"trigger","required":true},
-    {"name":"content","required":true}
+    {"name":"content","required":true},
+    {"name":"surface","required":false,"description":""}
   ],
   "a11y": {"announces":["preview"]},
   "states": ["closed","open"],

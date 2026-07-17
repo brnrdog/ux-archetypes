@@ -35,7 +35,9 @@ general-purpose dialog used for tasks and forms.
     {"name":"title","required":true},
     {"name":"description","required":true},
     {"name":"cancel","required":true},
-    {"name":"confirm","required":true}
+    {"name":"confirm","required":true},
+    {"name":"surface","required":false,"description":""},
+    {"name":"actions","required":false,"description":""}
   ],
   "events": ["onConfirm","onCancel"],
   "a11y": {"role":"alertdialog","keyboard":["Tab","Escape"],"announces":["name","description"]},

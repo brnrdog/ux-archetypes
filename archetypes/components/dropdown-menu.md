@@ -34,7 +34,8 @@ navigable menu of commands.
   "slots": [
     {"name":"trigger","required":true},
     {"name":"item","required":true},
-    {"name":"separator","required":false}
+    {"name":"separator","required":false},
+    {"name":"surface","required":false,"description":""}
   ],
   "events": ["onSelect"],
   "a11y": {"role":"menu","keyboard":["ArrowUp","ArrowDown","Enter","Escape"],"announces":["active item"]},

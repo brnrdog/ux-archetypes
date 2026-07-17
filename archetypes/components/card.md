@@ -32,7 +32,8 @@ into grids and lists.
     {"name":"media","required":false},
     {"name":"header","required":false},
     {"name":"body","required":true},
-    {"name":"actions","required":false}
+    {"name":"actions","required":false},
+    {"name":"overlays","required":false,"description":""}
   ],
   "states": ["default","hover","focus-visible"],
   "tokens": ["color.neutral.*","radius.lg"]
