@@ -83,6 +83,10 @@
       "description": "People accountable for the archetype.",
       "items": { "type": "string" },
       "uniqueItems": true
+    },
+    "implementation": {
+      "type": "string",
+      "description": "Reference implementation the API contract is checked against (a component file in the website, e.g. `Button.res`). Omit when there is no implementation to conform to."
     }
   }
 }

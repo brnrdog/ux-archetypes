@@ -23,6 +23,21 @@ An aspect-ratio box holds its content to a consistent width-to-height proportion
 (16:9, 1:1, 4:3) regardless of viewport size. It keeps media grids tidy and
 prevents layout shift by reserving the correct space before content loads.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"ratio","type":"string","default":"16/9","description":"Width-to-height proportion, e.g. 16/9, 1/1, 4/3."}
+  ],
+  "slots": [
+    {"name":"content","required":true,"description":"The media or element constrained to the ratio."}
+  ],
+  "states": ["default"],
+  "tokens": ["radius.md"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

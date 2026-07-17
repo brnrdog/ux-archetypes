@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [dropdown-menu, menubar, card, sidebar, navbar, list]
 related: [scroll-area, aspect-ratio]
 maintainers: [brnrdog]
+implementation: Separator.res
 ---
 
 # Separator
@@ -22,6 +23,19 @@ maintainers: [brnrdog]
 A separator divides content into distinct groups, giving structure and rhythm
 without adding a heavier container. It clarifies where one set of items ends and
 another begins.
+
+## API
+
+```json
+{
+  "props": [
+    {"name":"orientation","type":"enum","values":["horizontal","vertical"],"default":"horizontal","description":"Divider axis."}
+  ],
+  "a11y": {"role":"separator"},
+  "states": ["default"],
+  "tokens": ["color.neutral.*"]
+}
+```
 
 ## When to use / When not to use
 

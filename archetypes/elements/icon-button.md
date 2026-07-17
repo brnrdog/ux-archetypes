@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [toolbar, navbar, data-table, dialog, card]
 related: [button, tooltip, toggle]
 maintainers: [brnrdog]
+implementation: IconButton.res
 ---
 
 # Icon Button
@@ -24,6 +25,24 @@ label for compactness. It suits dense contexts — toolbars, table rows, card
 corners — where a full button would crowd the layout. Because it drops the
 visible label, it carries a strict obligation: the icon must be recognizable and
 the control must still expose an accessible name.
+
+## API
+
+```json
+{
+  "props": [
+    {"name":"variant","type":"enum","values":["solid","ghost"],"default":"ghost","description":"Emphasis."},
+    {"name":"label","type":"string","default":"","description":"Accessible name (required; visually hidden)."}
+  ],
+  "slots": [
+    {"name":"icon","required":true,"description":"The single glyph conveying the action."}
+  ],
+  "events": ["onActivate"],
+  "a11y": {"role":"button","keyboard":["Enter","Space"],"announces":["disabled"]},
+  "states": ["default","hover","focus-visible","active","disabled"],
+  "tokens": ["color.action.*","radius.md"]
+}
+```
 
 ## When to use / When not to use
 

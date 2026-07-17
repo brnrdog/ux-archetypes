@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [input, navbar, card, form, dialog, landing-page]
 related: [link, icon-button]
 maintainers: [brnrdog]
+implementation: Button.res
 ---
 
 # Button

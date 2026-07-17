@@ -24,6 +24,27 @@ a handle along a track. It suits choices where the approximate position matters
 more than exact typing, and where seeing the value's place within the range is
 useful.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"value","type":"number","default":"0","description":"Current value (or range)."},
+    {"name":"min","type":"number","default":"0","description":"Lower bound."},
+    {"name":"max","type":"number","default":"100","description":"Upper bound."},
+    {"name":"step","type":"number","default":"1","description":"Granularity."},
+    {"name":"disabled","type":"boolean","default":"false","description":"Not interactive."}
+  ],
+  "slots": [
+    {"name":"thumb","required":true,"description":"The draggable handle."}
+  ],
+  "events": ["onChange"],
+  "a11y": {"role":"slider","keyboard":["ArrowLeft","ArrowRight","Home","End"],"announces":["valuenow"]},
+  "states": ["default","focus-visible","dragging","disabled"],
+  "tokens": ["color.action.*","radius.full"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

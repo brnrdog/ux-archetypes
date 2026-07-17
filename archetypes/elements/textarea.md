@@ -23,6 +23,23 @@ A textarea captures longer, multi-line text — a comment, description, or messa
 It gives the user room to write and review several lines at once, unlike the
 single-line input.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"placeholder","type":"string","default":"","description":"Hint shown when empty."},
+    {"name":"value","type":"string","default":"","description":"Current text."},
+    {"name":"rows","type":"number","default":"3","description":"Visible line count."},
+    {"name":"required","type":"boolean","default":"false","description":"Must be filled to submit."}
+  ],
+  "events": ["onInput","onChange"],
+  "a11y": {"role":"textbox","announces":["invalid","required"]},
+  "states": ["default","focus-visible","filled","disabled","error"],
+  "tokens": ["color.action.*","radius.md"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

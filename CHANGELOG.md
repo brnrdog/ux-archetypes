@@ -21,8 +21,21 @@ released.
 
 ### Added
 
+- **API contracts on every element.** All 26 element archetypes now carry a
+  `## API` contract (props, slots, events, a11y, states, tokens). Nine are
+  mapped to a reference implementation via a new `implementation:` frontmatter
+  field and conformance-checked on every build; five of those (button, badge,
+  icon-button, link, separator) are **compiler-enforced** — the component
+  annotates its props with the generated `Contracts.*` types, so an enum value
+  that drifts from the spec fails to compile.
 - `INDEX.md` is now **generated** from the specs' frontmatter (`npm run index`),
   so the registry can no longer drift from the archetypes.
+
+### Changed
+
+- The conformance check is now driven by the `implementation:` frontmatter field
+  rather than a hardcoded map, so mapping a component to its spec is a one-line
+  edit in the archetype.
 
 ## [0.5.0] - 2026-07-17
 

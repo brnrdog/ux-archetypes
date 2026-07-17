@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [avatar, card, navbar, table, tabs, sidebar]
 related: [button, label]
 maintainers: [brnrdog]
+implementation: Badge.res
 ---
 
 # Badge
@@ -22,6 +23,21 @@ maintainers: [brnrdog]
 A badge attaches a short, high-signal annotation to another element — a status
 ("Active"), a category ("Beta"), or a count (unread items). It is read at a
 glance and never the primary focus; it enriches the thing it sits on.
+
+## API
+
+```json
+{
+  "props": [
+    {"name":"variant","type":"enum","values":["solid","soft","outline"],"default":"solid","description":"Visual weight."}
+  ],
+  "slots": [
+    {"name":"label","required":true,"description":"Short status, category, or count."}
+  ],
+  "states": ["default"],
+  "tokens": ["color.*","radius.full","font.weight.medium"]
+}
+```
 
 ## When to use / When not to use
 

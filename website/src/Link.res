@@ -3,7 +3,7 @@
 @jsx.component
 let make = (
   ~href: string="#",
-  ~variant: [#default | #muted]=#default,
+  ~variant: Contracts.Link.variant=#default,
   ~newTab: bool=false,
   ~extraClass: string="",
   ~children: View.node,

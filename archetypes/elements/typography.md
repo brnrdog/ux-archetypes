@@ -24,6 +24,22 @@ code, and inline emphasis — that gives written content clear hierarchy and
 comfortable reading rhythm. It is the connective tissue of nearly every screen;
 consistent type is what makes an interface feel coherent.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"variant","type":"enum","values":["h1","h2","h3","h4","body","small","muted","code"],"default":"body","description":"Semantic/visual role."}
+  ],
+  "slots": [
+    {"name":"text","required":true,"description":"The textual content."}
+  ],
+  "a11y": {"announces":["heading level"]},
+  "states": ["default"],
+  "tokens": ["font.family.sans","font.weight.*","font.size.*","color.neutral.*"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

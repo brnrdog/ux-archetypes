@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [form, navbar, sign-in, landing-page]
 related: [button, textarea, select, checkbox]
 maintainers: [brnrdog]
+implementation: Input.res
 ---
 
 # Text Input
@@ -23,6 +24,26 @@ A text input captures a short, free-form value from the user — a name, an emai
 a search query. It is the workhorse of data entry: a labelled field the user can
 focus, type into, correct, and submit. A good input makes its purpose,
 constraints, and current validity obvious at every moment.
+
+## API
+
+```json
+{
+  "props": [
+    {"name":"type","type":"string","default":"text","description":"Native input type (text, email, password…)."},
+    {"name":"placeholder","type":"string","default":"","description":"Hint shown when empty."},
+    {"name":"value","type":"string","default":"","description":"Current text."},
+    {"name":"required","type":"boolean","default":"false","description":"Must be filled to submit."}
+  ],
+  "slots": [
+
+  ],
+  "events": ["onInput","onChange"],
+  "a11y": {"role":"textbox","announces":["invalid","required"]},
+  "states": ["default","focus-visible","filled","disabled","error"],
+  "tokens": ["color.action.*","radius.md","space.inline.md"]
+}
+```
 
 ## When to use / When not to use
 

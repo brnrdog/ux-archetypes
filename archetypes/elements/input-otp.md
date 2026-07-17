@@ -24,6 +24,25 @@ authenticator) with one visible slot per character. The segmented layout makes t
 expected length obvious, eases review, and pairs naturally with auto-advance and
 paste of the full code.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"length","type":"number","default":"6","description":"Number of code cells."},
+    {"name":"value","type":"string","default":"","description":"Entered digits."},
+    {"name":"disabled","type":"boolean","default":"false","description":"Not interactive."}
+  ],
+  "slots": [
+    {"name":"cell","required":true,"description":"A single-character entry box."}
+  ],
+  "events": ["onChange","onComplete"],
+  "a11y": {"role":"group","keyboard":["ArrowLeft","ArrowRight","Backspace"],"announces":["value"]},
+  "states": ["default","focus-visible","filled","disabled","error"],
+  "tokens": ["color.action.*","radius.md"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

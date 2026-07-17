@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [command, tooltip, dropdown-menu, menubar]
 related: [badge, tooltip]
 maintainers: [brnrdog]
+implementation: Kbd.res
 ---
 
 # Keyboard Key
@@ -22,6 +23,21 @@ maintainers: [brnrdog]
 A keyboard-key element renders a physical key or shortcut combination inline
 ("⌘K", "Ctrl+S") so users can discover and recall keyboard shortcuts. It is
 display-only — it documents an interaction rather than performing one.
+
+## API
+
+```json
+{
+  "props": [
+
+  ],
+  "slots": [
+    {"name":"key","required":true,"description":"The key or chord label (e.g. ⌘K)."}
+  ],
+  "states": ["default"],
+  "tokens": ["radius.sm","font.family.mono"]
+}
+```
 
 ## When to use / When not to use
 

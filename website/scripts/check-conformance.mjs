@@ -12,9 +12,6 @@ const archetypesDir = join(here, "..", "..", "archetypes");
 const srcDir = join(here, "..", "src");
 const layers = ["elements", "components", "blocks", "pages", "flows"];
 
-// Which archetypes have a component implementation to check, and where.
-const componentFor = { button: "Button.res" };
-
 // ReScript renames a few reserved words used as prop labels.
 const reserved = { type: "type_" };
 const pascal = (id) =>
@@ -28,6 +25,17 @@ function apiOf(body) {
   if (!m) return null;
   const fence = body.slice(m.index).match(/```json\s*([\s\S]*?)```/);
   return fence ? JSON.parse(fence[1]) : null;
+}
+
+function frontmatter(raw) {
+  const m = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return {};
+  const meta = {};
+  for (const line of m[1].split("\n")) {
+    const mm = line.match(/^([a-zA-Z]+):\s*(.*)$/);
+    if (mm) meta[mm[1]] = mm[2].trim();
+  }
+  return meta;
 }
 
 // Extract the labeled args of the component's `make` and, for each, its
@@ -52,16 +60,17 @@ for (const layerDir of layers) {
     continue;
   }
   for (const file of files.sort()) {
+    const raw = readFileSync(join(archetypesDir, layerDir, file), "utf8");
     const id = basename(file, ".md");
-    const api = apiOf(readFileSync(join(archetypesDir, layerDir, file), "utf8"));
-    if (api) contracts.push({ id, api });
+    const api = apiOf(raw);
+    if (api) contracts.push({ id, api, impl: frontmatter(raw).implementation || "" });
   }
 }
 
 let failures = 0;
 let checked = 0;
-for (const { id, api } of contracts) {
-  const rel = componentFor[id];
+for (const { id, api, impl } of contracts) {
+  const rel = impl;
   if (!rel) {
     console.log(`• ${id}: contract present, no implementation mapped — skipped`);
     continue;

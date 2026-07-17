@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [navbar, breadcrumb, pagination, navigation-menu, sidebar, footer, sign-in]
 related: [button, icon-button]
 maintainers: [brnrdog]
+implementation: Link.res
 ---
 
 # Link
@@ -24,6 +25,25 @@ or an external resource. It represents _navigation_, not an action: activating a
 link changes location, and users rightly expect to be able to open it in a new
 tab, copy its address, and go back. This is the defining distinction from a
 button, which performs an action in place.
+
+## API
+
+```json
+{
+  "props": [
+    {"name":"variant","type":"enum","values":["default","muted"],"default":"default","description":"Emphasis."},
+    {"name":"href","type":"string","default":"#","description":"Destination URL."},
+    {"name":"newTab","type":"boolean","default":"false","description":"Open in a new browsing context."}
+  ],
+  "slots": [
+    {"name":"label","required":true,"description":"The link text (describes the destination)."}
+  ],
+  "events": ["onActivate"],
+  "a11y": {"role":"link","keyboard":["Enter"],"announces":["name"]},
+  "states": ["default","hover","focus-visible","visited"],
+  "tokens": ["color.neutral.*"]
+}
+```
 
 ## When to use / When not to use
 

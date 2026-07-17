@@ -23,6 +23,19 @@ A skeleton stands in for content that hasn't loaded yet, echoing its eventual
 layout. By reserving space in the real shape, it reduces perceived wait and
 prevents layout shift when the content arrives.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"shape","type":"enum","values":["text","circle","rect"],"default":"text","description":"Placeholder shape."}
+  ],
+  "a11y": {"role":"presentation","announces":["busy"]},
+  "states": ["loading"],
+  "tokens": ["color.neutral.*","radius.md"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

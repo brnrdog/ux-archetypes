@@ -24,6 +24,25 @@ option (single-select, like a segmented control) or several (multi-select, like 
 formatting toolbar). It communicates that the options belong together and are
 governed as a set.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"type","type":"enum","values":["single","multiple"],"default":"single","description":"One or many selections."},
+    {"name":"value","type":"string","default":"","description":"Selected item id(s)."},
+    {"name":"disabled","type":"boolean","default":"false","description":"Disables the group."}
+  ],
+  "slots": [
+    {"name":"item","required":true,"description":"A toggle within the group."}
+  ],
+  "events": ["onChange"],
+  "a11y": {"role":"group","keyboard":["ArrowLeft","ArrowRight"],"announces":["pressed"]},
+  "states": ["default","selected","focus-visible","disabled"],
+  "tokens": ["color.action.*","radius.md"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

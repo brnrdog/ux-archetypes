@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [navbar, card, dropdown-menu, comment, sidebar]
 related: [badge, skeleton]
 maintainers: [brnrdog]
+implementation: Avatar.res
 ---
 
 # Avatar
@@ -23,6 +24,24 @@ An avatar represents a person or entity in a small, recognizable footprint so
 users can identify _who_ is associated with content or an action at a glance. It
 must degrade gracefully: when an image is missing or slow, it shows a meaningful
 fallback rather than a broken graphic.
+
+## API
+
+```json
+{
+  "props": [
+    {"name":"initials","type":"string","default":"","description":"Fallback text when no image is available."},
+    {"name":"size","type":"string","default":"md","description":"Rendered size."}
+  ],
+  "slots": [
+    {"name":"image","required":false,"description":"The person or entity's picture."},
+    {"name":"fallback","required":false,"description":"Initials or icon shown when the image is missing."}
+  ],
+  "a11y": {"role":"img","announces":["name"]},
+  "states": ["loading","loaded","error"],
+  "tokens": ["radius.full","color.neutral.*"]
+}
+```
 
 ## When to use / When not to use
 

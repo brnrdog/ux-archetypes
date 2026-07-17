@@ -24,6 +24,24 @@ identifies whose product this is. Beyond identity, it plays a functional role:
 placed in the navbar it is the conventional "home" affordance users reach for,
 and it anchors trust on auth and marketing pages.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"href","type":"string","default":"/","description":"Where the logo links (usually home)."},
+    {"name":"size","type":"string","default":"md","description":"Rendered size."}
+  ],
+  "slots": [
+    {"name":"mark","required":false,"description":"The symbol/glyph."},
+    {"name":"wordmark","required":false,"description":"The set brand name."}
+  ],
+  "a11y": {"role":"link","announces":["brand name"]},
+  "states": ["default","hover","focus-visible"],
+  "tokens": ["color.neutral.*"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

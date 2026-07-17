@@ -23,6 +23,22 @@ A scroll area confines overflowing content to a bounded region with predictable,
 consistently-styled scrollbars across platforms. It keeps long lists, menus, and
 panels contained without letting the whole page scroll.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"orientation","type":"enum","values":["vertical","horizontal","both"],"default":"vertical","description":"Scroll axis."}
+  ],
+  "slots": [
+    {"name":"content","required":true,"description":"The overflowing content."}
+  ],
+  "a11y": {"keyboard":["ArrowUp","ArrowDown","PageUp","PageDown"]},
+  "states": ["default","scrolling"],
+  "tokens": ["radius.md","color.neutral.*"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

@@ -24,6 +24,23 @@ technology can announce the control correctly. Its defining property is not the
 text itself but the **programmatic association** with a control — a label that
 isn't bound to anything is just text.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"for","type":"string","default":"","description":"id of the control this labels."},
+    {"name":"required","type":"boolean","default":"false","description":"Marks the field as required."}
+  ],
+  "slots": [
+    {"name":"text","required":true,"description":"The field name."}
+  ],
+  "a11y": {"announces":["name"]},
+  "states": ["default"],
+  "tokens": ["font.weight.medium","color.neutral.*"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

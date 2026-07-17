@@ -3,7 +3,7 @@
 @jsx.component
 let make = (
   ~label: string,
-  ~variant: [#solid | #ghost]=#ghost,
+  ~variant: Contracts.IconButton.variant=#ghost,
   ~onClick: option<Dom.event => unit>=?,
   ~children: View.node,
 ) => {

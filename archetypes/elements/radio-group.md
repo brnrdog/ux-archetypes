@@ -23,6 +23,26 @@ A radio group presents a small set of mutually exclusive options and lets the
 user choose exactly one. Showing all options at once makes the full set of
 choices visible and comparable, which aids decisions among a few alternatives.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"value","type":"string","default":"","description":"id/value of the selected option."},
+    {"name":"name","type":"string","default":"","description":"Groups the radios."},
+    {"name":"orientation","type":"enum","values":["vertical","horizontal"],"default":"vertical","description":"Layout axis."},
+    {"name":"disabled","type":"boolean","default":"false","description":"Disables the whole group."}
+  ],
+  "slots": [
+    {"name":"option","required":true,"description":"A single mutually-exclusive choice."}
+  ],
+  "events": ["onChange"],
+  "a11y": {"role":"radiogroup","keyboard":["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"],"announces":["checked"]},
+  "states": ["default","selected","focus-visible","disabled"],
+  "tokens": ["color.action.*","radius.full"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

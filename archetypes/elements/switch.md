@@ -23,6 +23,22 @@ A switch turns a single setting on or off, taking effect immediately like a
 physical light switch. Its value is the instant, self-evident nature of the
 change — no separate submit step.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"checked","type":"boolean","default":"false","description":"On/off state."},
+    {"name":"disabled","type":"boolean","default":"false","description":"Not interactive."},
+    {"name":"label","type":"string","default":"","description":"Names what the switch toggles."}
+  ],
+  "events": ["onChange"],
+  "a11y": {"role":"switch","keyboard":["Space","Enter"],"announces":["checked","disabled"]},
+  "states": ["off","on","focus-visible","disabled"],
+  "tokens": ["color.action.*","radius.full"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

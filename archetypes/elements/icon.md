@@ -24,6 +24,21 @@ search, a trash can for delete — or reinforces a text label. Used well, icons 
 recognition and save space; used carelessly, they become decoration that assistive
 technology and unfamiliar users can't interpret. Meaning, not ornament, is the bar.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"name","type":"string","default":"","description":"Identifier of the glyph to render."},
+    {"name":"size","type":"string","default":"md","description":"Rendered size."},
+    {"name":"label","type":"string","default":"","description":"Accessible name; omit to mark decorative."}
+  ],
+  "a11y": {"role":"img","announces":["name"]},
+  "states": ["default"],
+  "tokens": ["color.neutral.*"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

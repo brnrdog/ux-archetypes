@@ -24,6 +24,22 @@ symbols mean — which line is revenue, which bar is churn. Without it a
 multi-series chart is undecipherable; with it, the encoding becomes readable. It
 often doubles as a control for toggling series on and off.
 
+## API
+
+```json
+{
+  "props": [
+
+  ],
+  "slots": [
+    {"name":"text","required":true,"description":"Names the grouped set of controls."}
+  ],
+  "a11y": {"announces":["group name"]},
+  "states": ["default"],
+  "tokens": ["font.weight.medium"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

@@ -13,6 +13,7 @@ composedOf: []
 usedBy: [button, form, card, dialog, data-table]
 related: [progress, skeleton]
 maintainers: [brnrdog]
+implementation: Spinner.res
 ---
 
 # Spinner
@@ -22,6 +23,19 @@ maintainers: [brnrdog]
 A spinner signals that something is happening and the user should wait, without
 claiming to know how long. It is the lightest-weight loading cue — ideal inline,
 inside buttons, or over a small region during a brief, unmeasured wait.
+
+## API
+
+```json
+{
+  "props": [
+
+  ],
+  "a11y": {"role":"status","announces":["busy"]},
+  "states": ["spinning"],
+  "tokens": ["color.neutral.*"]
+}
+```
 
 ## When to use / When not to use
 

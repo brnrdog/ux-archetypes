@@ -23,6 +23,26 @@ A checkbox lets a person turn a single option on or off, or pick any number of
 options from a set. It represents a discrete boolean choice whose effect is
 typically applied on form submission rather than immediately.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"checked","type":"boolean","default":"false","description":"Whether the box is ticked."},
+    {"name":"indeterminate","type":"boolean","default":"false","description":"Partial/mixed state."},
+    {"name":"disabled","type":"boolean","default":"false","description":"Not interactive."},
+    {"name":"required","type":"boolean","default":"false","description":"Must be checked to proceed."}
+  ],
+  "slots": [
+    {"name":"label","required":false,"description":"Describes what the checkbox controls."}
+  ],
+  "events": ["onChange"],
+  "a11y": {"role":"checkbox","keyboard":["Space"],"announces":["checked","mixed","disabled"]},
+  "states": ["default","checked","indeterminate","focus-visible","disabled","error"],
+  "tokens": ["color.action.*","radius.sm"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

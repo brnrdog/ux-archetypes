@@ -23,6 +23,21 @@ A progress indicator communicates that a task is underway and, when known, how
 much remains. It reassures the user that work is happening and sets expectations
 for how long they must wait.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"value","type":"number","default":"0","description":"Current progress."},
+    {"name":"max","type":"number","default":"100","description":"Value representing complete."},
+    {"name":"indeterminate","type":"boolean","default":"false","description":"Progress is unknown."}
+  ],
+  "a11y": {"role":"progressbar","announces":["valuenow","valuemax"]},
+  "states": ["determinate","indeterminate","complete"],
+  "tokens": ["color.action.*","radius.full"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**

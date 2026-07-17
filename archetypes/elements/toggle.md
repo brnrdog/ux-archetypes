@@ -24,6 +24,24 @@ for a formatting or view option — bold text, grid vs. list, mute. Unlike a swi
 (a setting) it reads as a momentary tool that happens to remember its state, which
 is why it lives naturally in toolbars.
 
+## API
+
+```json
+{
+  "props": [
+    {"name":"pressed","type":"boolean","default":"false","description":"Whether the toggle is on."},
+    {"name":"disabled","type":"boolean","default":"false","description":"Not interactive."}
+  ],
+  "slots": [
+    {"name":"label","required":true,"description":"Icon or text naming the state."}
+  ],
+  "events": ["onChange"],
+  "a11y": {"role":"button","keyboard":["Enter","Space"],"announces":["pressed","disabled"]},
+  "states": ["off","on","focus-visible","disabled"],
+  "tokens": ["color.action.*","radius.md"]
+}
+```
+
 ## When to use / When not to use
 
 **Use when**
