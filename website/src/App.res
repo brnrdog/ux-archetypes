@@ -218,15 +218,19 @@ module Sidebar = {
     <aside class={Prop.signal(cls)}>
       <nav class="h-full w-64 overflow-y-auto p-2">
         {
-          let cls = Computed.make(() => {
-            let active = Signal.get(Router.location()).pathname == "/tokens"
-            "mb-4 block rounded-lg px-2 py-1.5 text-sm font-medium transition-colors " ++ (
-              active ? "bg-action text-on-action" : "text-neutral-700 hover:bg-neutral-100"
-            )
-          })
-          <Router.Link to="/tokens" class={Prop.signal(cls)}>
-            <View.Text> "Design Tokens" </View.Text>
-          </Router.Link>
+          let link = (to, label) => {
+            let cls = Computed.make(() => {
+              let active = Signal.get(Router.location()).pathname == to
+              "block rounded-lg px-2 py-1.5 text-sm font-medium transition-colors " ++ (
+                active ? "bg-action text-on-action" : "text-neutral-700 hover:bg-neutral-100"
+              )
+            })
+            <Router.Link to class={Prop.signal(cls)}> <View.Text> label </View.Text> </Router.Link>
+          }
+          <div class="mb-4 space-y-0.5">
+            {link("/guide", "Get Started")}
+            {link("/tokens", "Design Tokens")}
+          </div>
         }
         <SidebarGroup layer="element" title="Elements" />
         <SidebarGroup layer="component" title="Components" />
@@ -385,6 +389,14 @@ module Home = {
         <Link href="https://xote.dev" newTab=true> <View.Text> "Xote" </View.Text> </Link>
         <View.Text> "." </View.Text>
       </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <Router.Link to="/guide">
+          <Button variant=#primary> <View.Text> "Get started →" </View.Text> </Button>
+        </Router.Link>
+        <Router.Link to="/tokens">
+          <Button variant=#secondary> <View.Text> "Design tokens" </View.Text> </Button>
+        </Router.Link>
+      </div>
       <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-5">
         {stat("element", "Elements")}
         {stat("component", "Components")}
@@ -407,6 +419,145 @@ module Home = {
       </p>
     </div>
   }
+}
+
+module Guide = {
+  module Section = {
+    @jsx.component
+    let make = (~title: string, ~children: View.node) =>
+      <section class="mt-12">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900"> <View.Text> title </View.Text> </h2>
+        <div class="mt-3 space-y-4 text-[15px] leading-relaxed text-neutral-600"> {children} </div>
+      </section>
+  }
+
+  // A labelled definition row (term + description), used for layers/anatomy.
+  module Def = {
+    @jsx.component
+    let make = (~term: string, ~meta: string="", ~children: View.node) =>
+      <div class="flex flex-col gap-1 border-t border-neutral-200 py-3 sm:flex-row sm:gap-4">
+        <div class="flex w-40 shrink-0 items-baseline gap-2">
+          <span class="font-mono text-sm font-medium text-neutral-900"> <View.Text> term </View.Text> </span>
+          <View.Show when_={Prop.static(meta != "")}>
+            <span class="text-xs tabular-nums text-neutral-400"> <View.Text> meta </View.Text> </span>
+          </View.Show>
+        </div>
+        <div class="flex-1 text-sm text-neutral-600"> {children} </div>
+      </div>
+  }
+
+  let count = layer => inLayer(layer)->Array.length->Int.toString
+
+  @jsx.component
+  let make = () =>
+    <div class="mx-auto max-w-3xl px-8 py-14">
+      <Badge variant=#outline> <View.Text> "Get started" </View.Text> </Badge>
+      <h1 class="mt-5 text-4xl font-bold tracking-tight text-neutral-900">
+        <View.Text> "UX Archetypes" </View.Text>
+      </h1>
+      <p class="mt-4 text-lg leading-relaxed text-neutral-600">
+        <View.Text>
+          "A technology-agnostic catalogue of UI patterns — for people and AI agents. Each archetype defines the "
+        </View.Text>
+        <em class="text-neutral-900"> <View.Text> "idea" </View.Text> </em>
+        <View.Text>
+          " of a pattern — its structure, behavior, and accessibility — as a contract you implement in any stack. Stop re-deriving prop names, states, and keyboard behavior every time; implement to the spec."
+        </View.Text>
+      </p>
+
+      <Section title="Why">
+        <p>
+          <View.Text>
+            "Most UI is rebuilt from scratch on every project and every framework, and the accessibility and edge cases are reinvented (often incompletely) each time. UX Archetypes captures the durable part — what a pattern "
+          </View.Text>
+          <em class="text-neutral-900"> <View.Text> "is" </View.Text> </em>
+          <View.Text>
+            " — once, so the framework-specific implementation is a faithful rendering of a known-good contract rather than a guess."
+          </View.Text>
+        </p>
+      </Section>
+
+      <Section title="The layers">
+        <p> <View.Text> "Archetypes are organized from the smallest primitives up to whole journeys." </View.Text> </p>
+        <div>
+          <Def term="element" meta={count("element")}> <View.Text> "Indivisible primitives — button, input, badge, avatar, checkbox." </View.Text> </Def>
+          <Def term="component" meta={count("component")}> <View.Text> "Composed, interactive units — dialog, tabs, select, form, data-table, navbar." </View.Text> </Def>
+          <Def term="block" meta={count("block")}> <View.Text> "Page-level sections — hero, pricing-table, feature-grid, testimonial." </View.Text> </Def>
+          <Def term="page" meta={count("page")}> <View.Text> "Full routes — dashboard, settings, sign-in, pricing." </View.Text> </Def>
+          <Def term="flow" meta={count("flow")}> <View.Text> "Multi-step journeys — authentication, onboarding, checkout." </View.Text> </Def>
+        </div>
+      </Section>
+
+      <Section title="What's in an archetype">
+        <p>
+          <View.Text> "Open " </View.Text>
+          <Router.Link to="/a/button" class="text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900"> <View.Text> "Button" </View.Text> </Router.Link>
+          <View.Text> " to see the shape every archetype follows:" </View.Text>
+        </p>
+        <div>
+          <Def term="Intent"> <View.Text> "The problem it solves and when to use it (or reach for a different archetype)." </View.Text> </Def>
+          <Def term="API"> <View.Text> "A machine-readable contract: props (with types, allowed values, defaults), slots, events, accessibility (role, keyboard, announcements), states, and the design-token roles it consumes." </View.Text> </Def>
+          <Def term="Traits"> <View.Text> "Shared behaviors it exhibits (dismissible, focus-trap, …)." </View.Text> </Def>
+          <Def term="Composition"> <View.Text> "The parts it is built from, each wired to a slot with the props passed." </View.Text> </Def>
+          <Def term="Spec"> <View.Text> "The full written specification — anatomy, states, variants, accessibility, do/don't." </View.Text> </Def>
+          <Def term="Example"> <View.Text> "A live, interactive implementation with its source." </View.Text> </Def>
+        </div>
+      </Section>
+
+      <Section title="Behaviors">
+        <p> <View.Text> "Cross-cutting interaction contracts many archetypes share, so a dialog and a drawer don't each re-describe focus trapping." </View.Text> </p>
+        <div>
+          <View.For
+            each={Prop.static(TraitsData.all)}
+            render={t =>
+              <Def term={t.id}>
+                <Router.Link to={"/t/" ++ t.id} class="text-neutral-700 hover:text-neutral-900"> <View.Text> {t.summary} </View.Text> </Router.Link>
+              </Def>}
+          />
+        </div>
+      </Section>
+
+      <Section title="Design tokens & theming">
+        <p>
+          <View.Text>
+            "Everything is styled against a shared token system — a monochrome ramp plus semantic roles (action, status, ink, surface, border). Components bind to the "
+          </View.Text>
+          <em class="text-neutral-900"> <View.Text> "roles" </View.Text> </em>
+          <View.Text> ", not hardcoded colors, so a re-theme is just changing token values. Try the " </View.Text>
+          <Router.Link to="/tokens" class="text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900"> <View.Text> "live token editor" </View.Text> </Router.Link>
+          <View.Text> " or the theme presets (the " </View.Text>
+          <span class="font-mono"> <View.Text> "⚙" </View.Text> </span>
+          <View.Text> " in the top bar), with light and dark modes." </View.Text>
+        </p>
+      </Section>
+
+      <Section title="How to use it">
+        <p class="font-medium text-neutral-900"> <View.Text> "1 · Browse" </View.Text> </p>
+        <p> <View.Text> "Find the pattern in the sidebar (or press ⌘K). Read its intent, contract, and spec; play with the live example." </View.Text> </p>
+        <p class="pt-2 font-medium text-neutral-900"> <View.Text> "2 · Consume" </View.Text> </p>
+        <p>
+          <View.Text> "Install the package (" </View.Text>
+          <code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-[13px] text-neutral-800"> <View.Text> "npm i ux-archetypes" </View.Text> </code>
+          <View.Text> ") to read the specs, tokens, and contracts in your build tooling — or add the bundled " </View.Text>
+          <Link href="https://github.com/brnrdog/ux-archetypes/blob/main/skill/SKILL.md" newTab=true> <View.Text> "Agent Skill" </View.Text> </Link>
+          <View.Text> " so an AI implements to the contracts for you." </View.Text>
+        </p>
+        <p class="pt-2 font-medium text-neutral-900"> <View.Text> "3 · Implement" </View.Text> </p>
+        <p> <View.Text> "For each pattern: match the contract's prop names, enum values, and defaults; handle every state; honor the accessibility and trait keyboard contracts; reuse the archetypes it composes. Render it in your framework and style it with the token roles." </View.Text> </p>
+      </Section>
+
+      <div class="mt-12 flex flex-wrap gap-3 border-t border-neutral-200 pt-8">
+        <Router.Link to="/a/button">
+          <Button variant=#primary> <View.Text> "Browse archetypes" </View.Text> </Button>
+        </Router.Link>
+        <Router.Link to="/tokens">
+          <Button variant=#secondary> <View.Text> "Design tokens" </View.Text> </Button>
+        </Router.Link>
+        <Link href="https://github.com/brnrdog/ux-archetypes" newTab=true variant=#muted extraClass="self-center text-sm">
+          <View.Text> "GitHub ↗" </View.Text>
+        </Link>
+      </div>
+    </div>
 }
 
 module Preview = {
@@ -755,6 +906,7 @@ let make = () => {
   })
   let routes = Router.routes([
     {pattern: "/", render: _ => <Home />},
+    {pattern: "/guide", render: _ => <Guide />},
     {pattern: "/tokens", render: _ => <Tokens />},
     {pattern: "/a/:id", render: params => <Detail id={params->Dict.get("id")->Option.getOr("")} />},
     {pattern: "/t/:id", render: params => <TraitDetail id={params->Dict.get("id")->Option.getOr("")} />},
