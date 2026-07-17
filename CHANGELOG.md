@@ -16,6 +16,11 @@ follows [Semantic Versioning](https://semver.org/) and the format of
 - New app shell: a topbar with a **spotlight search** (⌘K / Ctrl+K) that filters
   and jumps to any archetype, a **collapsible sidebar**, and a **fullscreen** view
   for any live example (Escape to exit).
+- Each detail page now renders the **full archetype spec** (Intent, When to
+  use, Anatomy, States, Variants, Accessibility, and the rest), generated from
+  the archetype's markdown source at build time.
+- The app shell now composes the reusable archetype components (Button, Badge,
+  Kbd, Link, Icon Button) rather than bespoke markup.
 
 ## [0.4.0] - 2026-07-17
 

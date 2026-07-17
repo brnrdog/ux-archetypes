@@ -443,9 +443,6 @@ module Detail = {
           <span class="font-mono text-xs text-neutral-400"> <View.Text> {"v" ++ a.version} </View.Text> </span>
         </div>
         <p class="mt-4 text-lg leading-relaxed text-neutral-700"> <View.Text> {a.summary} </View.Text> </p>
-        <View.Show when_={Prop.static(a.intent != "")}>
-          <p class="mt-4 leading-relaxed text-neutral-600"> <View.Text> {a.intent} </View.Text> </p>
-        </View.Show>
         <View.Show when_={Prop.static(Array.length(a.tags) > 0)}>
           <div class="mt-4 flex flex-wrap gap-1.5">
             <View.For
@@ -456,6 +453,10 @@ module Detail = {
         </View.Show>
 
         <ExampleBlock a />
+
+        <View.Show when_={Prop.static(a.spec != "")}>
+          <SpecBody html={a.spec} />
+        </View.Show>
 
         <div class="mt-10 grid gap-6 sm:grid-cols-3">
           <ChipRow title="Composed of" ids={a.composedOf} />

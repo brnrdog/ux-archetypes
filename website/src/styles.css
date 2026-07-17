@@ -21,6 +21,65 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Full archetype spec, injected as HTML (see SpecBody.res). Monochrome,
+ * driven by the shared --ux-* tokens. */
+.ux-prose {
+  color: var(--ux-color-neutral-700);
+  line-height: 1.7;
+  font-size: 0.9375rem;
+}
+.ux-prose h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ux-color-neutral-200);
+  color: var(--ux-color-neutral-900);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.ux-prose h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.ux-prose p {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.ux-prose ul {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.ux-prose li {
+  margin-top: 0.375rem;
+}
+.ux-prose li::marker {
+  color: var(--ux-color-neutral-300);
+}
+.ux-prose strong {
+  color: var(--ux-color-neutral-900);
+  font-weight: 600;
+}
+.ux-prose em {
+  font-style: italic;
+}
+.ux-prose code {
+  border-radius: var(--ux-radius-sm, 0.375rem);
+  background-color: var(--ux-color-neutral-100);
+  padding: 0.1rem 0.35rem;
+  font-family: var(--ux-font-family-mono, ui-monospace, monospace);
+  font-size: 0.8125rem;
+  color: var(--ux-color-neutral-800);
+}
+.ux-prose a {
+  color: var(--ux-color-neutral-900);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* A subtle checkerboard so transparent/edge examples remain legible. */
 .preview-surface {
   background-color: var(--ux-color-surface);
