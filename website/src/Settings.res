@@ -133,7 +133,9 @@ let applyTheme = (t: ThemesData.theme, dark) => {
   clearOverrides()
   t.tokens->Array.forEach(((path, v)) => applyByPath(path, v))
   if dark {
+    // Generic dark inversion, then the theme's own hue-tinted dark surfaces.
     ThemesData.darkMode->Array.forEach(((path, v)) => applyByPath(path, v))
+    t.darkTokens->Array.forEach(((path, v)) => applyByPath(path, v))
   }
   Signal.set(presetSel, t.id)
   Signal.set(darkMode, dark)

@@ -89,7 +89,10 @@ try {
       }
     }
   };
-  for (const t of themes) check(`theme \`${t.id}\``, t.tokens);
+  for (const t of themes) {
+    check(`theme \`${t.id}\``, t.tokens);
+    check(`theme \`${t.id}\` (dark)`, t.dark);
+  }
   for (const [id, tokens] of Object.entries(modes)) check(`mode \`${id}\``, tokens);
 } catch {
   /* no themes file */

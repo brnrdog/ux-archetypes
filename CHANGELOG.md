@@ -91,7 +91,10 @@ released.
   forest, editorial, terminal, sunset, vibrant, ocean, coral) carries the palette
   identity — accent, status, radius, font, light-mode ramp tint — and a separate
   **mode** overlay (`light` / `dark`) applies on top of *any* theme, inverting the
-  neutral ramp for dark while preserving the theme's accent/status. The website's
+  neutral ramp for dark while preserving the theme's accent/status. Each theme
+  also carries a subtle **hue-tinted dark surface** (`dark` in themes.json) so its
+  dark variant reads cool/warm to match — e.g. Ocean Dark is a dark teal, Coral
+  Dark a dark rose — rather than a flat neutral black. The website's
   picker (a theme grid + a Light/Dark toggle) is generated from the file, and
   every theme and mode override is validated against the tokens
   (`conformance:tokens`). The reference components and chrome were made fully

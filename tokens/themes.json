@@ -21,13 +21,19 @@
     {
       "id": "monochrome",
       "label": "Monochrome",
-      "swatches": ["#171717"],
+      "swatches": [
+        "#171717"
+      ],
       "tokens": {}
     },
     {
       "id": "indigo",
       "label": "Indigo",
-      "swatches": ["#eef2ff", "#4f46e5", "#312e81"],
+      "swatches": [
+        "#eef2ff",
+        "#4f46e5",
+        "#312e81"
+      ],
       "tokens": {
         "color.neutral.50": "#eef2ff",
         "color.neutral.100": "#e0e7ff",
@@ -46,12 +52,22 @@
         "radius.2xl": "2rem",
         "radius.3xl": "2.5rem",
         "font.family.sans": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      "dark": {
+        "color.neutral.0": "#14122b",
+        "color.neutral.50": "#1a1838",
+        "color.neutral.100": "#232048",
+        "color.neutral.200": "#322e63"
       }
     },
     {
       "id": "forest",
       "label": "Forest",
-      "swatches": ["#ecfdf5", "#059669", "#064e3b"],
+      "swatches": [
+        "#ecfdf5",
+        "#059669",
+        "#064e3b"
+      ],
       "tokens": {
         "color.neutral.50": "#ecfdf5",
         "color.neutral.100": "#d1fae5",
@@ -70,12 +86,22 @@
         "radius.2xl": "1.25rem",
         "radius.3xl": "1.75rem",
         "font.family.sans": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      "dark": {
+        "color.neutral.0": "#08150f",
+        "color.neutral.50": "#0d1f16",
+        "color.neutral.100": "#132b1f",
+        "color.neutral.200": "#1e3d2d"
       }
     },
     {
       "id": "editorial",
       "label": "Editorial",
-      "swatches": ["#fafaf9", "#44403c", "#1c1917"],
+      "swatches": [
+        "#fafaf9",
+        "#44403c",
+        "#1c1917"
+      ],
       "tokens": {
         "color.neutral.50": "#fafaf9",
         "color.neutral.100": "#f5f5f4",
@@ -94,12 +120,22 @@
         "radius.2xl": "0.5rem",
         "radius.3xl": "0.75rem",
         "font.family.sans": "Georgia, Cambria, \"Times New Roman\", serif"
+      },
+      "dark": {
+        "color.neutral.0": "#161310",
+        "color.neutral.50": "#1f1b18",
+        "color.neutral.100": "#2a2521",
+        "color.neutral.200": "#3a352f"
       }
     },
     {
       "id": "terminal",
       "label": "Terminal",
-      "swatches": ["#f0fdf4", "#16a34a", "#14532d"],
+      "swatches": [
+        "#f0fdf4",
+        "#16a34a",
+        "#14532d"
+      ],
       "tokens": {
         "color.neutral.50": "#f0fdf4",
         "color.neutral.100": "#dcfce7",
@@ -118,12 +154,22 @@
         "radius.2xl": "0.5rem",
         "radius.3xl": "0.75rem",
         "font.family.sans": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+      },
+      "dark": {
+        "color.neutral.0": "#08140c",
+        "color.neutral.50": "#0d1f14",
+        "color.neutral.100": "#132b1c",
+        "color.neutral.200": "#1e3d29"
       }
     },
     {
       "id": "sunset",
       "label": "Sunset",
-      "swatches": ["#fff7ed", "#ea580c", "#7c2d12"],
+      "swatches": [
+        "#fff7ed",
+        "#ea580c",
+        "#7c2d12"
+      ],
       "tokens": {
         "color.neutral.50": "#fff7ed",
         "color.neutral.100": "#ffedd5",
@@ -142,12 +188,24 @@
         "radius.2xl": "2rem",
         "radius.3xl": "2.5rem",
         "font.family.sans": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      "dark": {
+        "color.neutral.0": "#170d07",
+        "color.neutral.50": "#241408",
+        "color.neutral.100": "#31200f",
+        "color.neutral.200": "#4a2f1a"
       }
     },
     {
       "id": "vibrant",
       "label": "Vibrant",
-      "swatches": ["#7c3aed", "#2563eb", "#16a34a", "#d97706", "#dc2626"],
+      "swatches": [
+        "#7c3aed",
+        "#2563eb",
+        "#16a34a",
+        "#d97706",
+        "#dc2626"
+      ],
       "tokens": {
         "color.neutral.50": "#f5f3ff",
         "color.neutral.100": "#ede9fe",
@@ -170,12 +228,24 @@
         "radius.2xl": "2rem",
         "radius.3xl": "2.5rem",
         "font.family.sans": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      "dark": {
+        "color.neutral.0": "#16112b",
+        "color.neutral.50": "#1e1838",
+        "color.neutral.100": "#282048",
+        "color.neutral.200": "#3a2e68"
       }
     },
     {
       "id": "ocean",
       "label": "Ocean",
-      "swatches": ["#0891b2", "#0284c7", "#059669", "#ca8a04", "#e11d48"],
+      "swatches": [
+        "#0891b2",
+        "#0284c7",
+        "#059669",
+        "#ca8a04",
+        "#e11d48"
+      ],
       "tokens": {
         "color.neutral.50": "#ecfeff",
         "color.neutral.100": "#cffafe",
@@ -198,12 +268,24 @@
         "radius.2xl": "1.25rem",
         "radius.3xl": "1.75rem",
         "font.family.sans": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      "dark": {
+        "color.neutral.0": "#08171b",
+        "color.neutral.50": "#0d2228",
+        "color.neutral.100": "#132f36",
+        "color.neutral.200": "#1e454f"
       }
     },
     {
       "id": "coral",
       "label": "Coral",
-      "swatches": ["#e11d48", "#0891b2", "#65a30d", "#d97706", "#dc2626"],
+      "swatches": [
+        "#e11d48",
+        "#0891b2",
+        "#65a30d",
+        "#d97706",
+        "#dc2626"
+      ],
       "tokens": {
         "color.neutral.50": "#fff1f2",
         "color.neutral.100": "#ffe4e6",
@@ -226,6 +308,12 @@
         "radius.2xl": "2rem",
         "radius.3xl": "2.5rem",
         "font.family.sans": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      "dark": {
+        "color.neutral.0": "#1c0a10",
+        "color.neutral.50": "#2a0f18",
+        "color.neutral.100": "#381420",
+        "color.neutral.200": "#4f1f30"
       }
     }
   ]

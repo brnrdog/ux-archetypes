@@ -7,6 +7,7 @@ type theme = {
   label: string,
   swatches: array<string>,
   tokens: array<(string, string)>,
+  darkTokens: array<(string, string)>,
 }
 
 let all: array<theme> = [
@@ -15,54 +16,63 @@ let all: array<theme> = [
     label: "Monochrome",
     swatches: ["#171717"],
     tokens: [],
+    darkTokens: [],
   },
   {
     id: "indigo",
     label: "Indigo",
     swatches: ["#eef2ff", "#4f46e5", "#312e81"],
     tokens: [("color.neutral.50", "#eef2ff"), ("color.neutral.100", "#e0e7ff"), ("color.neutral.200", "#c7d2fe"), ("color.neutral.700", "#4338ca"), ("color.neutral.800", "#3730a3"), ("color.neutral.900", "#312e81"), ("color.neutral.950", "#1e1b4b"), ("color.action.default", "#4f46e5"), ("color.action.hover", "#4338ca"), ("color.action.onAction", "#ffffff"), ("radius.sm", "0.5rem"), ("radius.md", "0.75rem"), ("radius.lg", "1rem"), ("radius.xl", "1.5rem"), ("radius.2xl", "2rem"), ("radius.3xl", "2.5rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
+    darkTokens: [("color.neutral.0", "#14122b"), ("color.neutral.50", "#1a1838"), ("color.neutral.100", "#232048"), ("color.neutral.200", "#322e63")],
   },
   {
     id: "forest",
     label: "Forest",
     swatches: ["#ecfdf5", "#059669", "#064e3b"],
     tokens: [("color.neutral.50", "#ecfdf5"), ("color.neutral.100", "#d1fae5"), ("color.neutral.200", "#a7f3d0"), ("color.neutral.700", "#047857"), ("color.neutral.800", "#065f46"), ("color.neutral.900", "#064e3b"), ("color.neutral.950", "#022c22"), ("color.action.default", "#059669"), ("color.action.hover", "#047857"), ("color.action.onAction", "#ffffff"), ("radius.sm", "0.375rem"), ("radius.md", "0.5rem"), ("radius.lg", "0.75rem"), ("radius.xl", "1rem"), ("radius.2xl", "1.25rem"), ("radius.3xl", "1.75rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
+    darkTokens: [("color.neutral.0", "#08150f"), ("color.neutral.50", "#0d1f16"), ("color.neutral.100", "#132b1f"), ("color.neutral.200", "#1e3d2d")],
   },
   {
     id: "editorial",
     label: "Editorial",
     swatches: ["#fafaf9", "#44403c", "#1c1917"],
     tokens: [("color.neutral.50", "#fafaf9"), ("color.neutral.100", "#f5f5f4"), ("color.neutral.200", "#e7e5e4"), ("color.neutral.700", "#44403c"), ("color.neutral.800", "#292524"), ("color.neutral.900", "#1c1917"), ("color.neutral.950", "#0c0a09"), ("color.action.default", "#292524"), ("color.action.hover", "#1c1917"), ("color.action.onAction", "#fafaf9"), ("radius.sm", "0.125rem"), ("radius.md", "0.1875rem"), ("radius.lg", "0.25rem"), ("radius.xl", "0.375rem"), ("radius.2xl", "0.5rem"), ("radius.3xl", "0.75rem"), ("font.family.sans", "Georgia, Cambria, \"Times New Roman\", serif")],
+    darkTokens: [("color.neutral.0", "#161310"), ("color.neutral.50", "#1f1b18"), ("color.neutral.100", "#2a2521"), ("color.neutral.200", "#3a352f")],
   },
   {
     id: "terminal",
     label: "Terminal",
     swatches: ["#f0fdf4", "#16a34a", "#14532d"],
     tokens: [("color.neutral.50", "#f0fdf4"), ("color.neutral.100", "#dcfce7"), ("color.neutral.200", "#bbf7d0"), ("color.neutral.700", "#166534"), ("color.neutral.800", "#14532d"), ("color.neutral.900", "#052e16"), ("color.neutral.950", "#031a0d"), ("color.action.default", "#16a34a"), ("color.action.hover", "#15803d"), ("color.action.onAction", "#ffffff"), ("radius.sm", "0.125rem"), ("radius.md", "0.1875rem"), ("radius.lg", "0.25rem"), ("radius.xl", "0.375rem"), ("radius.2xl", "0.5rem"), ("radius.3xl", "0.75rem"), ("font.family.sans", "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace")],
+    darkTokens: [("color.neutral.0", "#08140c"), ("color.neutral.50", "#0d1f14"), ("color.neutral.100", "#132b1c"), ("color.neutral.200", "#1e3d29")],
   },
   {
     id: "sunset",
     label: "Sunset",
     swatches: ["#fff7ed", "#ea580c", "#7c2d12"],
     tokens: [("color.neutral.50", "#fff7ed"), ("color.neutral.100", "#ffedd5"), ("color.neutral.200", "#fed7aa"), ("color.neutral.700", "#c2410c"), ("color.neutral.800", "#9a3412"), ("color.neutral.900", "#7c2d12"), ("color.neutral.950", "#431407"), ("color.action.default", "#ea580c"), ("color.action.hover", "#c2410c"), ("color.action.onAction", "#ffffff"), ("radius.sm", "0.5rem"), ("radius.md", "0.75rem"), ("radius.lg", "1rem"), ("radius.xl", "1.5rem"), ("radius.2xl", "2rem"), ("radius.3xl", "2.5rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
+    darkTokens: [("color.neutral.0", "#170d07"), ("color.neutral.50", "#241408"), ("color.neutral.100", "#31200f"), ("color.neutral.200", "#4a2f1a")],
   },
   {
     id: "vibrant",
     label: "Vibrant",
     swatches: ["#7c3aed", "#2563eb", "#16a34a", "#d97706", "#dc2626"],
     tokens: [("color.neutral.50", "#f5f3ff"), ("color.neutral.100", "#ede9fe"), ("color.neutral.200", "#ddd6fe"), ("color.neutral.700", "#6d28d9"), ("color.neutral.800", "#5b21b6"), ("color.neutral.900", "#4c1d95"), ("color.neutral.950", "#2e1065"), ("color.action.default", "#7c3aed"), ("color.action.hover", "#6d28d9"), ("color.action.onAction", "#ffffff"), ("color.status.info", "#2563eb"), ("color.status.success", "#16a34a"), ("color.status.warning", "#d97706"), ("color.status.danger", "#dc2626"), ("radius.sm", "0.5rem"), ("radius.md", "0.75rem"), ("radius.lg", "1rem"), ("radius.xl", "1.5rem"), ("radius.2xl", "2rem"), ("radius.3xl", "2.5rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
+    darkTokens: [("color.neutral.0", "#16112b"), ("color.neutral.50", "#1e1838"), ("color.neutral.100", "#282048"), ("color.neutral.200", "#3a2e68")],
   },
   {
     id: "ocean",
     label: "Ocean",
     swatches: ["#0891b2", "#0284c7", "#059669", "#ca8a04", "#e11d48"],
     tokens: [("color.neutral.50", "#ecfeff"), ("color.neutral.100", "#cffafe"), ("color.neutral.200", "#a5f3fc"), ("color.neutral.700", "#0e7490"), ("color.neutral.800", "#155e75"), ("color.neutral.900", "#164e63"), ("color.neutral.950", "#083344"), ("color.action.default", "#0891b2"), ("color.action.hover", "#0e7490"), ("color.action.onAction", "#ffffff"), ("color.status.info", "#0284c7"), ("color.status.success", "#059669"), ("color.status.warning", "#ca8a04"), ("color.status.danger", "#e11d48"), ("radius.sm", "0.375rem"), ("radius.md", "0.5rem"), ("radius.lg", "0.75rem"), ("radius.xl", "1rem"), ("radius.2xl", "1.25rem"), ("radius.3xl", "1.75rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
+    darkTokens: [("color.neutral.0", "#08171b"), ("color.neutral.50", "#0d2228"), ("color.neutral.100", "#132f36"), ("color.neutral.200", "#1e454f")],
   },
   {
     id: "coral",
     label: "Coral",
     swatches: ["#e11d48", "#0891b2", "#65a30d", "#d97706", "#dc2626"],
     tokens: [("color.neutral.50", "#fff1f2"), ("color.neutral.100", "#ffe4e6"), ("color.neutral.200", "#fecdd3"), ("color.neutral.700", "#be123c"), ("color.neutral.800", "#9f1239"), ("color.neutral.900", "#881337"), ("color.neutral.950", "#4c0519"), ("color.action.default", "#e11d48"), ("color.action.hover", "#be123c"), ("color.action.onAction", "#ffffff"), ("color.status.info", "#0891b2"), ("color.status.success", "#65a30d"), ("color.status.warning", "#d97706"), ("color.status.danger", "#dc2626"), ("radius.sm", "0.5rem"), ("radius.md", "0.75rem"), ("radius.lg", "1rem"), ("radius.xl", "1.5rem"), ("radius.2xl", "2rem"), ("radius.3xl", "2.5rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
+    darkTokens: [("color.neutral.0", "#1c0a10"), ("color.neutral.50", "#2a0f18"), ("color.neutral.100", "#381420"), ("color.neutral.200", "#4f1f30")],
   },
 ]
 

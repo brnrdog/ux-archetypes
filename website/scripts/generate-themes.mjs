@@ -25,6 +25,7 @@ const body = themes
     label: ${s(t.label)},
     swatches: ${arr(t.swatches || [])},
     tokens: ${pairs(t.tokens)},
+    darkTokens: ${pairs(t.dark)},
   }`,
   )
   .join(",\n");
@@ -38,6 +39,7 @@ type theme = {
   label: string,
   swatches: array<string>,
   tokens: array<(string, string)>,
+  darkTokens: array<(string, string)>,
 }
 
 let all: array<theme> = [
