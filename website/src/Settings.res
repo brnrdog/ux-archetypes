@@ -186,7 +186,16 @@ module Panel = {
           </div>
         </div>
 
-        <div class="mt-5 flex items-center justify-between">
+        <button
+          class="mt-4 block text-xs text-neutral-500 underline decoration-neutral-300 underline-offset-2 hover:text-neutral-900"
+          onClick={_ => {
+            Signal.set(open_, false)
+            Router.push("/tokens", ())
+          }}>
+          <View.Text> "View all design tokens →" </View.Text>
+        </button>
+
+        <div class="mt-4 flex items-center justify-between border-t border-neutral-100 pt-3">
           <Button variant=#ghost size=#sm onClick={_ => reset()}>
             <View.Text> "Reset" </View.Text>
           </Button>

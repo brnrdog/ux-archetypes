@@ -217,6 +217,17 @@ module Sidebar = {
     )
     <aside class={Prop.signal(cls)}>
       <nav class="h-full w-64 overflow-y-auto p-2">
+        {
+          let cls = Computed.make(() => {
+            let active = Signal.get(Router.location()).pathname == "/tokens"
+            "mb-4 block rounded-lg px-2 py-1.5 text-sm font-medium transition-colors " ++ (
+              active ? "bg-neutral-900 text-white" : "text-neutral-700 hover:bg-neutral-100"
+            )
+          })
+          <Router.Link to="/tokens" class={Prop.signal(cls)}>
+            <View.Text> "Design Tokens" </View.Text>
+          </Router.Link>
+        }
         <SidebarGroup layer="element" title="Elements" />
         <SidebarGroup layer="component" title="Components" />
         <SidebarGroup layer="block" title="Blocks" />
@@ -631,6 +642,86 @@ module TraitDetail = {
     }
 }
 
+// The design-token reference — every token the framework defines, generated from
+// tokens.json (TokensData). Samples render the resolved value inline so the page
+// reflects exactly what the framework ships.
+module Tokens = {
+  module Sample = {
+    @jsx.component
+    let make = (~t: TokensData.token) =>
+      switch t.sample {
+      | "color" =>
+        <div class="size-10 shrink-0 rounded-md border border-neutral-200" style={"background-color: " ++ t.value} />
+      | "radius" =>
+        <div class="size-10 shrink-0 border-2 border-neutral-900 bg-neutral-100" style={"border-radius: " ++ t.value} />
+      | "space" =>
+        <div class="flex h-10 w-24 shrink-0 items-center">
+          <div class="h-4 rounded-sm bg-neutral-900" style={"width: " ++ t.value} />
+        </div>
+      | "shadow" =>
+        <div class="size-10 shrink-0 rounded-md border border-neutral-100 bg-white" style={"box-shadow: " ++ t.value} />
+      | "border" =>
+        <div class="size-10 shrink-0 rounded-md border-solid border-neutral-900 bg-neutral-50" style={"border-width: " ++ t.value} />
+      | "font-family" =>
+        <span class="w-10 shrink-0 text-2xl text-neutral-900" style={"font-family: " ++ t.value}> <View.Text> "Ag" </View.Text> </span>
+      | "font-size" =>
+        <span class="flex h-10 w-10 shrink-0 items-center text-neutral-900" style={"font-size: " ++ t.value}> <View.Text> "Ag" </View.Text> </span>
+      | "font-weight" =>
+        <span class="w-10 shrink-0 text-2xl text-neutral-900" style={"font-weight: " ++ t.value}> <View.Text> "Ag" </View.Text> </span>
+      | _ =>
+        <span class="flex size-10 shrink-0 items-center justify-center rounded-md bg-neutral-100 font-mono text-xs text-neutral-500"> <View.Text> {t.value} </View.Text> </span>
+      }
+  }
+
+  @jsx.component
+  let make = () =>
+    <div class="mx-auto max-w-3xl px-8 py-12">
+      <nav class="flex items-center gap-2 text-xs text-neutral-400">
+        <Router.Link to="/" class="hover:text-neutral-700"> <View.Text> "Overview" </View.Text> </Router.Link>
+        <span> <View.Text> "/" </View.Text> </span>
+        <span class="text-neutral-700"> <View.Text> "Design Tokens" </View.Text> </span>
+      </nav>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight text-neutral-900"> <View.Text> "Design Tokens" </View.Text> </h1>
+      <p class="mt-4 text-lg leading-relaxed text-neutral-600">
+        <View.Text> "The primitives every archetype is built on — generated from the framework's " </View.Text>
+        <Link href="https://github.com/brnrdog/ux-archetypes/blob/main/tokens/tokens.json" newTab=true>
+          <View.Text> "tokens.json" </View.Text>
+        </Link>
+        <View.Text> ". Contracts reference these by role; the theme is driven entirely by them." </View.Text>
+      </p>
+
+      <View.For
+        each={Prop.static(TokensData.all)}
+        render={g =>
+          <section class="mt-10">
+            <h2 class="text-lg font-semibold tracking-tight text-neutral-900 capitalize"> <View.Text> {g.group} </View.Text> </h2>
+            <p class="mt-1 text-sm text-neutral-500"> <View.Text> {g.description} </View.Text> </p>
+            <div class="mt-4 grid gap-3 sm:grid-cols-2">
+              <View.For
+                each={Prop.static(g.tokens)}
+                render={t =>
+                  <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white p-3">
+                    <Sample t />
+                    <div class="min-w-0">
+                      <div class="font-mono text-sm text-neutral-900"> <View.Text> {t.name} </View.Text> </div>
+                      <div class="flex flex-wrap items-center gap-x-2 font-mono text-xs text-neutral-400">
+                        <span> <View.Text> {t.value} </View.Text> </span>
+                        <View.Show when_={Prop.static(t.raw != "")}>
+                          <span class="text-neutral-300"> <View.Text> {t.raw} </View.Text> </span>
+                        </View.Show>
+                      </div>
+                      <View.Show when_={Prop.static(t.description != "")}>
+                        <div class="mt-0.5 text-xs text-neutral-500"> <View.Text> {t.description} </View.Text> </div>
+                      </View.Show>
+                    </div>
+                  </div>}
+              />
+            </div>
+          </section>}
+      />
+    </div>
+}
+
 @jsx.component
 let make = () => {
   // Global ⌘K opens the spotlight search.
@@ -642,6 +733,7 @@ let make = () => {
   })
   let routes = Router.routes([
     {pattern: "/", render: _ => <Home />},
+    {pattern: "/tokens", render: _ => <Tokens />},
     {pattern: "/a/:id", render: params => <Detail id={params->Dict.get("id")->Option.getOr("")} />},
     {pattern: "/t/:id", render: params => <TraitDetail id={params->Dict.get("id")->Option.getOr("")} />},
   ])
