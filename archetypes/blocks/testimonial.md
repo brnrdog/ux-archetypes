@@ -1,7 +1,7 @@
 ---
 id: testimonial
 title: Testimonial
-layer: component
+layer: block
 version: 1.0.0
 status: stable
 summary: A customer quote with attribution that builds trust through credible social proof.

@@ -1,7 +1,7 @@
 ---
 id: hero
 title: Hero
-layer: component
+layer: block
 version: 1.0.0
 status: stable
 summary: A prominent opening section that states the value proposition and the primary call to action.

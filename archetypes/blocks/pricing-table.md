@@ -1,7 +1,7 @@
 ---
 id: pricing-table
 title: Pricing Table
-layer: component
+layer: block
 version: 1.0.0
 status: stable
 summary: A side-by-side comparison of plans and their features to help a visitor choose.

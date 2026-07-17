@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const archetypesDir = join(here, "..", "..", "archetypes");
 const outFile = join(here, "..", "src", "Contracts.res");
-const layers = ["elements", "components", "pages", "flows"];
+const layers = ["elements", "components", "blocks", "pages", "flows"];
 
 // ReScript reserved words that can't be bare type names.
 const reserved = new Set(["type", "and", "as", "open", "let", "module", "rec"]);

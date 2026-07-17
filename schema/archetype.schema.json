@@ -20,7 +20,7 @@
     "layer": {
       "type": "string",
       "description": "The layer this archetype belongs to.",
-      "enum": ["element", "component", "page", "flow"]
+      "enum": ["element", "component", "block", "page", "flow"]
     },
     "version": {
       "type": "string",

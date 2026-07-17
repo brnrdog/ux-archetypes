@@ -1,7 +1,10 @@
 {
   "name": "ux-archetypes",
-  "version": "0.5.0",
-  "description": "A technology-agnostic collection of User Experience Archetypes: reusable definitions of UI patterns for humans and AI agents, spanning elements, components, and pages.",
+  "version": "0.6.0",
+  "description": "A technology-agnostic collection of User Experience Archetypes: reusable definitions of UI patterns for humans and AI agents, spanning elements, components, blocks, pages, and flows.",
+  "scripts": {
+    "index": "node scripts/generate-index.mjs"
+  },
   "license": "MIT",
   "author": "brnrdog",
   "keywords": [

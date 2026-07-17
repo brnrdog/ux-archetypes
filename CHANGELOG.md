@@ -4,6 +4,26 @@ All notable changes to this collection are documented here. The collection
 follows [Semantic Versioning](https://semver.org/) and the format of
 [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.6.0] - 2026-07-17
+
+A pre-release restructuring pass toward implementability. Contains breaking
+changes (layer taxonomy, file locations); the collection is not yet formally
+released.
+
+### Changed (breaking)
+
+- **New `block` layer.** Page-sections (`hero`, `feature-grid`, `testimonial`,
+  `pricing-table`, `faq`, `cta-section`) moved out of `components/` into
+  `archetypes/blocks/` and now declare `layer: block`. This restores a crisp
+  meaning to "component" (a reusable, composable unit) versus "block" (a
+  page-level section). The layer enum is now
+  `element | component | block | page | flow`.
+
+### Added
+
+- `INDEX.md` is now **generated** from the specs' frontmatter (`npm run index`),
+  so the registry can no longer drift from the archetypes.
+
 ## [0.5.0] - 2026-07-17
 
 ### Added

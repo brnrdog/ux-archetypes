@@ -51,6 +51,7 @@ let layerBadge = layer =>
   switch layer {
   | "element" => "bg-neutral-900 text-white"
   | "component" => "bg-neutral-200 text-neutral-800"
+  | "block" => "bg-neutral-100 text-neutral-700 ring-1 ring-inset ring-neutral-300"
   | "page" => "border border-neutral-300 text-neutral-700"
   | _ => "border border-dashed border-neutral-300 text-neutral-500"
   }

@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const archetypesDir = join(here, "..", "..", "archetypes");
 const srcDir = join(here, "..", "src");
-const layers = ["elements", "components", "pages", "flows"];
+const layers = ["elements", "components", "blocks", "pages", "flows"];
 
 // Which archetypes have a component implementation to check, and where.
 const componentFor = { button: "Button.res" };

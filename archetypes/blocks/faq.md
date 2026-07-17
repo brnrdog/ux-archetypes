@@ -1,7 +1,7 @@
 ---
 id: faq
 title: FAQ
-layer: component
+layer: block
 version: 1.0.0
 status: stable
 summary: A list of common questions with expandable answers that removes last-mile objections.

@@ -1,7 +1,7 @@
 ---
 id: feature-grid
 title: Feature Grid
-layer: component
+layer: block
 version: 1.0.0
 status: stable
 summary: A grid of concise, icon-led items that communicate a product's key features or benefits.

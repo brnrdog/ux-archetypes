@@ -1,7 +1,7 @@
 ---
 id: cta-section
 title: CTA Section
-layer: component
+layer: block
 version: 1.0.0
 status: stable
 summary: A focused section that restates the primary action to drive conversion.

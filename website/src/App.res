@@ -127,6 +127,7 @@ module Sidebar = {
       <nav class="h-full w-64 overflow-y-auto p-2">
         <SidebarGroup layer="element" title="Elements" />
         <SidebarGroup layer="component" title="Components" />
+        <SidebarGroup layer="block" title="Blocks" />
         <SidebarGroup layer="page" title="Pages" />
         <SidebarGroup layer="flow" title="Flows" />
       </nav>
@@ -279,9 +280,10 @@ module Home = {
         <Link href="https://xote.dev" newTab=true> <View.Text> "Xote" </View.Text> </Link>
         <View.Text> "." </View.Text>
       </p>
-      <div class="mt-10 grid grid-cols-4 gap-4">
+      <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-5">
         {stat("element", "Elements")}
         {stat("component", "Components")}
+        {stat("block", "Blocks")}
         {stat("page", "Pages")}
         {stat("flow", "Flows")}
       </div>
