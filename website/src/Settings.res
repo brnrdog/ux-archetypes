@@ -91,21 +91,43 @@ let clearOverrides = () => {
 // generated into ThemesData — this module just applies them.
 
 // --- State ---------------------------------------------------------------------
+// A theme (palette identity) and a light/dark mode are orthogonal: the mode
+// overlay is applied on top of the chosen theme.
 let open_ = Signal.make(false)
 let presetSel = Signal.make(readOr("ux.preset", "monochrome"))
+let darkMode = Signal.make(readOr("ux.mode", "light") == "dark")
 
-let applyPreset = (t: ThemesData.theme) => {
+let themeById = id => ThemesData.all->Array.find(t => t.id == id)
+
+let applyTheme = (t: ThemesData.theme, dark) => {
   clearOverrides()
   t.tokens->Array.forEach(((path, v)) => applyByPath(path, v))
+  if dark {
+    ThemesData.darkMode->Array.forEach(((path, v)) => applyByPath(path, v))
+  }
   Signal.set(presetSel, t.id)
+  Signal.set(darkMode, dark)
   store("ux.preset", t.id)
+  store("ux.mode", dark ? "dark" : "light")
 }
 
-// Reset everything (presets + per-token edits) back to the framework defaults.
+// Pick a theme, keeping the current mode.
+let applyPreset = t => applyTheme(t, Signal.get(darkMode))
+
+// Flip the mode, keeping the current theme.
+let setDark = dark =>
+  switch themeById(Signal.get(presetSel)) {
+  | Some(t) => applyTheme(t, dark)
+  | None => ()
+  }
+
+// Reset everything (theme + mode + per-token edits) back to the framework defaults.
 let resetTokens = () => {
   clearOverrides()
   Signal.set(presetSel, "monochrome")
+  Signal.set(darkMode, false)
   store("ux.preset", "monochrome")
+  store("ux.mode", "light")
 }
 let resetTokensAndReload = () => {
   resetTokens()
@@ -136,8 +158,25 @@ module Panel = {
       <Backdrop onClose={() => Signal.set(open_, false)} />
       <div class="fixed right-3 top-16 z-40 w-72 rounded-2xl border border-border bg-surface p-4 shadow-2xl">
         <div class="flex items-center justify-between">
-          <h2 class="text-sm font-semibold text-ink"> <View.Text> "Theme presets" </View.Text> </h2>
-          <span class="text-xs text-muted"> <View.Text> "live tokens" </View.Text> </span>
+          <h2 class="text-sm font-semibold text-ink"> <View.Text> "Theme" </View.Text> </h2>
+          {
+            // Light / dark mode toggle — orthogonal to the theme.
+            let seg = dark => Computed.make(() =>
+              "rounded-md px-2 py-0.5 text-xs font-medium transition-colors " ++ (
+                Signal.get(darkMode) == dark
+                  ? "bg-action text-on-action"
+                  : "text-muted hover:text-ink"
+              )
+            )
+            <div class="flex items-center gap-0.5 rounded-lg border border-border p-0.5">
+              <button class={Prop.signal(seg(false))} onClick={_ => setDark(false)}>
+                <View.Text> "☀ Light" </View.Text>
+              </button>
+              <button class={Prop.signal(seg(true))} onClick={_ => setDark(true)}>
+                <View.Text> "☾ Dark" </View.Text>
+              </button>
+            </div>
+          }
         </div>
 
         <div class="mt-3 grid grid-cols-3 gap-2">

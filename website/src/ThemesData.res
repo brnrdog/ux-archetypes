@@ -64,10 +64,7 @@ let all: array<theme> = [
     swatches: ["#e11d48", "#0891b2", "#65a30d", "#d97706", "#dc2626"],
     tokens: [("color.neutral.50", "#fff1f2"), ("color.neutral.100", "#ffe4e6"), ("color.neutral.200", "#fecdd3"), ("color.neutral.700", "#be123c"), ("color.neutral.800", "#9f1239"), ("color.neutral.900", "#881337"), ("color.neutral.950", "#4c0519"), ("color.action.default", "#e11d48"), ("color.action.hover", "#be123c"), ("color.action.onAction", "#ffffff"), ("color.status.info", "#0891b2"), ("color.status.success", "#65a30d"), ("color.status.warning", "#d97706"), ("color.status.danger", "#dc2626"), ("radius.sm", "0.5rem"), ("radius.md", "0.75rem"), ("radius.lg", "1rem"), ("radius.xl", "1.5rem"), ("radius.2xl", "2rem"), ("radius.3xl", "2.5rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
   },
-  {
-    id: "night",
-    label: "Night",
-    swatches: ["#0a0a0a", "#fafafa"],
-    tokens: [("color.neutral.0", "#0a0a0a"), ("color.neutral.50", "#171717"), ("color.neutral.100", "#262626"), ("color.neutral.200", "#404040"), ("color.neutral.300", "#525252"), ("color.neutral.400", "#737373"), ("color.neutral.500", "#a3a3a3"), ("color.neutral.600", "#d4d4d4"), ("color.neutral.700", "#e5e5e5"), ("color.neutral.800", "#f5f5f5"), ("color.neutral.900", "#fafafa"), ("color.neutral.950", "#ffffff"), ("color.neutral.1000", "#ffffff")],
-  },
 ]
+
+// Orthogonal light/dark mode overlays, applied on top of any theme.
+let darkMode: array<(string, string)> = [("color.neutral.0", "#0a0a0a"), ("color.neutral.50", "#171717"), ("color.neutral.100", "#262626"), ("color.neutral.200", "#404040"), ("color.neutral.300", "#525252"), ("color.neutral.400", "#737373"), ("color.neutral.500", "#a3a3a3"), ("color.neutral.600", "#d4d4d4"), ("color.neutral.700", "#e5e5e5"), ("color.neutral.800", "#f5f5f5"), ("color.neutral.900", "#fafafa"), ("color.neutral.950", "#ffffff"), ("color.neutral.1000", "#ffffff")]

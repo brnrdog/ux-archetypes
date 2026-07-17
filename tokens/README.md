@@ -83,11 +83,17 @@ touching a single archetype or component.
 
 ### Themes (presets)
 
-[`themes.json`](./themes.json) ships ready-made themes — each a named bundle of
-token overrides (a map of token path → value) on top of the monochrome baseline.
-Included: `monochrome`, `indigo`, `forest`, `editorial`, `terminal`, `sunset`,
-`vibrant`, `ocean`, `coral`, and a dark `night`. A theme that tints **both ends**
-of the neutral ramp re-skins backgrounds and text together; `night` inverts the
-whole ramp for a dark mode. The website's theme picker is generated from this
-file (`website/scripts/generate-themes.mjs`), and every override path is
-validated against the tokens (`npm run conformance:tokens`).
+[`themes.json`](./themes.json) ships ready-made themes and light/dark modes.
+
+- **Themes** (`themes` array) carry the palette identity — accent, status,
+  radius, font, and a light-mode tint of the neutral ramp — as a map of token
+  path → value. Included: `monochrome`, `indigo`, `forest`, `editorial`,
+  `terminal`, `sunset`, `vibrant`, `ocean`, `coral`.
+- **Modes** (`modes` object) are orthogonal light/dark variants applied on top of
+  *any* theme. `dark` inverts the neutral ramp so surfaces go dark and text
+  light, while the theme's accent/status/radius/font are preserved — so every
+  theme has a coherent dark variant for free.
+
+The website's picker is generated from this file
+(`website/scripts/generate-themes.mjs`), and every theme and mode override path
+is validated against the tokens (`npm run conformance:tokens`).

@@ -9,23 +9,24 @@ const here = dirname(fileURLToPath(import.meta.url));
 const file = join(here, "..", "..", "tokens", "themes.json");
 const outFile = join(here, "..", "src", "ThemesData.res");
 
-const { themes } = JSON.parse(readFileSync(file, "utf8"));
+const { themes, modes = {} } = JSON.parse(readFileSync(file, "utf8"));
 
 const s = (v) => JSON.stringify(v);
 const arr = (xs) => `[${xs.map(s).join(", ")}]`;
+const pairs = (obj) =>
+  `[${Object.entries(obj || {})
+    .map(([path, value]) => `(${s(path)}, ${s(value)})`)
+    .join(", ")}]`;
 
 const body = themes
-  .map((t) => {
-    const tokens = Object.entries(t.tokens || {})
-      .map(([path, value]) => `(${s(path)}, ${s(value)})`)
-      .join(", ");
-    return `  {
+  .map(
+    (t) => `  {
     id: ${s(t.id)},
     label: ${s(t.label)},
     swatches: ${arr(t.swatches || [])},
-    tokens: [${tokens}],
-  }`;
-  })
+    tokens: ${pairs(t.tokens)},
+  }`,
+  )
   .join(",\n");
 
 const out = `// GENERATED FILE — do not edit by hand.
@@ -42,6 +43,9 @@ type theme = {
 let all: array<theme> = [
 ${body},
 ]
+
+// Orthogonal light/dark mode overlays, applied on top of any theme.
+let darkMode: array<(string, string)> = ${pairs(modes.dark)}
 `;
 
 writeFileSync(outFile, out);
