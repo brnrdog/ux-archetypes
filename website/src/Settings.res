@@ -45,12 +45,23 @@ let applyVars = (t: TokensData.token, value) => {
 let overridesVersion = Signal.make(0)
 let bumpOverrides = () => Signal.update(overridesVersion, v => v + 1)
 
-// The value currently in effect for a token: its override if any, else the
-// generated default.
-let currentValue = (t: TokensData.token) =>
+// The value currently in effect for a token: its own override if any; otherwise
+// — for an alias like `{color.neutral.900}` — whatever its target currently
+// resolves to (so a semantic role reflects a change to the ramp it points at);
+// otherwise the generated default.
+let rec currentValue = (t: TokensData.token) =>
   switch getOverrides()->Dict.get(t.path) {
   | Some(v) => v
-  | None => t.value
+  | None =>
+    if t.raw != "" {
+      let ref = t.raw->String.slice(~start=1, ~end=String.length(t.raw) - 1)
+      switch tokenByPath(ref) {
+      | Some(target) => currentValue(target)
+      | None => t.value
+      }
+    } else {
+      t.value
+    }
   }
 
 let applyToken = (t: TokensData.token, value) => {
