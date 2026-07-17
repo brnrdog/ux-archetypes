@@ -9,7 +9,6 @@ since: 0.1.0
 updated: 2026-07-16
 tags: [navigation, header, layout, wayfinding]
 aliases: [navbar, top-nav, header, app-bar]
-composedOf: [button, input, link, logo, dropdown-menu, avatar]
 usedBy: [landing-page, dashboard, settings]
 related: [sidebar, tabs, breadcrumb, footer]
 maintainers: [brnrdog]
@@ -99,10 +98,18 @@ predictable landmark position. If sticky, it must not obscure content behind it
 
 ## Composition
 
-**Composed of:** logo, link (navigation items), button (CTA / menu toggle), input
-(search), avatar + menu (account).
-
-**Used by:** landing-page, dashboard, settings, and most full-page archetypes.
+```json
+{
+  "parts": [
+    {"ref":"logo","slot":"brand","note":"links home"},
+    {"ref":"link","slot":"nav"},
+    {"ref":"input","slot":"actions","note":"search"},
+    {"ref":"button","slot":"actions","props":{"variant":"primary"}},
+    {"ref":"dropdown-menu","slot":"account"},
+    {"ref":"avatar","slot":"account"}
+  ]
+}
+```
 
 ## Do / Don't
 

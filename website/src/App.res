@@ -68,6 +68,60 @@ module Chip = {
   }
 }
 
+// Structured composition: each part wired to a slot, with the props passed and
+// an optional note. Parts group under their slot name.
+module Composition = {
+  @jsx.component
+  let make = (~parts: array<ArchetypesData.compPart>) => {
+    // Distinct slot names, in first-seen order.
+    let slots = []
+    parts->Array.forEach(p =>
+      if !(slots->Array.includes(p.slot)) {
+        slots->Array.push(p.slot)
+      }
+    )
+    <div class="mt-10">
+      <h3 class="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+        <View.Text> "Composition" </View.Text>
+      </h3>
+      <div class="mt-3 space-y-4">
+        <View.For
+          each={Prop.static(slots)}
+          render={slot => {
+            let inSlot = parts->Array.filter(p => p.slot == slot)
+            <div class="rounded-xl border border-neutral-200 bg-white p-4">
+              <div class="font-mono text-xs uppercase tracking-wide text-neutral-400">
+                <View.Text> slot </View.Text>
+              </div>
+              <ul class="mt-2 space-y-2">
+                <View.For
+                  each={Prop.static(inSlot)}
+                  render={p =>
+                    <li class="flex flex-wrap items-center gap-2 text-sm">
+                      <Chip id={p.compRef} />
+                      <View.For
+                        each={Prop.static(p.props)}
+                        render={pair => {
+                          let (k, v) = pair
+                          <code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-xs text-neutral-700">
+                            <View.Text> {k ++ "=" ++ v} </View.Text>
+                          </code>
+                        }}
+                      />
+                      <View.Show when_={Prop.static(p.note != "")}>
+                        <span class="text-xs text-neutral-500"> <View.Text> {p.note} </View.Text> </span>
+                      </View.Show>
+                    </li>}
+                />
+              </ul>
+            </div>
+          }}
+        />
+      </div>
+    </div>
+  }
+}
+
 module ChipRow = {
   @jsx.component
   let make = (~title, ~ids) =>
@@ -518,8 +572,14 @@ module Detail = {
           <SpecBody html={a.spec} />
         </View.Show>
 
+        {Array.length(a.composition) > 0
+          ? <Composition parts={a.composition} />
+          : View.null()}
+
         <div class="mt-10 grid gap-6 sm:grid-cols-3">
-          <ChipRow title="Composed of" ids={a.composedOf} />
+          {Array.length(a.composition) > 0
+            ? View.null()
+            : <ChipRow title="Composed of" ids={a.composedOf} />}
           <ChipRow title="Used by" ids={a.usedBy} />
           <ChipRow title="Related" ids={a.related} />
         </div>

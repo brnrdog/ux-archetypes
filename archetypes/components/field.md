@@ -9,7 +9,6 @@ since: 0.2.0
 updated: 2026-07-16
 tags: [form, control, layout, validation]
 aliases: [form-field, form-control, form-group]
-composedOf: [label, input, textarea, select, checkbox, radio-group, switch]
 usedBy: [form, sign-in, settings]
 related: [form, label, input]
 maintainers: [brnrdog]
@@ -78,10 +77,19 @@ label and control on a baseline. Messages reserve space to avoid layout jumps.
 
 ## Composition
 
-**Composed of:** label plus one control (input, textarea, select, checkbox,
-radio-group, switch, …).
-
-**Used by:** form, sign-in, settings.
+```json
+{
+  "parts": [
+    {"ref":"label","slot":"label"},
+    {"ref":"input","slot":"control"},
+    {"ref":"textarea","slot":"control"},
+    {"ref":"select","slot":"control"},
+    {"ref":"checkbox","slot":"control"},
+    {"ref":"radio-group","slot":"control"},
+    {"ref":"switch","slot":"control"}
+  ]
+}
+```
 
 ## Do / Don't
 

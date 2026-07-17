@@ -31,6 +31,13 @@ released.
 - `INDEX.md` is now **generated** from the specs' frontmatter (`npm run index`),
   so the registry can no longer drift from the archetypes.
 
+- **Structural composition.** The `## Composition` section can now carry a
+  `json` block that wires each part to a **slot** with the **props** passed and a
+  note, instead of a flat list of ids. The registry derives `composedOf` from
+  these parts (the frontmatter line is dropped when the block exists), and the
+  website renders composition grouped by slot with prop pills. Converted:
+  `card`, `form`, `dialog`, `navbar`, `field`, `comment`; the rest keep the flat
+  chip list until migrated.
 - **Behavior traits.** A new `traits/` layer captures cross-cutting interaction
   contracts — `dismissible`, `focus-trap`, `anchored`, `roving-focus`,
   `typeahead` — that many archetypes share. Archetypes reference them via a new

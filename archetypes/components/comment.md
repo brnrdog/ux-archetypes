@@ -9,7 +9,6 @@ since: 0.4.0
 updated: 2026-07-17
 tags: [social, discussion, content, thread]
 aliases: [comment-item, reply, post]
-composedOf: [avatar, badge, button, icon-button, textarea, link]
 usedBy: []
 related: [list, card, avatar]
 maintainers: [brnrdog]
@@ -80,10 +79,18 @@ flattening) to preserve readability.
 
 ## Composition
 
-**Composed of:** avatar, badge (role), button / icon-button (actions), textarea
-(reply/edit), link.
-
-**Used by:** discussion threads, feeds, review lists.
+```json
+{
+  "parts": [
+    {"ref":"avatar","slot":"author"},
+    {"ref":"badge","slot":"author","props":{"variant":"soft"},"note":"role"},
+    {"ref":"link","slot":"body"},
+    {"ref":"button","slot":"actions"},
+    {"ref":"icon-button","slot":"actions"},
+    {"ref":"textarea","slot":"composer"}
+  ]
+}
+```
 
 ## Do / Don't
 

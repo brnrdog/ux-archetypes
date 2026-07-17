@@ -9,7 +9,6 @@ since: 0.2.0
 updated: 2026-07-16
 tags: [form, input, validation, data-entry]
 aliases: [data-entry, input-form]
-composedOf: [field, input, textarea, select, checkbox, radio-group, switch, button, alert]
 usedBy: [sign-in, settings, dialog, landing-page]
 related: [field, input, dialog]
 maintainers: [brnrdog]
@@ -80,10 +79,21 @@ predictably placed. On small screens, fields go full-width.
 
 ## Composition
 
-**Composed of:** field, input, textarea, select, checkbox, radio-group, switch,
-button, alert (error summary).
-
-**Used by:** sign-in, settings, dialog, landing-page (lead capture).
+```json
+{
+  "parts": [
+    {"ref":"field","slot":"fields","note":"each label + control + message"},
+    {"ref":"input","slot":"fields"},
+    {"ref":"textarea","slot":"fields"},
+    {"ref":"select","slot":"fields"},
+    {"ref":"checkbox","slot":"fields"},
+    {"ref":"radio-group","slot":"fields"},
+    {"ref":"switch","slot":"fields"},
+    {"ref":"alert","slot":"validation","note":"error summary"},
+    {"ref":"button","slot":"actions","props":{"type":"submit","variant":"primary"}}
+  ]
+}
+```
 
 ## Do / Don't
 

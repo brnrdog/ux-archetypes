@@ -102,9 +102,22 @@ maintainers: []
 
 ## Composition
 
-**Composed of:** <!-- archetype ids, or "Not applicable" for a primitive element -->
+<!-- For composite archetypes, describe the structural wiring in a `json` block:
+     each part references another archetype (`ref`), the `slot` it fills, the
+     `props` passed to it, and an optional `note`. The registry derives the flat
+     `composedOf` list from these refs, so the frontmatter `composedOf:` line can
+     be dropped once this block exists. Primitive elements have no parts — leave
+     this section as prose ("Not applicable") or omit it. `usedBy` stays in
+     frontmatter. -->
 
-**Used by:** <!-- archetype ids that commonly include this one -->
+```json
+{
+  "parts": [
+    { "ref": "button", "slot": "actions", "props": { "variant": "primary" }, "note": "…" },
+    { "ref": "avatar", "slot": "header", "note": "identity" }
+  ]
+}
+```
 
 ## Do / Don't
 

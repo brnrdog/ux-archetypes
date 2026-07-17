@@ -9,7 +9,6 @@ since: 0.2.0
 updated: 2026-07-16
 tags: [container, surface, layout, grouping]
 aliases: [tile, panel]
-composedOf: [typography, button, badge, avatar, aspect-ratio, separator]
 usedBy: [dashboard, landing-page, data-table, settings]
 related: [alert, table, sheet]
 maintainers: [brnrdog]
@@ -80,9 +79,18 @@ consistent padding. Keep footers/actions aligned across a set for a clean grid.
 
 ## Composition
 
-**Composed of:** typography, button, badge, avatar, aspect-ratio, separator.
-
-**Used by:** dashboard, landing-page, data-table (as tiles), settings.
+```json
+{
+  "parts": [
+    {"ref":"aspect-ratio","slot":"media","note":"constrains the media"},
+    {"ref":"avatar","slot":"header","note":"identity"},
+    {"ref":"typography","slot":"header","note":"title and subtitle"},
+    {"ref":"badge","slot":"overlays","props":{"variant":"soft"}},
+    {"ref":"separator","slot":"body","note":"divides sections"},
+    {"ref":"button","slot":"actions","props":{"variant":"primary"}}
+  ]
+}
+```
 
 ## Do / Don't
 

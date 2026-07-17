@@ -9,7 +9,6 @@ since: 0.2.0
 updated: 2026-07-16
 tags: [overlay, modal, focus, task]
 aliases: [modal, modal-dialog, lightbox]
-composedOf: [button, scroll-area, separator]
 usedBy: [form, data-table, dashboard, command]
 related: [alert-dialog, sheet, drawer, popover]
 traits: [dismissible, focus-trap]
@@ -80,9 +79,15 @@ and actions stay reachable.
 
 ## Composition
 
-**Composed of:** button (actions/close), scroll-area, separator.
-
-**Used by:** form, data-table, dashboard, command (as its overlay base).
+```json
+{
+  "parts": [
+    {"ref":"scroll-area","slot":"body","note":"scrolls long content"},
+    {"ref":"separator","slot":"footer","note":"divides body and actions"},
+    {"ref":"button","slot":"footer","props":{"variant":"primary"}}
+  ]
+}
+```
 
 ## Do / Don't
 

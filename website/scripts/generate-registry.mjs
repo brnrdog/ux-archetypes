@@ -83,6 +83,27 @@ function extractApi(body, id) {
   return { api, body: body.slice(0, m.index) + rest };
 }
 
+// Pull the structured composition wiring out of the `## Composition` section
+// (a ```json block of parts) and strip that section from the prose so neither
+// raw JSON nor a stale prose list renders. Absent block → prose left as-is.
+function extractComposition(body, id) {
+  const m = body.match(/^##\s+Composition\s*$/m);
+  if (!m) return { composition: null, body };
+  const after = body.slice(m.index + m[0].length);
+  const nextIdx = after.search(/^##\s+/m);
+  const section = nextIdx === -1 ? after : after.slice(0, nextIdx);
+  const fence = section.match(/```json\s*([\s\S]*?)```/);
+  if (!fence) return { composition: null, body };
+  let composition = null;
+  try {
+    composition = JSON.parse(fence[1]).parts || [];
+  } catch (e) {
+    throw new Error(`Invalid Composition JSON in ${id}: ${e.message}`);
+  }
+  const rest = nextIdx === -1 ? "" : after.slice(nextIdx);
+  return { composition, body: body.slice(0, m.index) + rest };
+}
+
 const records = [];
 for (const layerDir of layers) {
   let files;
@@ -99,7 +120,8 @@ for (const layerDir of layers) {
     if (!parsed) continue;
     const { meta, body: rawBody } = parsed;
     const id = meta.id || basename(file, ".md");
-    const { api, body } = extractApi(rawBody, id);
+    const { api, body: bodyA } = extractApi(rawBody, id);
+    const { composition, body } = extractComposition(bodyA, id);
     records.push({
       id,
       title: meta.title || "",
@@ -109,10 +131,11 @@ for (const layerDir of layers) {
       summary: meta.summary || "",
       tags: meta.tags || [],
       aliases: meta.aliases || [],
-      composedOf: meta.composedOf || [],
+      composedOf: composition ? [...new Set(composition.map((c) => c.ref))] : meta.composedOf || [],
       usedBy: meta.usedBy || [],
       related: meta.related || [],
       traits: meta.traits || [],
+      composition: composition || [],
       intent: extractSection(body, "Intent"),
       spec: mdToHtml(body),
       api,
@@ -158,6 +181,20 @@ function emitApi(api) {
   )}, states: ${arr(api.states || [])}, tokens: ${arr(api.tokens || [])} })`;
 }
 
+// Emit composition parts as a ReScript array<compPart>.
+function emitComposition(parts) {
+  return `[${(parts || [])
+    .map((c) => {
+      const props = Object.entries(c.props || {})
+        .map(([k, v]) => `(${s(k)}, ${s(String(v))})`)
+        .join(", ");
+      return `{ compRef: ${s(c.ref)}, slot: ${s(c.slot || "")}, props: [${props}], note: ${s(
+        c.note || "",
+      )} }`;
+    })
+    .join(", ")}]`;
+}
+
 const body = records
   .map(
     (r) => `  {
@@ -173,6 +210,7 @@ const body = records
     usedBy: ${arr(r.usedBy)},
     related: ${arr(r.related)},
     traits: ${arr(r.traits)},
+    composition: ${emitComposition(r.composition)},
     intent: ${s(r.intent)},
     spec: ${s(r.spec)},
     api: ${emitApi(r.api)},
@@ -195,6 +233,13 @@ type apiSlot = {
   name: string,
   required: bool,
   description: string,
+}
+
+type compPart = {
+  compRef: string,
+  slot: string,
+  props: array<(string, string)>,
+  note: string,
 }
 
 type apiContract = {
@@ -221,6 +266,7 @@ type archetype = {
   usedBy: array<string>,
   related: array<string>,
   traits: array<string>,
+  composition: array<compPart>,
   intent: string,
   spec: string,
   api: option<apiContract>,
