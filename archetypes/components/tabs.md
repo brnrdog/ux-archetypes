@@ -12,6 +12,7 @@ aliases: [tab-group, segmented-views]
 composedOf: [separator, badge]
 usedBy: [dashboard, settings, card]
 related: [accordion, toggle-group, navigation-menu]
+traits: [roving-focus]
 maintainers: [brnrdog]
 ---
 

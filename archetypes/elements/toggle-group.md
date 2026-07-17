@@ -12,6 +12,7 @@ aliases: [segmented-control, button-group-toggle]
 composedOf: [toggle]
 usedBy: [toolbar, menubar, data-table]
 related: [toggle, radio-group, tabs, button-group]
+traits: [roving-focus]
 maintainers: [brnrdog]
 ---
 

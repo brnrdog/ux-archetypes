@@ -12,6 +12,7 @@ aliases: [snackbar, notification, flash-message]
 composedOf: [button, progress]
 usedBy: [dashboard, form, data-table]
 related: [alert, alert-dialog, badge]
+traits: [dismissible]
 maintainers: [brnrdog]
 ---
 

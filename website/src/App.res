@@ -6,6 +6,10 @@ open ArchetypesData
 let byId = id => all->Array.find(a => a.id == id)
 let existsId = id => all->Array.some(a => a.id == id)
 let inLayer = layer => all->Array.filter(a => a.layer == layer)
+
+// Behavior traits (cross-cutting interaction contracts).
+let traitById = id => TraitsData.all->Array.find(t => t.id == id)
+let archetypesWithTrait = tid => all->Array.filter(a => a.traits->Array.includes(tid))
 let layerPlural = layer => layer ++ "s"
 let docUrl = a =>
   "https://github.com/brnrdog/ux-archetypes/blob/main/archetypes/" ++
@@ -115,6 +119,40 @@ module SidebarGroup = {
   }
 }
 
+module TraitsGroup = {
+  @jsx.component
+  let make = () => {
+    let items = TraitsData.all
+    <div class="mb-4">
+      <div class="mb-1 flex items-center justify-between px-2">
+        <span class="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+          <View.Text> "Behaviors" </View.Text>
+        </span>
+        <span class="text-xs tabular-nums text-neutral-400"> <View.Text> {Array.length(items)->Int.toString} </View.Text> </span>
+      </div>
+      <ul class="space-y-0.5">
+        <View.For
+          each={Prop.static(items)}
+          by={t => t.id}
+          render={t => {
+            let cls = Computed.make(() => {
+              let active = Signal.get(Router.location()).pathname == "/t/" ++ t.id
+              "block rounded-lg px-2 py-1.5 text-sm transition-colors " ++ (
+                active ? "bg-neutral-900 text-white" : "text-neutral-700 hover:bg-neutral-100"
+              )
+            })
+            <li>
+              <Router.Link to={"/t/" ++ t.id} class={Prop.signal(cls)}>
+                <View.Text> {t.title} </View.Text>
+              </Router.Link>
+            </li>
+          }}
+        />
+      </ul>
+    </div>
+  }
+}
+
 module Sidebar = {
   @jsx.component
   let make = () => {
@@ -130,6 +168,7 @@ module Sidebar = {
         <SidebarGroup layer="block" title="Blocks" />
         <SidebarGroup layer="page" title="Pages" />
         <SidebarGroup layer="flow" title="Flows" />
+        <TraitsGroup />
       </nav>
     </aside>
   }
@@ -453,6 +492,20 @@ module Detail = {
             />
           </div>
         </View.Show>
+        <View.Show when_={Prop.static(Array.length(a.traits) > 0)}>
+          <div class="mt-3 flex flex-wrap items-center gap-1.5">
+            <span class="text-xs font-medium text-neutral-400"> <View.Text> "Behaviors" </View.Text> </span>
+            <View.For
+              each={Prop.static(a.traits)}
+              render={tid =>
+                <Router.Link
+                  to={"/t/" ++ tid}
+                  class="inline-flex items-center rounded-full border border-neutral-300 bg-white px-2.5 py-0.5 text-xs font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900">
+                  <View.Text> {tid} </View.Text>
+                </Router.Link>}
+            />
+          </div>
+        </View.Show>
 
         <ExampleBlock a />
 
@@ -474,6 +527,40 @@ module Detail = {
     }
 }
 
+module TraitDetail = {
+  @jsx.component
+  let make = (~id) =>
+    switch traitById(id) {
+    | None => <NotFound />
+    | Some(t) =>
+      <div class="mx-auto max-w-3xl px-8 py-12">
+        <nav class="flex items-center gap-2 text-xs text-neutral-400">
+          <Router.Link to="/" class="hover:text-neutral-700"> <View.Text> "Overview" </View.Text> </Router.Link>
+          <span> <View.Text> "/" </View.Text> </span>
+          <span> <View.Text> "Behaviors" </View.Text> </span>
+          <span> <View.Text> "/" </View.Text> </span>
+          <span class="text-neutral-700"> <View.Text> {t.title} </View.Text> </span>
+        </nav>
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+          <h1 class="text-3xl font-bold tracking-tight text-neutral-900"> <View.Text> {t.title} </View.Text> </h1>
+          <span
+            class="inline-flex items-center rounded-md border border-dashed border-neutral-300 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-neutral-500">
+            <View.Text> "behavior" </View.Text>
+          </span>
+        </div>
+        <p class="mt-4 text-lg leading-relaxed text-neutral-700"> <View.Text> {t.summary} </View.Text> </p>
+
+        <View.Show when_={Prop.static(t.spec != "")}>
+          <SpecBody html={t.spec} />
+        </View.Show>
+
+        <div class="mt-10">
+          <ChipRow title="Exhibited by" ids={archetypesWithTrait(id)->Array.map(a => a.id)} />
+        </div>
+      </div>
+    }
+}
+
 @jsx.component
 let make = () => {
   // Global ⌘K opens the spotlight search.
@@ -481,6 +568,7 @@ let make = () => {
   let routes = Router.routes([
     {pattern: "/", render: _ => <Home />},
     {pattern: "/a/:id", render: params => <Detail id={params->Dict.get("id")->Option.getOr("")} />},
+    {pattern: "/t/:id", render: params => <TraitDetail id={params->Dict.get("id")->Option.getOr("")} />},
   ])
   <div class="flex h-screen flex-col">
     <Topbar />

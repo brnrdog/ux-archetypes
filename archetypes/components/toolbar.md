@@ -12,6 +12,7 @@ aliases: [action-bar, command-bar, tool-strip]
 composedOf: [button, icon-button, toggle, toggle-group, separator, dropdown-menu, input]
 usedBy: [data-table, dashboard]
 related: [button-group, menubar, navbar]
+traits: [roving-focus]
 maintainers: [brnrdog]
 ---
 

@@ -78,6 +78,12 @@
       "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
       "uniqueItems": true
     },
+    "traits": {
+      "type": "array",
+      "description": "ids of behavior traits this archetype exhibits (see traits/).",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "uniqueItems": true
+    },
     "maintainers": {
       "type": "array",
       "description": "People accountable for the archetype.",

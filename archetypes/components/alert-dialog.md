@@ -12,6 +12,7 @@ aliases: [confirm-dialog, confirmation-modal]
 composedOf: [dialog, button]
 usedBy: [data-table, settings, form]
 related: [dialog, alert, toast]
+traits: [focus-trap]
 maintainers: [brnrdog]
 ---
 

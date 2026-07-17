@@ -12,6 +12,7 @@ aliases: [action-menu, menu-button, overflow-menu]
 composedOf: [popover, separator, kbd, checkbox]
 usedBy: [navbar, data-table, card, sidebar, toolbar]
 related: [context-menu, menubar, popover, select]
+traits: [dismissible, anchored, roving-focus, typeahead]
 maintainers: [brnrdog]
 ---
 

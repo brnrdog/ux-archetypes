@@ -12,6 +12,7 @@ aliases: [right-click-menu, contextual-menu]
 composedOf: [popover, separator, kbd]
 usedBy: [data-table, sidebar, card]
 related: [dropdown-menu, menubar, popover]
+traits: [dismissible, anchored, roving-focus]
 maintainers: [brnrdog]
 ---
 

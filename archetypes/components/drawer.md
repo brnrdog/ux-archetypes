@@ -12,6 +12,7 @@ aliases: [bottom-sheet, slide-over]
 composedOf: [scroll-area, button, separator]
 usedBy: [navbar, dashboard, data-table]
 related: [sheet, dialog, sidebar, popover]
+traits: [dismissible, focus-trap]
 maintainers: [brnrdog]
 ---
 

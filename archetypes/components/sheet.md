@@ -12,6 +12,7 @@ aliases: [side-panel, slide-over, off-canvas]
 composedOf: [scroll-area, button, separator]
 usedBy: [dashboard, data-table, settings]
 related: [dialog, drawer, sidebar, popover]
+traits: [dismissible, focus-trap]
 maintainers: [brnrdog]
 ---
 

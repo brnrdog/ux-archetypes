@@ -62,6 +62,28 @@ for (const [dir, , heading] of layers) {
   );
 }
 
+// Behavior traits (cross-cutting interaction contracts).
+let traitSection = "";
+try {
+  const traitsDir = join(here, "..", "traits");
+  const rows = readdirSync(traitsDir)
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => {
+      const meta = frontmatter(readFileSync(join(traitsDir, f), "utf8"));
+      const id = meta.id || basename(f, ".md");
+      return { id, title: meta.title || id, summary: meta.summary || "", path: `traits/${f}` };
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
+  if (rows.length) {
+    const body = rows
+      .map((r) => `| [${r.title}](${r.path}) | \`${r.id}\` | ${r.summary} |`)
+      .join("\n");
+    traitSection = `\n\n## Behaviors\n\nCross-cutting interaction contracts shared by many archetypes (see \`traits/\`).\n\n| Trait | id | Summary |\n| ----- | -- | ------- |\n${body}`;
+  }
+} catch {
+  /* no traits dir */
+}
+
 const out = `<!-- GENERATED FILE — do not edit by hand. Run \`npm run index\`. -->
 
 # Archetype Index
@@ -69,7 +91,7 @@ const out = `<!-- GENERATED FILE — do not edit by hand. Run \`npm run index\`.
 A registry of every archetype in the collection, generated from the specs'
 frontmatter (\`npm run index\`).
 
-${sections.join("\n\n")}
+${sections.join("\n\n")}${traitSection}
 `;
 
 writeFileSync(outFile, out);

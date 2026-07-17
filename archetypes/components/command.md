@@ -12,6 +12,7 @@ aliases: [command-palette, command-menu, quick-search, spotlight]
 composedOf: [input, scroll-area, dialog, kbd, separator]
 usedBy: [dashboard, navbar]
 related: [combobox, dialog, dropdown-menu]
+traits: [dismissible, focus-trap]
 maintainers: [brnrdog]
 ---
 

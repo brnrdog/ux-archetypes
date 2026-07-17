@@ -12,6 +12,7 @@ aliases: [flyout, pop-up, floating-panel]
 composedOf: [button, scroll-area]
 usedBy: [combobox, select, date-picker, dropdown-menu, tooltip, hover-card, navigation-menu]
 related: [tooltip, dropdown-menu, dialog, hover-card]
+traits: [dismissible, anchored]
 maintainers: [brnrdog]
 ---
 

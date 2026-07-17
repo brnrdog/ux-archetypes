@@ -19,6 +19,7 @@
   ],
   "files": [
     "archetypes",
+    "traits",
     "templates",
     "schema",
     "tokens",

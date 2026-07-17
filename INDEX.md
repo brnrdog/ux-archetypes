@@ -111,3 +111,15 @@ frontmatter (`npm run index`).
 | [Authentication](archetypes/flows/authentication.md) | `authentication` | 1.0.0 | stable | A multi-step journey that verifies a user's identity to grant access to the product. |
 | [Checkout](archetypes/flows/checkout.md) | `checkout` | 1.0.0 | stable | A step-by-step flow that collects the details needed to complete a purchase. |
 | [Onboarding](archetypes/flows/onboarding.md) | `onboarding` | 1.0.0 | stable | A guided sequence that gets a new user from first login to first meaningful value. |
+
+## Behaviors
+
+Cross-cutting interaction contracts shared by many archetypes (see `traits/`).
+
+| Trait | id | Summary |
+| ----- | -- | ------- |
+| [Anchored](traits/anchored.md) | `anchored` | A floating surface is positioned relative to a trigger, staying visible by flipping and shifting to avoid the viewport edges. |
+| [Dismissible](traits/dismissible.md) | `dismissible` | A transient surface can be closed by Escape, an outside interaction, or an explicit close affordance, and returns control cleanly. |
+| [Focus Trap](traits/focus-trap.md) | `focus-trap` | While a modal surface is open, keyboard focus is confined to it and restored to the trigger when it closes. |
+| [Roving Focus](traits/roving-focus.md) | `roving-focus` | A group of related controls exposes a single tab stop; arrow keys move focus among the items. |
+| [Typeahead](traits/typeahead.md) | `typeahead` | Typing printable characters moves focus (or selection) to the item whose label matches, for fast keyboard access in a list. |

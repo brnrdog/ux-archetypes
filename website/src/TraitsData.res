@@ -1,0 +1,42 @@
+// GENERATED FILE — do not edit by hand.
+// Run `npm run traits` (scripts/generate-traits.mjs) to regenerate.
+
+type trait = {
+  id: string,
+  title: string,
+  summary: string,
+  spec: string,
+}
+
+let all: array<trait> = [
+  {
+    id: "anchored",
+    title: "Anchored",
+    summary: "A floating surface is positioned relative to a trigger, staying visible by flipping and shifting to avoid the viewport edges.",
+    spec: "<h2>Contract</h2>\n<p>An anchored surface floats above the page tethered to a trigger element (popover, tooltip, menu, listbox). It guarantees the surface stays connected to its anchor and fully visible regardless of where the anchor sits.</p>\n<ul><li><strong>Placement</strong> — the surface opens on a requested side (top, right, bottom, left) and alignment (start, center, end) relative to the anchor.</li><li><strong>Collision handling</strong> — when the preferred placement would overflow the viewport, the surface <strong>flips</strong> to the opposite side and/or <strong>shifts</strong> along the axis to stay in view, without detaching from the anchor.</li><li><strong>Follow</strong> — the surface tracks the anchor through scroll and resize, or closes if the anchor leaves the viewport.</li><li><strong>Layering</strong> — the surface renders above page content and escapes clipping and stacking contexts (typically via a portal).</li></ul>\n<h2>Accessibility</h2>\n<ul><li>The surface is associated with its trigger (e.g. the trigger owns/controls the surface) so assistive tech announces the relationship.</li><li>Positioning is purely visual; it must never be the only way meaning is conveyed, and it must not trap or displace focus (see anchored vs. modal).</li></ul>\n<h2>Notes for implementers</h2>\n<p>Anchoring is orthogonal to modality. Most anchored surfaces are <strong>non-modal</strong> and pair with <strong>dismissible</strong>; only a few also take a <strong>focus-trap</strong>.</p>",
+  },
+  {
+    id: "dismissible",
+    title: "Dismissible",
+    summary: "A transient surface can be closed by Escape, an outside interaction, or an explicit close affordance, and returns control cleanly.",
+    spec: "<h2>Contract</h2>\n<p>A dismissible surface is a temporary layer (menu, popover, dialog, toast) that the user can close without completing a task. It guarantees three independent ways out and a clean teardown.</p>\n<ul><li><strong>Escape</strong> — pressing <code>Escape</code> closes the topmost dismissible surface. When surfaces are nested, <code>Escape</code> closes them one level at a time.</li><li><strong>Outside interaction</strong> — a pointer press outside the surface closes it. A surface that models an irreversible decision (an alert dialog) may opt out of outside-dismiss so a stray click can't discard the choice.</li><li><strong>Explicit affordance</strong> — a visible close control (or a menu item that performs its action) dismisses the surface.</li><li><strong>Clean teardown</strong> — on close, any transient state is discarded and focus is returned to a sensible place (see the focus-trap trait for modal surfaces).</li></ul>\n<h2>Accessibility</h2>\n<ul><li>The dismiss keys must not be swallowed by inner controls; <code>Escape</code> reaches the surface even when a field inside it is focused.</li><li>Auto-dismissing surfaces (toasts) must give enough time and a way to pause or re-summon the content, and must not be the only channel for critical messages.</li></ul>\n<h2>Notes for implementers</h2>\n<p>Dismissal is a behavior, not a visual style. Expose an <code>onDismiss</code> event and let the surface's owner decide what \"closed\" means (unmount, hide, or animate out).</p>",
+  },
+  {
+    id: "focus-trap",
+    title: "Focus Trap",
+    summary: "While a modal surface is open, keyboard focus is confined to it and restored to the trigger when it closes.",
+    spec: "<h2>Contract</h2>\n<p>A focus trap applies to modal surfaces — those that demand resolution before the user returns to the page beneath. It keeps keyboard focus inside the surface so the user cannot silently interact with inert content behind it.</p>\n<ul><li><strong>Confinement</strong> — <code>Tab</code> and <code>Shift+Tab</code> cycle only through the focusable elements within the surface; focus wraps from last to first and back.</li><li><strong>Initial focus</strong> — on open, focus moves to the surface: the first meaningful control, or the surface container itself when there is none.</li><li><strong>Restoration</strong> — on close, focus returns to the element that opened the surface, so the user's place in the page is preserved.</li><li><strong>Inert background</strong> — content outside the surface is not focusable or interactive while the trap is active, and is hidden from assistive tech.</li></ul>\n<h2>Accessibility</h2>\n<ul><li>The surface exposes a dialog role and an accessible name.</li><li>Screen-reader users must not be able to escape into the background; the trap and the inert marking must agree.</li></ul>\n<h2>Notes for implementers</h2>\n<p>Focus-trap composes with <strong>dismissible</strong>: dismissal is how the trap ends, and restoration is part of the dismissible surface's clean teardown.</p>",
+  },
+  {
+    id: "roving-focus",
+    title: "Roving Focus",
+    summary: "A group of related controls exposes a single tab stop; arrow keys move focus among the items.",
+    spec: "<h2>Contract</h2>\n<p>Roving focus (a \"roving tabindex\") applies to a homogeneous set of controls that should feel like one widget — a tablist, toolbar, menu, radio group, or toggle group. It keeps the <code>Tab</code> sequence short and makes intra-group movement fast.</p>\n<ul><li><strong>Single tab stop</strong> — only one item in the group is in the page tab order at a time; <code>Tab</code> moves past the whole group, not through every item.</li><li><strong>Arrow navigation</strong> — arrow keys move focus between items along the group's orientation (Left/Right for horizontal, Up/Down for vertical); the active item becomes the new tab stop.</li><li><strong>Home / End</strong> — jump to the first and last item.</li><li><strong>Wrapping</strong> — movement may wrap from last to first; wrapping is consistent within a group.</li><li><strong>Remembered position</strong> — leaving and returning with <code>Tab</code> restores focus to the last-active item (or the selected one, for single-select groups).</li></ul>\n<h2>Accessibility</h2>\n<ul><li>The group exposes an appropriate container role (e.g. tablist, toolbar, radiogroup, menu) and each item its matching role.</li><li>Selection and focus are distinct: moving focus does not necessarily change selection unless the group's pattern is \"selection follows focus\".</li></ul>\n<h2>Notes for implementers</h2>\n<p>Roving focus often composes with <strong>typeahead</strong> for long lists and with <strong>anchored</strong> + <strong>dismissible</strong> when the group lives inside a floating menu.</p>",
+  },
+  {
+    id: "typeahead",
+    title: "Typeahead",
+    summary: "Typing printable characters moves focus (or selection) to the item whose label matches, for fast keyboard access in a list.",
+    spec: "<h2>Contract</h2>\n<p>Typeahead lets a keyboard user jump to an item in a list or menu by typing the start of its label, instead of arrowing through every entry. It applies to option lists, menus, and select-like controls.</p>\n<ul><li><strong>Match on type</strong> — pressing printable keys focuses the next item whose label begins with the typed string.</li><li><strong>Buffering</strong> — successive keystrokes within a short window accumulate into a query (\"ge\" → \"Germany\"); a pause resets the buffer.</li><li><strong>Same-letter cycling</strong> — repeatedly pressing one letter cycles through all items starting with it.</li><li><strong>Non-destructive</strong> — typeahead moves focus/active item only; it does not commit a selection on its own (that remains Enter/Space or click).</li><li><strong>Wrap</strong> — matching continues from the top after reaching the end.</li></ul>\n<h2>Accessibility</h2>\n<ul><li>Typeahead supplements, never replaces, arrow-key navigation (see the roving-focus trait) and pointer interaction.</li><li>The matched item follows the group's normal focus/selection semantics so assistive tech announces it consistently.</li></ul>\n<h2>Notes for implementers</h2>\n<p>Typeahead is a refinement layered on a navigable collection; specify it wherever a list can grow long enough that arrowing becomes tedious.</p>",
+  },
+]

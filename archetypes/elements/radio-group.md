@@ -12,6 +12,7 @@ aliases: [radio, radio-buttons, option-group]
 composedOf: [label]
 usedBy: [form, field, settings]
 related: [checkbox, select, toggle-group, switch]
+traits: [roving-focus]
 maintainers: [brnrdog]
 ---
 

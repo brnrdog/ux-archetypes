@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/brnrdog/ux-archetypes/schema/trait.schema.json",
+  "title": "UX Behavior Trait metadata",
+  "description": "Frontmatter for a behavior trait — a reusable, cross-cutting interaction contract (dismiss, focus-trap, anchored positioning, roving focus, typeahead) that many archetypes share instead of re-describing it each time.",
+  "type": "object",
+  "required": ["id", "title", "summary", "since", "updated"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Unique kebab-case slug; must match the filename."
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "since": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "updated": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+  }
+}

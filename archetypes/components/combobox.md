@@ -12,6 +12,7 @@ aliases: [autocomplete, typeahead, searchable-select]
 composedOf: [input, popover, scroll-area, badge]
 usedBy: [form, field, command, data-table]
 related: [select, command, input, dropdown-menu]
+traits: [dismissible, anchored, typeahead]
 maintainers: [brnrdog]
 ---
 

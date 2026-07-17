@@ -12,6 +12,7 @@ aliases: [mega-menu, nav-menu, flyout-nav]
 composedOf: [link, popover, separator]
 usedBy: [navbar, landing-page]
 related: [navbar, menubar, dropdown-menu, tabs]
+traits: [anchored, roving-focus]
 maintainers: [brnrdog]
 ---
 

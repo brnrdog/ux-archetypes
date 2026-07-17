@@ -31,11 +31,22 @@ released.
 - `INDEX.md` is now **generated** from the specs' frontmatter (`npm run index`),
   so the registry can no longer drift from the archetypes.
 
+- **Behavior traits.** A new `traits/` layer captures cross-cutting interaction
+  contracts — `dismissible`, `focus-trap`, `anchored`, `roving-focus`,
+  `typeahead` — that many archetypes share. Archetypes reference them via a new
+  `traits:` frontmatter field (schema in `schema/trait.schema.json`); 19
+  overlays and collections now declare their behaviors instead of re-describing
+  them in prose. The website renders trait chips on each archetype, dedicated
+  trait pages (with an "exhibited by" back-reference), and a Behaviors group in
+  the sidebar.
+
 ### Changed
 
 - The conformance check is now driven by the `implementation:` frontmatter field
   rather than a hardcoded map, so mapping a component to its spec is a one-line
   edit in the archetype.
+- The markdown→HTML renderer is now a shared module (`website/scripts/md.mjs`),
+  used by both the archetype and trait generators.
 
 ## [0.5.0] - 2026-07-17
 

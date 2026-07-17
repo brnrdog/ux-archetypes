@@ -12,6 +12,7 @@ aliases: [preview-card, rich-tooltip]
 composedOf: [popover, avatar, button, typography]
 usedBy: [navbar, card, data-table]
 related: [tooltip, popover, card]
+traits: [anchored]
 maintainers: [brnrdog]
 ---
 

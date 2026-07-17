@@ -12,6 +12,7 @@ aliases: [modal, modal-dialog, lightbox]
 composedOf: [button, scroll-area, separator]
 usedBy: [form, data-table, dashboard, command]
 related: [alert-dialog, sheet, drawer, popover]
+traits: [dismissible, focus-trap]
 maintainers: [brnrdog]
 ---
 

@@ -12,6 +12,7 @@ aliases: [app-menu, menu-bar]
 composedOf: [dropdown-menu, separator, kbd]
 usedBy: [dashboard]
 related: [dropdown-menu, navigation-menu, context-menu]
+traits: [anchored, roving-focus, typeahead]
 maintainers: [brnrdog]
 ---
 
