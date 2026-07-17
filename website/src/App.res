@@ -89,7 +89,7 @@ module Composition = {
           each={Prop.static(slots)}
           render={slot => {
             let inSlot = parts->Array.filter(p => p.slot == slot)
-            <div class="rounded-xl border border-neutral-200 bg-white p-4">
+            <div class="rounded-xl border border-neutral-200 bg-surface p-4">
               <div class="font-mono text-xs uppercase tracking-wide text-neutral-400">
                 <View.Text> slot </View.Text>
               </div>
@@ -242,7 +242,7 @@ module Sidebar = {
 module Topbar = {
   @jsx.component
   let make = () =>
-    <header class="flex h-14 shrink-0 items-center gap-3 border-b border-neutral-200 bg-white px-3">
+    <header class="flex h-14 shrink-0 items-center gap-3 border-b border-neutral-200 bg-surface px-3">
       <IconButton label="Toggle sidebar" onClick={_ => Signal.update(sidebarOpen, v => !v)}>
         <span class="text-lg"> <View.Text> "☰" </View.Text> </span>
       </IconButton>
@@ -318,7 +318,7 @@ module Spotlight = {
     <View.Show when_={Prop.signal(spotlightOpen)}>
       <div class="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[12vh]">
         <div class="absolute inset-0 bg-neutral-900/40" onClick={_ => Signal.set(spotlightOpen, false)} />
-        <div class="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl">
+        <div class="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-neutral-200 bg-surface shadow-2xl">
           <div class="flex items-center gap-2 border-b border-neutral-100 px-4">
             <span class="text-neutral-400"> <View.Text> "🔍" </View.Text> </span>
             <input
@@ -510,7 +510,7 @@ module ExampleBlock = {
       | None => View.null()
       }}
       <View.Show when_={Prop.signal(full)}>
-        <div class="fixed inset-0 z-50 flex flex-col bg-white">
+        <div class="fixed inset-0 z-50 flex flex-col bg-surface">
           <div class="flex h-14 shrink-0 items-center justify-between border-b border-neutral-200 px-4">
             <span class="text-sm font-medium text-neutral-900"> <View.Text> {a.title ++ " — live preview"} </View.Text> </span>
             <Button variant=#secondary size=#sm onClick={_ => Signal.set(full, false)}>
@@ -566,7 +566,7 @@ module Detail = {
               render={tid =>
                 <Router.Link
                   to={"/t/" ++ tid}
-                  class="inline-flex items-center rounded-full border border-neutral-300 bg-white px-2.5 py-0.5 text-xs font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900">
+                  class="inline-flex items-center rounded-full border border-neutral-300 bg-surface px-2.5 py-0.5 text-xs font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900">
                   <View.Text> {tid} </View.Text>
                 </Router.Link>}
             />
@@ -658,7 +658,7 @@ module Tokens = {
         <div class="flex h-10 w-20 shrink-0 items-center">
           <div class="h-4 rounded-sm bg-neutral-900" style={"width: " ++ v} />
         </div>
-      | "shadow" => <div class="size-10 shrink-0 rounded-md border border-neutral-100 bg-white" style={"box-shadow: " ++ v} />
+      | "shadow" => <div class="size-10 shrink-0 rounded-md border border-neutral-100 bg-surface" style={"box-shadow: " ++ v} />
       | "border" => <div class="size-10 shrink-0 rounded-md border-solid border-neutral-900 bg-neutral-50" style={"border-width: " ++ v} />
       | "font-family" => <span class="w-10 shrink-0 text-2xl text-neutral-900" style={"font-family: " ++ v}> <View.Text> "Ag" </View.Text> </span>
       | "font-size" => <span class="flex h-10 w-10 shrink-0 items-center text-neutral-900" style={"font-size: " ++ v}> <View.Text> "Ag" </View.Text> </span>
@@ -671,7 +671,7 @@ module Tokens = {
   module Row = {
     @jsx.component
     let make = (~t: TokensData.token) =>
-      <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white p-3">
+      <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-surface p-3">
         {t.sample == "color"
           ? <input
               type_="color"

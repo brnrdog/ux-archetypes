@@ -85,6 +85,15 @@ released.
 
 ### Added
 
+- **Themes are now framework-owned.** The theme presets moved out of the website
+  code into [`tokens/themes.json`](tokens/themes.json) — each a named bundle of
+  token-path overrides on the monochrome baseline. The website's picker is
+  generated from it, and every override path is validated against the tokens
+  (`conformance:tokens` now checks 161 theme overrides too). A new **`night`**
+  dark theme (a full ramp inversion) joins the ten; the reference components and
+  chrome were made fully token-driven (`bg-surface` / `text-ink` /
+  `text-neutral-0` instead of literal `bg-white` / `text-white`) so it inverts
+  cleanly.
 - **Machine-readable API contracts.** Archetypes can now carry an `## API`
   section — a `json` block naming the props (with types, enum values, and
   defaults), slots, events, accessibility expectations, states, and design-token

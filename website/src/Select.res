@@ -18,7 +18,7 @@ let make = (~value: Signal.t<string>, ~options: array<string>, ~disabled: bool=f
       <Backdrop onClose={() => Signal.set(open_, false)} />
       <ul
         role="listbox"
-        class="absolute z-20 mt-1 w-full rounded-md border border-neutral-200 bg-white py-1 shadow-lg">
+        class="absolute z-20 mt-1 w-full rounded-md border border-neutral-200 bg-surface py-1 shadow-lg">
         <View.For
           each={Prop.static(options)}
           render={o => {

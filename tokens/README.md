@@ -80,3 +80,14 @@ To re-skin an implementation, override token values — most usefully the
 roles themselves (`color.action.*`, `color.status.*`) for finer control.
 Swapping the ramp for a tinted palette restyles everything downstream without
 touching a single archetype or component.
+
+### Themes (presets)
+
+[`themes.json`](./themes.json) ships ready-made themes — each a named bundle of
+token overrides (a map of token path → value) on top of the monochrome baseline.
+Included: `monochrome`, `indigo`, `forest`, `editorial`, `terminal`, `sunset`,
+`vibrant`, `ocean`, `coral`, and a dark `night`. A theme that tints **both ends**
+of the neutral ramp re-skins backgrounds and text together; `night` inverts the
+whole ramp for a dark mode. The website's theme picker is generated from this
+file (`website/scripts/generate-themes.mjs`), and every override path is
+validated against the tokens (`npm run conformance:tokens`).

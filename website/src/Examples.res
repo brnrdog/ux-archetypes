@@ -98,7 +98,7 @@ module AvatarEx = {
         <Avatar initials="MP" size="size-9 text-xs" />
         <Avatar initials="RM" size="size-9 text-xs" />
         <span
-          class="inline-flex size-9 items-center justify-center rounded-full bg-neutral-900 text-xs font-medium text-white ring-2 ring-white">
+          class="inline-flex size-9 items-center justify-center rounded-full bg-neutral-900 text-xs font-medium text-neutral-0 ring-2 ring-white">
           <View.Text> "+3" </View.Text>
         </span>
       </div>
@@ -310,8 +310,8 @@ module Toggle = {
     let cls = Computed.make(() =>
       "inline-flex size-10 items-center justify-center rounded-md text-sm font-semibold transition-colors " ++ (
         Signal.get(on)
-          ? "bg-neutral-900 text-white"
-          : "border border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-100"
+          ? "bg-neutral-900 text-neutral-0"
+          : "border border-neutral-300 bg-surface text-neutral-700 hover:bg-neutral-100"
       )
     )
     <button class={Prop.signal(cls)} onClick={_ => Signal.update(on, v => !v)}>
@@ -333,8 +333,8 @@ module ToggleGroup = {
           let cls = Computed.make(() =>
             "border-l border-neutral-300 px-4 py-2 text-sm transition-colors first:border-l-0 " ++ (
               Signal.get(value) == id
-                ? "bg-neutral-900 text-white"
-                : "bg-white text-neutral-700 hover:bg-neutral-100"
+                ? "bg-neutral-900 text-neutral-0"
+                : "bg-surface text-neutral-700 hover:bg-neutral-100"
             )
           )
           <button class={Prop.signal(cls)} onClick={_ => Signal.set(value, id)}>
@@ -524,7 +524,7 @@ module AlertDialog = {
       <View.Show when_={Prop.signal(open_)}>
         <div class="absolute inset-0 z-10 flex items-center justify-center">
           <div class="absolute inset-0 bg-neutral-900/40" />
-          <div class="relative z-20 w-80 rounded-lg border border-neutral-200 bg-white p-5 shadow-2xl">
+          <div class="relative z-20 w-80 rounded-lg border border-neutral-200 bg-surface p-5 shadow-2xl">
             <h3 class="text-lg font-semibold text-neutral-900"> <View.Text> "Are you absolutely sure?" </View.Text> </h3>
             <p class="mt-1 text-sm text-neutral-500"> <View.Text> "This permanently deletes your account and all data. This cannot be undone." </View.Text> </p>
             <div class="mt-5 flex justify-end gap-2">
@@ -580,7 +580,7 @@ module Pagination = {
           let cls = Computed.make(() =>
             navBtn ++ (
               Signal.get(page) == p
-                ? " bg-neutral-900 text-white"
+                ? " bg-neutral-900 text-neutral-0"
                 : " text-neutral-700 hover:bg-neutral-100"
             )
           )
@@ -669,9 +669,9 @@ module ButtonGroup = {
   @jsx.component
   let make = () =>
     <div class="inline-flex overflow-hidden rounded-md border border-neutral-300">
-      <button class="border-r border-neutral-300 bg-white px-3 py-2 text-sm hover:bg-neutral-100"> <View.Text> "Bold" </View.Text> </button>
-      <button class="border-r border-neutral-300 bg-white px-3 py-2 text-sm hover:bg-neutral-100"> <View.Text> "Italic" </View.Text> </button>
-      <button class="bg-white px-3 py-2 text-sm hover:bg-neutral-100"> <View.Text> "Underline" </View.Text> </button>
+      <button class="border-r border-neutral-300 bg-surface px-3 py-2 text-sm hover:bg-neutral-100"> <View.Text> "Bold" </View.Text> </button>
+      <button class="border-r border-neutral-300 bg-surface px-3 py-2 text-sm hover:bg-neutral-100"> <View.Text> "Italic" </View.Text> </button>
+      <button class="bg-surface px-3 py-2 text-sm hover:bg-neutral-100"> <View.Text> "Underline" </View.Text> </button>
     </div>
 }
 
@@ -706,7 +706,7 @@ module DropdownMenu = {
       </Button>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
-        <div class="absolute z-20 mt-1 w-48 rounded-md border border-neutral-200 bg-white py-1 shadow-lg">
+        <div class="absolute z-20 mt-1 w-48 rounded-md border border-neutral-200 bg-surface py-1 shadow-lg">
           <View.For
             each={Prop.static(items)}
             render={i =>
@@ -737,7 +737,7 @@ module ContextMenu = {
       </div>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
-        <div class="absolute left-1/2 top-1/2 z-20 w-44 rounded-md border border-neutral-200 bg-white py-1 shadow-lg">
+        <div class="absolute left-1/2 top-1/2 z-20 w-44 rounded-md border border-neutral-200 bg-surface py-1 shadow-lg">
           <View.For
             each={Prop.static(["Cut", "Copy", "Paste", "Delete"])}
             render={i =>
@@ -763,7 +763,7 @@ module Popover = {
       </Button>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
-        <div class="absolute z-20 mt-2 w-64 rounded-lg border border-neutral-200 bg-white p-4 shadow-xl">
+        <div class="absolute z-20 mt-2 w-64 rounded-lg border border-neutral-200 bg-surface p-4 shadow-xl">
           <p class="text-sm font-medium text-neutral-900"> <View.Text> "Dimensions" </View.Text> </p>
           <p class="mt-1 text-xs text-neutral-500"> <View.Text> "Set the width and height of the layer." </View.Text> </p>
           <div class="mt-3 space-y-2">
@@ -789,7 +789,7 @@ module HoverCard = {
           <View.Text> "@ada" </View.Text>
         </a>
         <View.Show when_={Prop.signal(open_)}>
-          <div class="absolute left-0 top-7 z-20 w-64 rounded-lg border border-neutral-200 bg-white p-4 shadow-xl">
+          <div class="absolute left-0 top-7 z-20 w-64 rounded-lg border border-neutral-200 bg-surface p-4 shadow-xl">
             <div class="flex items-center gap-3">
               <Avatar initials="AL" />
               <div>
@@ -813,7 +813,7 @@ module Sheet = {
       <Button variant=#primary onClick={_ => Signal.set(open_, true)}> <View.Text> "Open sheet" </View.Text> </Button>
       <View.Show when_={Prop.signal(open_)}>
         <div class="absolute inset-0 z-10 bg-neutral-900/40" onClick={_ => Signal.set(open_, false)} />
-        <div class="absolute right-0 top-0 z-20 flex h-full w-72 flex-col border-l border-neutral-200 bg-white p-5 shadow-2xl">
+        <div class="absolute right-0 top-0 z-20 flex h-full w-72 flex-col border-l border-neutral-200 bg-surface p-5 shadow-2xl">
           <h3 class="text-lg font-semibold text-neutral-900"> <View.Text> "Filters" </View.Text> </h3>
           <p class="mt-1 text-sm text-neutral-500"> <View.Text> "Refine the results shown in the list." </View.Text> </p>
           <div class="mt-auto flex justify-end">
@@ -833,7 +833,7 @@ module Drawer = {
       <Button variant=#primary onClick={_ => Signal.set(open_, true)}> <View.Text> "Open drawer" </View.Text> </Button>
       <View.Show when_={Prop.signal(open_)}>
         <div class="absolute inset-0 z-10 bg-neutral-900/40" onClick={_ => Signal.set(open_, false)} />
-        <div class="absolute bottom-0 left-0 z-20 w-full rounded-t-2xl border-t border-neutral-200 bg-white p-5 shadow-2xl">
+        <div class="absolute bottom-0 left-0 z-20 w-full rounded-t-2xl border-t border-neutral-200 bg-surface p-5 shadow-2xl">
           <div class="mx-auto mb-4 h-1 w-10 rounded-full bg-neutral-300" />
           <h3 class="text-lg font-semibold text-neutral-900"> <View.Text> "Share" </View.Text> </h3>
           <p class="mt-1 text-sm text-neutral-500"> <View.Text> "Swipe down or tap the backdrop to dismiss." </View.Text> </p>
@@ -861,7 +861,7 @@ module Toast = {
         <View.Text> "Show toast" </View.Text>
       </Button>
       <View.Show when_={Prop.signal(show)}>
-        <div class="absolute bottom-2 right-2 flex w-72 items-start gap-3 rounded-lg border border-neutral-200 bg-white p-3 shadow-xl">
+        <div class="absolute bottom-2 right-2 flex w-72 items-start gap-3 rounded-lg border border-neutral-200 bg-surface p-3 shadow-xl">
           <span class="mt-0.5 font-semibold text-neutral-900"> <View.Text> "✓" </View.Text> </span>
           <div class="flex-1">
             <p class="text-sm font-medium text-neutral-900"> <View.Text> "Changes saved" </View.Text> </p>
@@ -1020,12 +1020,12 @@ module Carousel = {
           />
         </div>
         <button
-          class="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-white/90 hover:bg-white"
+          class="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-surface/90 hover:bg-surface"
           onClick={_ => Signal.update(idx, i => i > 0 ? i - 1 : 0)}>
           <View.Text> "‹" </View.Text>
         </button>
         <button
-          class="absolute right-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-white/90 hover:bg-white"
+          class="absolute right-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-surface/90 hover:bg-surface"
           onClick={_ => Signal.update(idx, i => i < total - 1 ? i + 1 : i)}>
           <View.Text> "›" </View.Text>
         </button>
@@ -1069,7 +1069,7 @@ module Combobox = {
       </button>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
-        <div class="absolute z-20 mt-1 w-full rounded-md border border-neutral-200 bg-white p-1 shadow-lg">
+        <div class="absolute z-20 mt-1 w-full rounded-md border border-neutral-200 bg-surface p-1 shadow-lg">
           <Input
             extraClass="mb-1"
             placeholder="Search…"
@@ -1150,7 +1150,7 @@ module Calendar = {
             let cls = Computed.make(() =>
               "flex size-8 items-center justify-center rounded-full text-sm transition-colors " ++ (
                 Signal.get(selected) == d
-                  ? "bg-neutral-900 text-white"
+                  ? "bg-neutral-900 text-neutral-0"
                   : "text-neutral-700 hover:bg-neutral-100"
               )
             )
@@ -1180,14 +1180,14 @@ module DatePicker = {
       </button>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
-        <div class="absolute z-20 mt-1 w-64 rounded-lg border border-neutral-200 bg-white p-3 shadow-xl">
+        <div class="absolute z-20 mt-1 w-64 rounded-lg border border-neutral-200 bg-surface p-3 shadow-xl">
           <div class="grid grid-cols-7 gap-1 text-center">
             <View.For
               each={Prop.static(days)}
               render={d => {
                 let cls = Computed.make(() =>
                   "flex size-8 items-center justify-center rounded-full text-sm " ++ (
-                    Signal.get(day) == d ? "bg-neutral-900 text-white" : "text-neutral-700 hover:bg-neutral-100"
+                    Signal.get(day) == d ? "bg-neutral-900 text-neutral-0" : "text-neutral-700 hover:bg-neutral-100"
                   )
                 )
                 <button
@@ -1219,7 +1219,7 @@ module Resizable = {
           <View.Text> "Panel A" </View.Text>
         </div>
         <div class="w-1.5 cursor-col-resize bg-neutral-200" />
-        <div class="flex items-center justify-center bg-white text-sm text-neutral-500" style={Prop.signal(rightStyle)}>
+        <div class="flex items-center justify-center bg-surface text-sm text-neutral-500" style={Prop.signal(rightStyle)}>
           <View.Text> "Panel B" </View.Text>
         </div>
       </div>
@@ -1238,7 +1238,7 @@ module Resizable = {
 module Navbar = {
   @jsx.component
   let make = () =>
-    <div class="w-full max-w-2xl rounded-lg border border-neutral-200 bg-white">
+    <div class="w-full max-w-2xl rounded-lg border border-neutral-200 bg-surface">
       <div class="flex items-center justify-between px-4 py-3">
         <div class="flex items-center gap-6">
           <span class="font-semibold text-neutral-900"> <View.Text> "Acme" </View.Text> </span>
@@ -1259,7 +1259,7 @@ module Navbar = {
 module Menubar = {
   @jsx.component
   let make = () =>
-    <div class="flex w-full max-w-lg items-center gap-1 rounded-lg border border-neutral-200 bg-white p-1 text-sm">
+    <div class="flex w-full max-w-lg items-center gap-1 rounded-lg border border-neutral-200 bg-surface p-1 text-sm">
       <View.For
         each={Prop.static(["File", "Edit", "View", "Help"])}
         render={m =>
@@ -1273,7 +1273,7 @@ module NavigationMenu = {
   let make = () => {
     let open_ = Signal.make(false)
     <div class="relative w-full max-w-lg">
-      <div class="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white p-1 text-sm">
+      <div class="flex items-center gap-1 rounded-lg border border-neutral-200 bg-surface p-1 text-sm">
         <button
           class="rounded px-3 py-1.5 text-neutral-700 hover:bg-neutral-100"
           onClick={_ => Signal.update(open_, v => !v)}>
@@ -1284,7 +1284,7 @@ module NavigationMenu = {
       </div>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
-        <div class="absolute z-20 mt-1 grid w-96 grid-cols-2 gap-1 rounded-lg border border-neutral-200 bg-white p-2 shadow-xl">
+        <div class="absolute z-20 mt-1 grid w-96 grid-cols-2 gap-1 rounded-lg border border-neutral-200 bg-surface p-2 shadow-xl">
           <View.For
             each={Prop.static([
               ("Analytics", "Understand your traffic"),
@@ -1312,7 +1312,7 @@ module Sidebar = {
     <div class="flex h-56 w-56 flex-col rounded-lg border border-neutral-200 bg-neutral-50 p-2">
       <div class="px-2 py-1.5 text-sm font-semibold text-neutral-900"> <View.Text> "Workspace" </View.Text> </div>
       <nav class="mt-1 space-y-0.5 text-sm">
-        <a class="block rounded-md bg-neutral-900 px-2 py-1.5 text-white" href="#"> <View.Text> "Dashboard" </View.Text> </a>
+        <a class="block rounded-md bg-neutral-900 px-2 py-1.5 text-neutral-0" href="#"> <View.Text> "Dashboard" </View.Text> </a>
         <a class="block rounded-md px-2 py-1.5 text-neutral-700 hover:bg-neutral-100" href="#"> <View.Text> "Projects" </View.Text> </a>
         <a class="block rounded-md px-2 py-1.5 text-neutral-700 hover:bg-neutral-100" href="#"> <View.Text> "Reports" </View.Text> </a>
         <a class="block rounded-md px-2 py-1.5 text-neutral-700 hover:bg-neutral-100" href="#"> <View.Text> "Settings" </View.Text> </a>
@@ -1323,7 +1323,7 @@ module Sidebar = {
 module LandingPage = {
   @jsx.component
   let make = () =>
-    <div class="w-full max-w-2xl overflow-hidden rounded-lg border border-neutral-200 bg-white">
+    <div class="w-full max-w-2xl overflow-hidden rounded-lg border border-neutral-200 bg-surface">
       <div class="flex items-center justify-between border-b border-neutral-200 px-5 py-3">
         <span class="font-semibold text-neutral-900"> <View.Text> "Acme" </View.Text> </span>
         <Button variant=#primary> <View.Text> "Start free" </View.Text> </Button>
@@ -1375,7 +1375,7 @@ module IconButtonEx = {
 module Toolbar = {
   @jsx.component
   let make = () =>
-    <div class="flex w-full max-w-xl items-center gap-1 rounded-lg border border-neutral-200 bg-white p-1">
+    <div class="flex w-full max-w-xl items-center gap-1 rounded-lg border border-neutral-200 bg-surface p-1">
       <IconButton label="Bold"> <span class="font-bold"> <View.Text> "B" </View.Text> </span> </IconButton>
       <IconButton label="Italic"> <span class="italic"> <View.Text> "I" </View.Text> </span> </IconButton>
       <IconButton label="Underline"> <span class="underline"> <View.Text> "U" </View.Text> </span> </IconButton>
@@ -1397,7 +1397,7 @@ module List = {
       ("Grace Hopper", "@grace", "Admin", "GH"),
       ("Alan Turing", "@alan", "Member", "AT"),
     ]
-    <div class="w-80 divide-y divide-neutral-100 rounded-lg border border-neutral-200 bg-white">
+    <div class="w-80 divide-y divide-neutral-100 rounded-lg border border-neutral-200 bg-surface">
       <View.For
         each={Prop.static(people)}
         render={p => {
@@ -1429,7 +1429,7 @@ module Footer = {
             <p> <Link href="#" variant=#muted extraClass="text-sm"> <View.Text> {i} </View.Text> </Link> </p>}
         />
       </div>
-    <div class="w-full max-w-2xl rounded-lg border border-neutral-200 bg-white p-6">
+    <div class="w-full max-w-2xl rounded-lg border border-neutral-200 bg-surface p-6">
       <div class="grid grid-cols-3 gap-6">
         {col("Product", ["Features", "Pricing", "Changelog"])}
         {col("Company", ["About", "Blog", "Careers"])}
@@ -1489,7 +1489,7 @@ module Settings = {
         <span class="text-sm text-neutral-800"> <View.Text> {text} </View.Text> </span>
         <Switch on={sig} />
       </div>
-    <div class="w-full max-w-lg space-y-5 rounded-lg border border-neutral-200 bg-white p-6">
+    <div class="w-full max-w-lg space-y-5 rounded-lg border border-neutral-200 bg-surface p-6">
       <div>
         <h3 class="text-sm font-semibold text-neutral-900"> <View.Text> "Profile" </View.Text> </h3>
         <p class="text-xs text-neutral-500"> <View.Text> "Update your account details." </View.Text> </p>
@@ -1514,9 +1514,9 @@ module SignIn = {
   @jsx.component
   let make = () => {
     let remember = Signal.make(true)
-    <div class="w-full max-w-sm space-y-5 rounded-lg border border-neutral-200 bg-white p-6">
+    <div class="w-full max-w-sm space-y-5 rounded-lg border border-neutral-200 bg-surface p-6">
       <div class="text-center">
-        <div class="mx-auto mb-2 flex size-9 items-center justify-center rounded-md bg-neutral-900 text-sm font-bold text-white">
+        <div class="mx-auto mb-2 flex size-9 items-center justify-center rounded-md bg-neutral-900 text-sm font-bold text-neutral-0">
           <View.Text> "U" </View.Text>
         </div>
         <h3 class="text-lg font-semibold text-neutral-900"> <View.Text> "Welcome back" </View.Text> </h3>
@@ -1584,7 +1584,7 @@ module Pricing = {
 module Hero = {
   @jsx.component
   let make = () =>
-    <div class="w-full max-w-2xl rounded-lg border border-neutral-200 bg-white px-8 py-12 text-center">
+    <div class="w-full max-w-2xl rounded-lg border border-neutral-200 bg-surface px-8 py-12 text-center">
       <Badge variant=#outline> <View.Text> "New · v2 is here" </View.Text> </Badge>
       <h2 class="mx-auto mt-4 max-w-lg text-4xl font-bold tracking-tight text-neutral-900">
         <View.Text> "Ship your product faster" </View.Text>
@@ -1726,15 +1726,15 @@ module Faq = {
 module CtaSection = {
   @jsx.component
   let make = () =>
-    <div class="w-full max-w-2xl rounded-lg bg-neutral-900 px-8 py-10 text-center text-white">
+    <div class="w-full max-w-2xl rounded-lg bg-neutral-900 px-8 py-10 text-center text-neutral-0">
       <h2 class="text-2xl font-bold"> <View.Text> "Start building today" </View.Text> </h2>
       <p class="mt-2 text-sm text-neutral-300"> <View.Text> "Join thousands of teams shipping faster. Free for 14 days." </View.Text> </p>
       <div class="mx-auto mt-5 flex max-w-md gap-2">
         <input
-          class="flex-1 rounded-md border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          class="flex-1 rounded-md border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-0 placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           placeholder="you@example.com"
         />
-        <button class="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-200">
+        <button class="rounded-md bg-surface px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-200">
           <View.Text> "Get started" </View.Text>
         </button>
       </div>
@@ -1760,10 +1760,10 @@ module LogoEx = {
   let make = () =>
     <div class="flex flex-wrap items-center gap-8">
       <div class="flex items-center gap-2">
-        <span class="flex size-8 items-center justify-center rounded-md bg-neutral-900 text-sm font-bold text-white"> <View.Text> "U" </View.Text> </span>
+        <span class="flex size-8 items-center justify-center rounded-md bg-neutral-900 text-sm font-bold text-neutral-0"> <View.Text> "U" </View.Text> </span>
         <span class="text-lg font-semibold tracking-tight text-neutral-900"> <View.Text> "Untitled" </View.Text> </span>
       </div>
-      <span class="flex size-9 items-center justify-center rounded-lg bg-neutral-900 font-bold text-white"> <View.Text> "U" </View.Text> </span>
+      <span class="flex size-9 items-center justify-center rounded-lg bg-neutral-900 font-bold text-neutral-0"> <View.Text> "U" </View.Text> </span>
       <span class="text-xl font-bold tracking-tight text-neutral-900"> <View.Text> "ACME" </View.Text> </span>
     </div>
 }
@@ -1819,7 +1819,7 @@ module SearchEx = {
     })
     let hasQuery = Computed.make(() => Signal.get(query) != "")
     <div class="relative w-72">
-      <div class="flex items-center gap-2 rounded-md border border-neutral-300 bg-white pl-3 pr-1">
+      <div class="flex items-center gap-2 rounded-md border border-neutral-300 bg-surface pl-3 pr-1">
         <span class="text-neutral-400"> <View.Text> "🔍" </View.Text> </span>
         <input
           class="flex-1 bg-transparent py-2 text-sm focus:outline-none"
@@ -1836,7 +1836,7 @@ module SearchEx = {
       </div>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
-        <ul class="absolute z-20 mt-1 w-full rounded-md border border-neutral-200 bg-white py-1 shadow-lg">
+        <ul class="absolute z-20 mt-1 w-full rounded-md border border-neutral-200 bg-surface py-1 shadow-lg">
           <View.For
             each={Prop.signal(filtered)}
             render={o =>
@@ -1890,7 +1890,7 @@ module AuthenticationEx = {
     let step = Signal.make(1)
     let stepLabel = Computed.make(() => "Step " ++ Int.toString(Signal.get(step)) ++ " of 2")
     let onStep1 = Computed.make(() => Signal.get(step) == 1)
-    <div class="w-full max-w-sm rounded-lg border border-neutral-200 bg-white p-6">
+    <div class="w-full max-w-sm rounded-lg border border-neutral-200 bg-surface p-6">
       <p class="text-xs text-neutral-400"> <View.Text> {stepLabel} </View.Text> </p>
       <View.Show
         when_={Prop.signal(onStep1)}
@@ -1934,7 +1934,7 @@ module OnboardingEx = {
       }
     )
     let nextLabel = Computed.make(() => Signal.get(step) == total ? "Finish" : "Next")
-    <div class="w-full max-w-md rounded-lg border border-neutral-200 bg-white p-6">
+    <div class="w-full max-w-md rounded-lg border border-neutral-200 bg-surface p-6">
       <div class="h-1.5 w-full overflow-hidden rounded-full bg-neutral-200">
         <div class="rounded-full bg-neutral-900 transition-all" style={Prop.signal(pct)} />
       </div>
@@ -1955,7 +1955,7 @@ module CheckoutEx = {
   let make = () => {
     let items = [("Pro plan (annual)", "$120.00"), ("Add-on: Analytics", "$24.00")]
     <div class="grid w-full max-w-2xl gap-4 sm:grid-cols-2">
-      <div class="space-y-4 rounded-lg border border-neutral-200 bg-white p-5">
+      <div class="space-y-4 rounded-lg border border-neutral-200 bg-surface p-5">
         <h3 class="text-sm font-semibold text-neutral-900"> <View.Text> "Payment details" </View.Text> </h3>
         <Field label="Card number" for_="co-card"> <Input id="co-card" placeholder="4242 4242 4242 4242" /> </Field>
         <div class="grid grid-cols-2 gap-3">

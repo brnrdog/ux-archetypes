@@ -73,5 +73,25 @@ for (const layer of layers) {
 for (const [role, ids] of unknown) {
   console.log(`✗ unknown token role \`${role}\` — referenced by ${ids.length} archetype(s): ${ids.slice(0, 6).join(", ")}${ids.length > 6 ? "…" : ""}`);
 }
-console.log(`\n${failures ? "✗" : "✓"} tokens: ${checked} reference(s) checked, ${unknown.size} unknown role(s)`);
+
+// Themes must override real tokens (concrete leaf paths).
+let themeChecked = 0;
+try {
+  const { themes } = JSON.parse(readFileSync(join(here, "..", "..", "tokens", "themes.json"), "utf8"));
+  for (const t of themes) {
+    for (const path of Object.keys(t.tokens || {})) {
+      themeChecked++;
+      if (!paths.has(path)) {
+        failures++;
+        console.log(`✗ theme \`${t.id}\` overrides unknown token \`${path}\``);
+      }
+    }
+  }
+} catch {
+  /* no themes file */
+}
+
+console.log(
+  `\n${failures ? "✗" : "✓"} tokens: ${checked} contract reference(s) + ${themeChecked} theme override(s) checked, ${unknown.size} unknown role(s)`,
+);
 process.exitCode = failures ? 1 : 0;

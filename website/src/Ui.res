@@ -51,7 +51,7 @@ let muted = "text-muted"
 // Layer badge classes (still monochrome — differ by fill weight only)
 let layerBadge = layer =>
   switch layer {
-  | "element" => "bg-neutral-900 text-white"
+  | "element" => "bg-neutral-900 text-neutral-0"
   | "component" => "bg-neutral-200 text-neutral-800"
   | "block" => "bg-neutral-100 text-neutral-700 ring-1 ring-inset ring-neutral-300"
   | "page" => "border border-neutral-300 text-neutral-700"

@@ -22,7 +22,7 @@ let code = (v: string) =>
 
 @jsx.component
 let make = (~api: ArchetypesData.apiContract) =>
-  <section class="mt-10 rounded-2xl border border-neutral-200 bg-white p-6">
+  <section class="mt-10 rounded-2xl border border-neutral-200 bg-surface p-6">
     <div class="flex items-center gap-2">
       <h2 class="text-lg font-semibold tracking-tight text-neutral-900">
         <View.Text> "API" </View.Text>

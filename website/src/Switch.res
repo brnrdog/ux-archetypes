@@ -8,7 +8,7 @@ let make = (~on: Signal.t<bool>, ~label: string="") => {
     )
   )
   let knob = Computed.make(() =>
-    "inline-block size-5 transform rounded-full bg-white shadow transition-transform " ++ (
+    "inline-block size-5 transform rounded-full bg-surface shadow transition-transform " ++ (
       Signal.get(on) ? "translate-x-5" : "translate-x-0.5"
     )
   )
