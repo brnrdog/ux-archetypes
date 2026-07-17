@@ -3,7 +3,8 @@
   "version": "0.6.0",
   "description": "A technology-agnostic collection of User Experience Archetypes: reusable definitions of UI patterns for humans and AI agents, spanning elements, components, blocks, pages, and flows.",
   "scripts": {
-    "index": "node scripts/generate-index.mjs"
+    "index": "node scripts/generate-index.mjs",
+    "skill": "node scripts/generate-skill.mjs"
   },
   "license": "MIT",
   "author": "brnrdog",
@@ -23,6 +24,7 @@
     "templates",
     "schema",
     "tokens",
+    "skill",
     "INDEX.md",
     "CHANGELOG.md",
     "VERSION",

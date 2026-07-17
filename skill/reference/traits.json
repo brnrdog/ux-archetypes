@@ -1,0 +1,52 @@
+[
+  {
+    "id": "anchored",
+    "title": "Anchored",
+    "summary": "A floating surface is positioned relative to a trigger, staying visible by flipping and shifting to avoid the viewport edges.",
+    "keys": [],
+    "match": "all",
+    "contract": "An anchored surface floats above the page tethered to a trigger element\n(popover, tooltip, menu, listbox). It guarantees the surface stays connected to\nits anchor and fully visible regardless of where the anchor sits.\n\n- **Placement** — the surface opens on a requested side (top, right, bottom,\n  left) and alignment (start, center, end) relative to the anchor.\n- **Collision handling** — when the preferred placement would overflow the\n  viewport, the surface **flips** to the opposite side and/or **shifts** along\n  the axis to stay in view, without detaching from the anchor.\n- **Follow** — the surface tracks the anchor through scroll and resize, or closes\n  if the anchor leaves the viewport.\n- **Layering** — the surface renders above page content and escapes clipping and\n  stacking contexts (typically via a portal)."
+  },
+  {
+    "id": "dismissible",
+    "title": "Dismissible",
+    "summary": "A transient surface can be closed by Escape, an outside interaction, or an explicit close affordance, and returns control cleanly.",
+    "keys": [
+      "Escape"
+    ],
+    "match": "all",
+    "contract": "A dismissible surface is a temporary layer (menu, popover, dialog, toast) that\nthe user can close without completing a task. It guarantees three independent\nways out and a clean teardown.\n\n- **Escape** — pressing `Escape` closes the topmost dismissible surface. When\n  surfaces are nested, `Escape` closes them one level at a time.\n- **Outside interaction** — a pointer press outside the surface closes it. A\n  surface that models an irreversible decision (an alert dialog) may opt out of\n  outside-dismiss so a stray click can't discard the choice.\n- **Explicit affordance** — a visible close control (or a menu item that\n  performs its action) dismisses the surface.\n- **Clean teardown** — on close, any transient state is discarded and focus is\n  returned to a sensible place (see the focus-trap trait for modal surfaces)."
+  },
+  {
+    "id": "focus-trap",
+    "title": "Focus Trap",
+    "summary": "While a modal surface is open, keyboard focus is confined to it and restored to the trigger when it closes.",
+    "keys": [
+      "Tab",
+      "Escape"
+    ],
+    "match": "all",
+    "contract": "A focus trap applies to modal surfaces — those that demand resolution before the\nuser returns to the page beneath. It keeps keyboard focus inside the surface so\nthe user cannot silently interact with inert content behind it.\n\n- **Confinement** — `Tab` and `Shift+Tab` cycle only through the focusable\n  elements within the surface; focus wraps from last to first and back.\n- **Initial focus** — on open, focus moves to the surface: the first meaningful\n  control, or the surface container itself when there is none.\n- **Restoration** — on close, focus returns to the element that opened the\n  surface, so the user's place in the page is preserved.\n- **Inert background** — content outside the surface is not focusable or\n  interactive while the trap is active, and is hidden from assistive tech."
+  },
+  {
+    "id": "roving-focus",
+    "title": "Roving Focus",
+    "summary": "A group of related controls exposes a single tab stop; arrow keys move focus among the items.",
+    "keys": [
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight"
+    ],
+    "match": "any",
+    "contract": "Roving focus (a \"roving tabindex\") applies to a homogeneous set of controls that\nshould feel like one widget — a tablist, toolbar, menu, radio group, or toggle\ngroup. It keeps the `Tab` sequence short and makes intra-group movement fast.\n\n- **Single tab stop** — only one item in the group is in the page tab order at a\n  time; `Tab` moves past the whole group, not through every item.\n- **Arrow navigation** — arrow keys move focus between items along the group's\n  orientation (Left/Right for horizontal, Up/Down for vertical); the active item\n  becomes the new tab stop.\n- **Home / End** — jump to the first and last item.\n- **Wrapping** — movement may wrap from last to first; wrapping is consistent\n  within a group.\n- **Remembered position** — leaving and returning with `Tab` restores focus to\n  the last-active item (or the selected one, for single-select groups)."
+  },
+  {
+    "id": "typeahead",
+    "title": "Typeahead",
+    "summary": "Typing printable characters moves focus (or selection) to the item whose label matches, for fast keyboard access in a list.",
+    "keys": [],
+    "match": "all",
+    "contract": "Typeahead lets a keyboard user jump to an item in a list or menu by typing the\nstart of its label, instead of arrowing through every entry. It applies to\noption lists, menus, and select-like controls.\n\n- **Match on type** — pressing printable keys focuses the next item whose label\n  begins with the typed string.\n- **Buffering** — successive keystrokes within a short window accumulate into a\n  query (\"ge\" → \"Germany\"); a pause resets the buffer.\n- **Same-letter cycling** — repeatedly pressing one letter cycles through all\n  items starting with it.\n- **Non-destructive** — typeahead moves focus/active item only; it does not\n  commit a selection on its own (that remains Enter/Space or click).\n- **Wrap** — matching continues from the top after reaching the end."
+  }
+]

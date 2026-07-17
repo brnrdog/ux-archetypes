@@ -1,0 +1,6539 @@
+[
+  {
+    "id": "aspect-ratio",
+    "title": "Aspect Ratio",
+    "layer": "element",
+    "summary": "A layout primitive that constrains content to a fixed width-to-height proportion.",
+    "tags": [
+      "layout",
+      "media",
+      "structure",
+      "responsive"
+    ],
+    "traits": [],
+    "usedBy": [
+      "card",
+      "carousel",
+      "avatar",
+      "landing-page"
+    ],
+    "related": [
+      "skeleton",
+      "scroll-area",
+      "separator"
+    ],
+    "intent": "An aspect-ratio box holds its content to a consistent width-to-height proportion\n(16:9, 1:1, 4:3) regardless of viewport size. It keeps media grids tidy and\nprevents layout shift by reserving the correct space before content loads.",
+    "api": {
+      "props": [
+        {
+          "name": "ratio",
+          "type": "string",
+          "default": "16/9",
+          "description": "Width-to-height proportion, e.g. 16/9, 1/1, 4/3."
+        }
+      ],
+      "slots": [
+        {
+          "name": "content",
+          "required": true,
+          "description": "The media or element constrained to the ratio."
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "radius.md"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "avatar",
+    "title": "Avatar",
+    "layer": "element",
+    "summary": "A compact visual representation of a person or entity, with a graceful fallback when no image is available.",
+    "tags": [
+      "identity",
+      "media",
+      "display",
+      "user"
+    ],
+    "traits": [],
+    "usedBy": [
+      "navbar",
+      "card",
+      "dropdown-menu",
+      "comment",
+      "sidebar"
+    ],
+    "related": [
+      "badge",
+      "skeleton"
+    ],
+    "intent": "An avatar represents a person or entity in a small, recognizable footprint so\nusers can identify _who_ is associated with content or an action at a glance. It\nmust degrade gracefully: when an image is missing or slow, it shows a meaningful\nfallback rather than a broken graphic.",
+    "api": {
+      "props": [
+        {
+          "name": "initials",
+          "type": "string",
+          "default": "",
+          "description": "Fallback text when no image is available."
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "md",
+          "description": "Rendered size."
+        }
+      ],
+      "slots": [
+        {
+          "name": "image",
+          "required": false,
+          "description": "The person or entity's picture."
+        },
+        {
+          "name": "fallback",
+          "required": false,
+          "description": "Initials or icon shown when the image is missing."
+        }
+      ],
+      "a11y": {
+        "role": "img",
+        "announces": [
+          "name"
+        ]
+      },
+      "states": [
+        "loading",
+        "loaded",
+        "error"
+      ],
+      "tokens": [
+        "radius.full",
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": "Avatar.res"
+  },
+  {
+    "id": "badge",
+    "title": "Badge",
+    "layer": "element",
+    "summary": "A small label that annotates an element with a status, category, or count.",
+    "tags": [
+      "status",
+      "label",
+      "metadata",
+      "count",
+      "tag"
+    ],
+    "traits": [],
+    "usedBy": [
+      "avatar",
+      "card",
+      "navbar",
+      "table",
+      "tabs",
+      "sidebar"
+    ],
+    "related": [
+      "button",
+      "label"
+    ],
+    "intent": "A badge attaches a short, high-signal annotation to another element — a status\n(\"Active\"), a category (\"Beta\"), or a count (unread items). It is read at a\nglance and never the primary focus; it enriches the thing it sits on.",
+    "api": {
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "solid",
+            "soft",
+            "outline"
+          ],
+          "default": "solid",
+          "description": "Visual weight."
+        }
+      ],
+      "slots": [
+        {
+          "name": "label",
+          "required": true,
+          "description": "Short status, category, or count."
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.*",
+        "radius.full",
+        "font.weight.medium"
+      ]
+    },
+    "composition": null,
+    "implementation": "Badge.res"
+  },
+  {
+    "id": "button",
+    "title": "Button",
+    "layer": "element",
+    "summary": "An interactive control that triggers an action or event when activated.",
+    "tags": [
+      "action",
+      "control",
+      "interactive",
+      "form",
+      "cta"
+    ],
+    "traits": [],
+    "usedBy": [
+      "input",
+      "navbar",
+      "card",
+      "form",
+      "dialog",
+      "landing-page"
+    ],
+    "related": [
+      "link",
+      "icon-button"
+    ],
+    "intent": "A button lets a person trigger a single, well-defined action — submit a form,\nopen a dialog, confirm a choice. It is the most fundamental unit of intent in an\ninterface: the user says \"do this now.\" A button represents an _action_, not a\n_destination_; navigation to another location is the job of a link.",
+    "api": {
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost",
+            "destructive"
+          ],
+          "default": "primary",
+          "description": "Emphasis of the action."
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "description": "Control density."
+        },
+        {
+          "name": "type",
+          "type": "enum",
+          "values": [
+            "button",
+            "submit",
+            "reset"
+          ],
+          "default": "button",
+          "description": "Native button behavior in a form."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Action unavailable; removed from tab order."
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": "false",
+          "description": "Async action in flight; blocks re-activation."
+        }
+      ],
+      "slots": [
+        {
+          "name": "label",
+          "required": true,
+          "description": "Verb-led text naming the action."
+        },
+        {
+          "name": "leadingIcon",
+          "required": false,
+          "description": "Reinforces meaning."
+        },
+        {
+          "name": "trailingIcon",
+          "required": false,
+          "description": "e.g. a chevron opening a menu."
+        }
+      ],
+      "events": [
+        "onActivate"
+      ],
+      "a11y": {
+        "role": "button",
+        "keyboard": [
+          "Enter",
+          "Space"
+        ],
+        "announces": [
+          "disabled",
+          "busy"
+        ]
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "active",
+        "disabled",
+        "loading"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md",
+        "space.inline.*",
+        "font.weight.medium"
+      ]
+    },
+    "composition": null,
+    "implementation": "Button.res"
+  },
+  {
+    "id": "checkbox",
+    "title": "Checkbox",
+    "layer": "element",
+    "summary": "A control for toggling a single option on or off, or selecting several from a set.",
+    "tags": [
+      "form",
+      "control",
+      "selection",
+      "boolean"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "field",
+      "data-table",
+      "dropdown-menu"
+    ],
+    "related": [
+      "switch",
+      "radio-group",
+      "toggle"
+    ],
+    "intent": "A checkbox lets a person turn a single option on or off, or pick any number of\noptions from a set. It represents a discrete boolean choice whose effect is\ntypically applied on form submission rather than immediately.",
+    "api": {
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the box is ticked."
+        },
+        {
+          "name": "indeterminate",
+          "type": "boolean",
+          "default": "false",
+          "description": "Partial/mixed state."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Not interactive."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "default": "false",
+          "description": "Must be checked to proceed."
+        }
+      ],
+      "slots": [
+        {
+          "name": "label",
+          "required": false,
+          "description": "Describes what the checkbox controls."
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "checkbox",
+        "keyboard": [
+          "Space"
+        ],
+        "announces": [
+          "checked",
+          "mixed",
+          "disabled"
+        ]
+      },
+      "states": [
+        "default",
+        "checked",
+        "indeterminate",
+        "focus-visible",
+        "disabled",
+        "error"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.sm"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "icon-button",
+    "title": "Icon Button",
+    "layer": "element",
+    "summary": "A compact, icon-only button that triggers an action where space is tight.",
+    "tags": [
+      "action",
+      "control",
+      "interactive",
+      "icon",
+      "compact"
+    ],
+    "traits": [],
+    "usedBy": [
+      "toolbar",
+      "navbar",
+      "data-table",
+      "dialog",
+      "card"
+    ],
+    "related": [
+      "button",
+      "tooltip",
+      "toggle"
+    ],
+    "intent": "An icon button triggers an action using a glyph alone, trading an explicit text\nlabel for compactness. It suits dense contexts — toolbars, table rows, card\ncorners — where a full button would crowd the layout. Because it drops the\nvisible label, it carries a strict obligation: the icon must be recognizable and\nthe control must still expose an accessible name.",
+    "api": {
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "solid",
+            "ghost"
+          ],
+          "default": "ghost",
+          "description": "Emphasis."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "",
+          "description": "Accessible name (required; visually hidden)."
+        }
+      ],
+      "slots": [
+        {
+          "name": "icon",
+          "required": true,
+          "description": "The single glyph conveying the action."
+        }
+      ],
+      "events": [
+        "onActivate"
+      ],
+      "a11y": {
+        "role": "button",
+        "keyboard": [
+          "Enter",
+          "Space"
+        ],
+        "announces": [
+          "disabled"
+        ]
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "active",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": null,
+    "implementation": "IconButton.res"
+  },
+  {
+    "id": "icon",
+    "title": "Icon",
+    "layer": "element",
+    "summary": "A small pictographic symbol that conveys meaning or reinforces a label compactly.",
+    "tags": [
+      "symbol",
+      "visual",
+      "display",
+      "glyph"
+    ],
+    "traits": [],
+    "usedBy": [
+      "button",
+      "icon-button",
+      "feature-grid",
+      "alert",
+      "badge",
+      "list",
+      "stat"
+    ],
+    "related": [
+      "icon-button",
+      "logo"
+    ],
+    "intent": "An icon is a small symbol that conveys a concept at a glance — a magnifier for\nsearch, a trash can for delete — or reinforces a text label. Used well, icons speed\nrecognition and save space; used carelessly, they become decoration that assistive\ntechnology and unfamiliar users can't interpret. Meaning, not ornament, is the bar.",
+    "api": {
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "default": "",
+          "description": "Identifier of the glyph to render."
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "md",
+          "description": "Rendered size."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "",
+          "description": "Accessible name; omit to mark decorative."
+        }
+      ],
+      "a11y": {
+        "role": "img",
+        "announces": [
+          "name"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "input-otp",
+    "title": "One-Time-Code Input",
+    "layer": "element",
+    "summary": "A segmented field for entering a short verification code one character per slot.",
+    "tags": [
+      "form",
+      "field",
+      "control",
+      "verification",
+      "security"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "sign-in",
+      "dialog"
+    ],
+    "related": [
+      "input",
+      "field"
+    ],
+    "intent": "A one-time-code input collects a short verification code (from SMS, email, or an\nauthenticator) with one visible slot per character. The segmented layout makes the\nexpected length obvious, eases review, and pairs naturally with auto-advance and\npaste of the full code.",
+    "api": {
+      "props": [
+        {
+          "name": "length",
+          "type": "number",
+          "default": "6",
+          "description": "Number of code cells."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Entered digits."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Not interactive."
+        }
+      ],
+      "slots": [
+        {
+          "name": "cell",
+          "required": true,
+          "description": "A single-character entry box."
+        }
+      ],
+      "events": [
+        "onChange",
+        "onComplete"
+      ],
+      "a11y": {
+        "role": "group",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "Backspace"
+        ],
+        "announces": [
+          "value"
+        ]
+      },
+      "states": [
+        "default",
+        "focus-visible",
+        "filled",
+        "disabled",
+        "error"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "input",
+    "title": "Text Input",
+    "layer": "element",
+    "summary": "A single-line field that lets a person enter and edit a short piece of text.",
+    "tags": [
+      "form",
+      "field",
+      "control",
+      "interactive",
+      "text"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "navbar",
+      "sign-in",
+      "landing-page"
+    ],
+    "related": [
+      "button",
+      "textarea",
+      "select",
+      "checkbox"
+    ],
+    "intent": "A text input captures a short, free-form value from the user — a name, an email,\na search query. It is the workhorse of data entry: a labelled field the user can\nfocus, type into, correct, and submit. A good input makes its purpose,\nconstraints, and current validity obvious at every moment.",
+    "api": {
+      "props": [
+        {
+          "name": "type",
+          "type": "string",
+          "default": "text",
+          "description": "Native input type (text, email, password…)."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "",
+          "description": "Hint shown when empty."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Current text."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "default": "false",
+          "description": "Must be filled to submit."
+        }
+      ],
+      "slots": [],
+      "events": [
+        "onInput",
+        "onChange"
+      ],
+      "a11y": {
+        "role": "textbox",
+        "announces": [
+          "invalid",
+          "required"
+        ]
+      },
+      "states": [
+        "default",
+        "focus-visible",
+        "filled",
+        "disabled",
+        "error"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md",
+        "space.inline.md"
+      ]
+    },
+    "composition": null,
+    "implementation": "Input.res"
+  },
+  {
+    "id": "kbd",
+    "title": "Keyboard Key",
+    "layer": "element",
+    "summary": "An inline representation of a key or key combination the user can press.",
+    "tags": [
+      "display",
+      "keyboard",
+      "shortcut",
+      "hint"
+    ],
+    "traits": [],
+    "usedBy": [
+      "command",
+      "tooltip",
+      "dropdown-menu",
+      "menubar"
+    ],
+    "related": [
+      "badge",
+      "tooltip"
+    ],
+    "intent": "A keyboard-key element renders a physical key or shortcut combination inline\n(\"⌘K\", \"Ctrl+S\") so users can discover and recall keyboard shortcuts. It is\ndisplay-only — it documents an interaction rather than performing one.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "key",
+          "required": true,
+          "description": "The key or chord label (e.g. ⌘K)."
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "radius.sm",
+        "font.family.mono"
+      ]
+    },
+    "composition": null,
+    "implementation": "Kbd.res"
+  },
+  {
+    "id": "label",
+    "title": "Label",
+    "layer": "element",
+    "summary": "A short caption that names a form control and is programmatically bound to it.",
+    "tags": [
+      "form",
+      "text",
+      "accessibility",
+      "field"
+    ],
+    "traits": [],
+    "usedBy": [
+      "input",
+      "checkbox",
+      "radio-group",
+      "select",
+      "switch",
+      "field",
+      "form"
+    ],
+    "related": [
+      "field",
+      "input"
+    ],
+    "intent": "A label names a form control so people know what value to provide and assistive\ntechnology can announce the control correctly. Its defining property is not the\ntext itself but the **programmatic association** with a control — a label that\nisn't bound to anything is just text.",
+    "api": {
+      "props": [
+        {
+          "name": "for",
+          "type": "string",
+          "default": "",
+          "description": "id of the control this labels."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "default": "false",
+          "description": "Marks the field as required."
+        }
+      ],
+      "slots": [
+        {
+          "name": "text",
+          "required": true,
+          "description": "The field name."
+        }
+      ],
+      "a11y": {
+        "announces": [
+          "name"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "font.weight.medium",
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "legend",
+    "title": "Legend",
+    "layer": "element",
+    "summary": "A key that maps a chart's colors or symbols to the series they represent.",
+    "tags": [
+      "chart",
+      "data",
+      "key",
+      "display"
+    ],
+    "traits": [],
+    "usedBy": [
+      "chart"
+    ],
+    "related": [
+      "chart",
+      "badge"
+    ],
+    "intent": "A legend is the key that tells the reader what a chart's colors, patterns, or\nsymbols mean — which line is revenue, which bar is churn. Without it a\nmulti-series chart is undecipherable; with it, the encoding becomes readable. It\noften doubles as a control for toggling series on and off.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "text",
+          "required": true,
+          "description": "Names the grouped set of controls."
+        }
+      ],
+      "a11y": {
+        "announces": [
+          "group name"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "font.weight.medium"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "link",
+    "title": "Link",
+    "layer": "element",
+    "summary": "A navigational control that takes the user to another location or resource.",
+    "tags": [
+      "navigation",
+      "text",
+      "interactive",
+      "anchor"
+    ],
+    "traits": [],
+    "usedBy": [
+      "navbar",
+      "breadcrumb",
+      "pagination",
+      "navigation-menu",
+      "sidebar",
+      "footer",
+      "sign-in"
+    ],
+    "related": [
+      "button",
+      "icon-button"
+    ],
+    "intent": "A link takes the user somewhere — another page, a section of the current page,\nor an external resource. It represents _navigation_, not an action: activating a\nlink changes location, and users rightly expect to be able to open it in a new\ntab, copy its address, and go back. This is the defining distinction from a\nbutton, which performs an action in place.",
+    "api": {
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "default",
+            "muted"
+          ],
+          "default": "default",
+          "description": "Emphasis."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "default": "#",
+          "description": "Destination URL."
+        },
+        {
+          "name": "newTab",
+          "type": "boolean",
+          "default": "false",
+          "description": "Open in a new browsing context."
+        }
+      ],
+      "slots": [
+        {
+          "name": "label",
+          "required": true,
+          "description": "The link text (describes the destination)."
+        }
+      ],
+      "events": [
+        "onActivate"
+      ],
+      "a11y": {
+        "role": "link",
+        "keyboard": [
+          "Enter"
+        ],
+        "announces": [
+          "name"
+        ]
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "visited"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": "Link.res"
+  },
+  {
+    "id": "logo",
+    "title": "Logo",
+    "layer": "element",
+    "summary": "A brand mark that identifies the product or organization and usually links home.",
+    "tags": [
+      "brand",
+      "identity",
+      "navigation",
+      "display"
+    ],
+    "traits": [],
+    "usedBy": [
+      "navbar",
+      "footer",
+      "sign-in"
+    ],
+    "related": [
+      "icon",
+      "link"
+    ],
+    "intent": "A logo is the brand's mark in the interface — a wordmark, symbol, or lockup that\nidentifies whose product this is. Beyond identity, it plays a functional role:\nplaced in the navbar it is the conventional \"home\" affordance users reach for,\nand it anchors trust on auth and marketing pages.",
+    "api": {
+      "props": [
+        {
+          "name": "href",
+          "type": "string",
+          "default": "/",
+          "description": "Where the logo links (usually home)."
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "md",
+          "description": "Rendered size."
+        }
+      ],
+      "slots": [
+        {
+          "name": "mark",
+          "required": false,
+          "description": "The symbol/glyph."
+        },
+        {
+          "name": "wordmark",
+          "required": false,
+          "description": "The set brand name."
+        }
+      ],
+      "a11y": {
+        "role": "link",
+        "announces": [
+          "brand name"
+        ]
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus-visible"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "progress",
+    "title": "Progress",
+    "layer": "element",
+    "summary": "A visual indicator of how far a task has advanced toward completion.",
+    "tags": [
+      "feedback",
+      "status",
+      "loading",
+      "progress"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "card",
+      "dialog",
+      "data-table",
+      "sidebar"
+    ],
+    "related": [
+      "spinner",
+      "skeleton",
+      "slider"
+    ],
+    "intent": "A progress indicator communicates that a task is underway and, when known, how\nmuch remains. It reassures the user that work is happening and sets expectations\nfor how long they must wait.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "default": "0",
+          "description": "Current progress."
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": "100",
+          "description": "Value representing complete."
+        },
+        {
+          "name": "indeterminate",
+          "type": "boolean",
+          "default": "false",
+          "description": "Progress is unknown."
+        }
+      ],
+      "a11y": {
+        "role": "progressbar",
+        "announces": [
+          "valuenow",
+          "valuemax"
+        ]
+      },
+      "states": [
+        "determinate",
+        "indeterminate",
+        "complete"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.full"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "radio-group",
+    "title": "Radio Group",
+    "layer": "element",
+    "summary": "A set of mutually exclusive options from which exactly one can be selected.",
+    "tags": [
+      "form",
+      "control",
+      "selection",
+      "single-choice"
+    ],
+    "traits": [
+      "roving-focus"
+    ],
+    "usedBy": [
+      "form",
+      "field",
+      "settings"
+    ],
+    "related": [
+      "checkbox",
+      "select",
+      "toggle-group",
+      "switch"
+    ],
+    "intent": "A radio group presents a small set of mutually exclusive options and lets the\nuser choose exactly one. Showing all options at once makes the full set of\nchoices visible and comparable, which aids decisions among a few alternatives.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "id/value of the selected option."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "default": "",
+          "description": "Groups the radios."
+        },
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "default": "vertical",
+          "description": "Layout axis."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Disables the whole group."
+        }
+      ],
+      "slots": [
+        {
+          "name": "option",
+          "required": true,
+          "description": "A single mutually-exclusive choice."
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "radiogroup",
+        "keyboard": [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight"
+        ],
+        "announces": [
+          "checked"
+        ]
+      },
+      "states": [
+        "default",
+        "selected",
+        "focus-visible",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.full"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "scroll-area",
+    "title": "Scroll Area",
+    "layer": "element",
+    "summary": "A container that scrolls overflowing content with consistent, styleable scrollbars.",
+    "tags": [
+      "layout",
+      "scroll",
+      "container",
+      "overflow"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dropdown-menu",
+      "command",
+      "sidebar",
+      "dialog",
+      "data-table"
+    ],
+    "related": [
+      "separator",
+      "resizable",
+      "aspect-ratio"
+    ],
+    "intent": "A scroll area confines overflowing content to a bounded region with predictable,\nconsistently-styled scrollbars across platforms. It keeps long lists, menus, and\npanels contained without letting the whole page scroll.",
+    "api": {
+      "props": [
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "vertical",
+            "horizontal",
+            "both"
+          ],
+          "default": "vertical",
+          "description": "Scroll axis."
+        }
+      ],
+      "slots": [
+        {
+          "name": "content",
+          "required": true,
+          "description": "The overflowing content."
+        }
+      ],
+      "a11y": {
+        "keyboard": [
+          "ArrowUp",
+          "ArrowDown",
+          "PageUp",
+          "PageDown"
+        ]
+      },
+      "states": [
+        "default",
+        "scrolling"
+      ],
+      "tokens": [
+        "radius.md",
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "separator",
+    "title": "Separator",
+    "layer": "element",
+    "summary": "A thin divider that visually and semantically separates groups of content.",
+    "tags": [
+      "layout",
+      "divider",
+      "structure"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dropdown-menu",
+      "menubar",
+      "card",
+      "sidebar",
+      "navbar",
+      "list"
+    ],
+    "related": [
+      "scroll-area",
+      "aspect-ratio"
+    ],
+    "intent": "A separator divides content into distinct groups, giving structure and rhythm\nwithout adding a heavier container. It clarifies where one set of items ends and\nanother begins.",
+    "api": {
+      "props": [
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "description": "Divider axis."
+        }
+      ],
+      "a11y": {
+        "role": "separator"
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": "Separator.res"
+  },
+  {
+    "id": "skeleton",
+    "title": "Skeleton",
+    "layer": "element",
+    "summary": "A placeholder that mirrors the shape of content while it loads.",
+    "tags": [
+      "loading",
+      "placeholder",
+      "feedback",
+      "perceived-performance"
+    ],
+    "traits": [],
+    "usedBy": [
+      "card",
+      "data-table",
+      "list",
+      "avatar",
+      "dashboard"
+    ],
+    "related": [
+      "spinner",
+      "progress"
+    ],
+    "intent": "A skeleton stands in for content that hasn't loaded yet, echoing its eventual\nlayout. By reserving space in the real shape, it reduces perceived wait and\nprevents layout shift when the content arrives.",
+    "api": {
+      "props": [
+        {
+          "name": "shape",
+          "type": "enum",
+          "values": [
+            "text",
+            "circle",
+            "rect"
+          ],
+          "default": "text",
+          "description": "Placeholder shape."
+        }
+      ],
+      "a11y": {
+        "role": "presentation",
+        "announces": [
+          "busy"
+        ]
+      },
+      "states": [
+        "loading"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "slider",
+    "title": "Slider",
+    "layer": "element",
+    "summary": "A control for choosing a value or range by dragging a handle along a track.",
+    "tags": [
+      "form",
+      "control",
+      "range",
+      "input"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "field",
+      "settings",
+      "data-table"
+    ],
+    "related": [
+      "input",
+      "progress",
+      "switch"
+    ],
+    "intent": "A slider lets a person pick a value from a continuous or stepped range by moving\na handle along a track. It suits choices where the approximate position matters\nmore than exact typing, and where seeing the value's place within the range is\nuseful.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "default": "0",
+          "description": "Current value (or range)."
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "default": "0",
+          "description": "Lower bound."
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": "100",
+          "description": "Upper bound."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "default": "1",
+          "description": "Granularity."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Not interactive."
+        }
+      ],
+      "slots": [
+        {
+          "name": "thumb",
+          "required": true,
+          "description": "The draggable handle."
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "slider",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "Home",
+          "End"
+        ],
+        "announces": [
+          "valuenow"
+        ]
+      },
+      "states": [
+        "default",
+        "focus-visible",
+        "dragging",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.full"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "spinner",
+    "title": "Spinner",
+    "layer": "element",
+    "summary": "A compact, indeterminate indicator that signals a short, ongoing wait.",
+    "tags": [
+      "loading",
+      "feedback",
+      "indeterminate",
+      "status"
+    ],
+    "traits": [],
+    "usedBy": [
+      "button",
+      "form",
+      "card",
+      "dialog",
+      "data-table"
+    ],
+    "related": [
+      "progress",
+      "skeleton"
+    ],
+    "intent": "A spinner signals that something is happening and the user should wait, without\nclaiming to know how long. It is the lightest-weight loading cue — ideal inline,\ninside buttons, or over a small region during a brief, unmeasured wait.",
+    "api": {
+      "props": [],
+      "a11y": {
+        "role": "status",
+        "announces": [
+          "busy"
+        ]
+      },
+      "states": [
+        "spinning"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": "Spinner.res"
+  },
+  {
+    "id": "switch",
+    "title": "Switch",
+    "layer": "element",
+    "summary": "A control that toggles a single setting on or off with an immediate effect.",
+    "tags": [
+      "form",
+      "control",
+      "toggle",
+      "boolean",
+      "setting"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "field",
+      "settings",
+      "sidebar"
+    ],
+    "related": [
+      "checkbox",
+      "toggle"
+    ],
+    "intent": "A switch turns a single setting on or off, taking effect immediately like a\nphysical light switch. Its value is the instant, self-evident nature of the\nchange — no separate submit step.",
+    "api": {
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false",
+          "description": "On/off state."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Not interactive."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "",
+          "description": "Names what the switch toggles."
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "switch",
+        "keyboard": [
+          "Space",
+          "Enter"
+        ],
+        "announces": [
+          "checked",
+          "disabled"
+        ]
+      },
+      "states": [
+        "off",
+        "on",
+        "focus-visible",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.full"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "textarea",
+    "title": "Textarea",
+    "layer": "element",
+    "summary": "A multi-line field for entering and editing longer free-form text.",
+    "tags": [
+      "form",
+      "field",
+      "control",
+      "text",
+      "multiline"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "field",
+      "dialog",
+      "card"
+    ],
+    "related": [
+      "input",
+      "label",
+      "field"
+    ],
+    "intent": "A textarea captures longer, multi-line text — a comment, description, or message.\nIt gives the user room to write and review several lines at once, unlike the\nsingle-line input.",
+    "api": {
+      "props": [
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "",
+          "description": "Hint shown when empty."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Current text."
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "default": "3",
+          "description": "Visible line count."
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "default": "false",
+          "description": "Must be filled to submit."
+        }
+      ],
+      "events": [
+        "onInput",
+        "onChange"
+      ],
+      "a11y": {
+        "role": "textbox",
+        "announces": [
+          "invalid",
+          "required"
+        ]
+      },
+      "states": [
+        "default",
+        "focus-visible",
+        "filled",
+        "disabled",
+        "error"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "toggle-group",
+    "title": "Toggle Group",
+    "layer": "element",
+    "summary": "A set of toggles acting as a single control for single- or multi-selection.",
+    "tags": [
+      "control",
+      "toolbar",
+      "selection",
+      "segmented"
+    ],
+    "traits": [
+      "roving-focus"
+    ],
+    "usedBy": [
+      "toolbar",
+      "menubar",
+      "data-table"
+    ],
+    "related": [
+      "toggle",
+      "radio-group",
+      "tabs",
+      "button-group"
+    ],
+    "intent": "A toggle group binds several toggles into one control so the user can pick one\noption (single-select, like a segmented control) or several (multi-select, like a\nformatting toolbar). It communicates that the options belong together and are\ngoverned as a set.",
+    "api": {
+      "props": [
+        {
+          "name": "type",
+          "type": "enum",
+          "values": [
+            "single",
+            "multiple"
+          ],
+          "default": "single",
+          "description": "One or many selections."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Selected item id(s)."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Disables the group."
+        }
+      ],
+      "slots": [
+        {
+          "name": "item",
+          "required": true,
+          "description": "A toggle within the group."
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "group",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight"
+        ],
+        "announces": [
+          "pressed"
+        ]
+      },
+      "states": [
+        "default",
+        "selected",
+        "focus-visible",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "toggle",
+    "title": "Toggle",
+    "layer": "element",
+    "summary": "A two-state button that can be turned on or off, often used in toolbars.",
+    "tags": [
+      "control",
+      "button",
+      "state",
+      "toolbar"
+    ],
+    "traits": [],
+    "usedBy": [
+      "toggle-group",
+      "toolbar",
+      "menubar"
+    ],
+    "related": [
+      "toggle-group",
+      "switch",
+      "button",
+      "checkbox"
+    ],
+    "intent": "A toggle is a button that stays pressed or unpressed, representing an on/off state\nfor a formatting or view option — bold text, grid vs. list, mute. Unlike a switch\n(a setting) it reads as a momentary tool that happens to remember its state, which\nis why it lives naturally in toolbars.",
+    "api": {
+      "props": [
+        {
+          "name": "pressed",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the toggle is on."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Not interactive."
+        }
+      ],
+      "slots": [
+        {
+          "name": "label",
+          "required": true,
+          "description": "Icon or text naming the state."
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "button",
+        "keyboard": [
+          "Enter",
+          "Space"
+        ],
+        "announces": [
+          "pressed",
+          "disabled"
+        ]
+      },
+      "states": [
+        "off",
+        "on",
+        "focus-visible",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "typography",
+    "title": "Typography",
+    "layer": "element",
+    "summary": "The system of text styles — headings, body, and inline elements — that gives content hierarchy and rhythm.",
+    "tags": [
+      "text",
+      "hierarchy",
+      "content",
+      "foundation"
+    ],
+    "traits": [],
+    "usedBy": [
+      "card",
+      "landing-page",
+      "dialog",
+      "form"
+    ],
+    "related": [
+      "label",
+      "separator"
+    ],
+    "intent": "Typography is the shared set of text styles — headings, body copy, lists, quotes,\ncode, and inline emphasis — that gives written content clear hierarchy and\ncomfortable reading rhythm. It is the connective tissue of nearly every screen;\nconsistent type is what makes an interface feel coherent.",
+    "api": {
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "body",
+            "small",
+            "muted",
+            "code"
+          ],
+          "default": "body",
+          "description": "Semantic/visual role."
+        }
+      ],
+      "slots": [
+        {
+          "name": "text",
+          "required": true,
+          "description": "The textual content."
+        }
+      ],
+      "a11y": {
+        "announces": [
+          "heading level"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "font.family.sans",
+        "font.weight.*",
+        "font.size.*",
+        "color.neutral.*"
+      ]
+    },
+    "composition": null,
+    "implementation": null
+  },
+  {
+    "id": "accordion",
+    "title": "Accordion",
+    "layer": "component",
+    "summary": "A stack of headers that expand and collapse to reveal or hide sections of content.",
+    "tags": [
+      "disclosure",
+      "content",
+      "navigation",
+      "faq"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "settings",
+      "sidebar"
+    ],
+    "related": [
+      "collapsible",
+      "tabs"
+    ],
+    "intent": "An accordion organizes related content into collapsible sections so users can\nscan headers and expand only what they need. It reduces long pages to a\nmanageable overview and is a natural fit for FAQs and grouped settings.",
+    "api": {
+      "props": [
+        {
+          "name": "type",
+          "type": "enum",
+          "values": [
+            "single",
+            "multiple"
+          ],
+          "default": "single",
+          "description": "One panel open at a time, or many."
+        },
+        {
+          "name": "collapsible",
+          "type": "boolean",
+          "default": "true",
+          "description": "Whether the open panel can be closed again."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "id(s) of the open item(s)."
+        }
+      ],
+      "slots": [
+        {
+          "name": "item",
+          "required": true,
+          "description": "A header + collapsible panel pair."
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "keyboard": [
+          "Enter",
+          "Space",
+          "ArrowUp",
+          "ArrowDown"
+        ],
+        "announces": [
+          "expanded"
+        ]
+      },
+      "states": [
+        "collapsed",
+        "expanded",
+        "focus-visible",
+        "disabled"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "collapsible",
+        "slot": "item"
+      },
+      {
+        "ref": "separator",
+        "slot": "item",
+        "note": "between items"
+      }
+    ],
+    "implementation": "Accordion.res"
+  },
+  {
+    "id": "alert-dialog",
+    "title": "Alert Dialog",
+    "layer": "component",
+    "summary": "A blocking modal that interrupts to confirm a consequential or irreversible action.",
+    "tags": [
+      "modal",
+      "confirmation",
+      "overlay",
+      "destructive"
+    ],
+    "traits": [
+      "focus-trap"
+    ],
+    "usedBy": [
+      "data-table",
+      "settings",
+      "form"
+    ],
+    "related": [
+      "dialog",
+      "alert",
+      "toast"
+    ],
+    "intent": "An alert dialog interrupts the user to confirm an action that is consequential or\nhard to undo — deleting data, discarding changes, or canceling a running job. It\ndemands an explicit decision before anything continues, making it distinct from a\ngeneral-purpose dialog used for tasks and forms.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the dialog is shown."
+        }
+      ],
+      "slots": [
+        {
+          "name": "title",
+          "required": true
+        },
+        {
+          "name": "description",
+          "required": true
+        },
+        {
+          "name": "cancel",
+          "required": true
+        },
+        {
+          "name": "confirm",
+          "required": true
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "actions",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "events": [
+        "onConfirm",
+        "onCancel"
+      ],
+      "a11y": {
+        "role": "alertdialog",
+        "keyboard": [
+          "Tab",
+          "Escape"
+        ],
+        "announces": [
+          "name",
+          "description"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.lg"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "dialog",
+        "slot": "surface"
+      },
+      {
+        "ref": "button",
+        "slot": "actions",
+        "props": {
+          "variant": "primary"
+        }
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "alert",
+    "title": "Alert",
+    "layer": "component",
+    "summary": "An inline message that draws attention to important, contextual information.",
+    "tags": [
+      "feedback",
+      "message",
+      "status",
+      "inline"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "card",
+      "dashboard",
+      "settings"
+    ],
+    "related": [
+      "toast",
+      "alert-dialog",
+      "badge"
+    ],
+    "intent": "An alert surfaces an important message in the flow of a page — a warning, a tip, a\nsuccess confirmation, or an error summary. Unlike a toast, it stays in place and\nin context; unlike an alert-dialog, it doesn't interrupt or block the user.",
+    "api": {
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "info",
+          "description": "Severity."
+        }
+      ],
+      "slots": [
+        {
+          "name": "icon",
+          "required": false
+        },
+        {
+          "name": "title",
+          "required": false
+        },
+        {
+          "name": "description",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "a11y": {
+        "role": "alert",
+        "announces": [
+          "message"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.status.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "actions"
+      },
+      {
+        "ref": "badge",
+        "slot": "icon"
+      }
+    ],
+    "implementation": "Alert.res"
+  },
+  {
+    "id": "breadcrumb",
+    "title": "Breadcrumb",
+    "layer": "component",
+    "summary": "A trail showing the current location within a hierarchy and the path back to the top.",
+    "tags": [
+      "navigation",
+      "wayfinding",
+      "hierarchy"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard",
+      "settings",
+      "data-table"
+    ],
+    "related": [
+      "navbar",
+      "pagination",
+      "tabs",
+      "sidebar"
+    ],
+    "intent": "A breadcrumb shows where the current page sits within a hierarchy and offers a\none-click path back to any ancestor. It answers \"where am I and how do I get\nback,\" reinforcing structure in deep or nested products.",
+    "api": {
+      "props": [
+        {
+          "name": "separator",
+          "type": "string",
+          "default": "/",
+          "description": "Glyph between crumbs."
+        }
+      ],
+      "slots": [
+        {
+          "name": "item",
+          "required": true,
+          "description": "A link to an ancestor; the last is the current page."
+        }
+      ],
+      "a11y": {
+        "role": "navigation",
+        "announces": [
+          "current page"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "link",
+        "slot": "item"
+      },
+      {
+        "ref": "separator",
+        "slot": "item",
+        "note": "between crumbs"
+      },
+      {
+        "ref": "dropdown-menu",
+        "slot": "item",
+        "note": "collapsed ancestors"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "button-group",
+    "title": "Button Group",
+    "layer": "component",
+    "summary": "A set of related buttons joined into a single visual unit.",
+    "tags": [
+      "action",
+      "layout",
+      "toolbar",
+      "grouping"
+    ],
+    "traits": [],
+    "usedBy": [
+      "toolbar",
+      "data-table",
+      "card",
+      "dialog"
+    ],
+    "related": [
+      "toggle-group",
+      "dropdown-menu",
+      "button"
+    ],
+    "intent": "A button group visually joins related buttons into one unit to signal that they\nbelong together — a set of related actions, or a primary action paired with a menu\nof alternatives (a split button). It clarifies relationships and conserves space in\ntoolbars and action areas.",
+    "api": {
+      "props": [
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "description": "Layout axis."
+        }
+      ],
+      "slots": [
+        {
+          "name": "button",
+          "required": true,
+          "description": "A button joined into the unit."
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "radius.md",
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "button"
+      },
+      {
+        "ref": "dropdown-menu",
+        "slot": "button",
+        "note": "split action"
+      },
+      {
+        "ref": "separator",
+        "slot": "button",
+        "note": "divider"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "calendar",
+    "title": "Calendar",
+    "layer": "component",
+    "summary": "A grid of dates for viewing a month and selecting one or more days.",
+    "tags": [
+      "date",
+      "selection",
+      "grid",
+      "input"
+    ],
+    "traits": [],
+    "usedBy": [
+      "date-picker",
+      "form",
+      "dashboard"
+    ],
+    "related": [
+      "date-picker",
+      "popover",
+      "input"
+    ],
+    "intent": "A calendar presents dates in a familiar month grid so users can orient by weekday\nand week, and select a day, a range, or several days. It is the visual core that a\ndate-picker wraps in a popover, but it also stands alone for scheduling views.",
+    "api": {
+      "props": [
+        {
+          "name": "mode",
+          "type": "enum",
+          "values": [
+            "single",
+            "range",
+            "multiple"
+          ],
+          "default": "single",
+          "description": "Selection model."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Selected date(s)."
+        }
+      ],
+      "slots": [
+        {
+          "name": "day",
+          "required": true
+        },
+        {
+          "name": "controls",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "events": [
+        "onSelect"
+      ],
+      "a11y": {
+        "role": "grid",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowUp",
+          "ArrowDown",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End"
+        ],
+        "announces": [
+          "selected date"
+        ]
+      },
+      "states": [
+        "default",
+        "selected",
+        "today",
+        "disabled",
+        "outside-month"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "controls",
+        "note": "prev/next month"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "card",
+    "title": "Card",
+    "layer": "component",
+    "summary": "A self-contained surface that groups related content and actions into a single unit.",
+    "tags": [
+      "container",
+      "surface",
+      "layout",
+      "grouping"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard",
+      "landing-page",
+      "data-table",
+      "settings"
+    ],
+    "related": [
+      "alert",
+      "table",
+      "sheet"
+    ],
+    "intent": "A card groups related content and actions about a single subject into one bounded\nsurface, making it scannable and manipulable as a unit. Cards turn a page of\ndisparate information into a tidy set of digestible objects, and tile naturally\ninto grids and lists.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "media",
+          "required": false
+        },
+        {
+          "name": "header",
+          "required": false
+        },
+        {
+          "name": "body",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "required": false
+        },
+        {
+          "name": "overlays",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus-visible"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.lg"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "aspect-ratio",
+        "slot": "media",
+        "note": "constrains the media"
+      },
+      {
+        "ref": "avatar",
+        "slot": "header",
+        "note": "identity"
+      },
+      {
+        "ref": "typography",
+        "slot": "header",
+        "note": "title and subtitle"
+      },
+      {
+        "ref": "badge",
+        "slot": "overlays",
+        "props": {
+          "variant": "soft"
+        }
+      },
+      {
+        "ref": "separator",
+        "slot": "body",
+        "note": "divides sections"
+      },
+      {
+        "ref": "button",
+        "slot": "actions",
+        "props": {
+          "variant": "primary"
+        }
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "carousel",
+    "title": "Carousel",
+    "layer": "component",
+    "summary": "A scrollable, paged set of items revealed a few at a time with navigation controls.",
+    "tags": [
+      "media",
+      "gallery",
+      "slider",
+      "content"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "dashboard"
+    ],
+    "related": [
+      "tabs",
+      "scroll-area",
+      "pagination"
+    ],
+    "intent": "A carousel presents a sequence of items — images, cards, testimonials — in a\nhorizontally scrollable track, showing a subset at a time with controls to move\nthrough them. It suits browsable, non-essential content where saving vertical\nspace matters more than seeing everything at once.",
+    "api": {
+      "props": [
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "description": "Scroll axis."
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": "false",
+          "description": "Wrap from last to first."
+        }
+      ],
+      "slots": [
+        {
+          "name": "slide",
+          "required": true
+        },
+        {
+          "name": "controls",
+          "required": false
+        }
+      ],
+      "events": [
+        "onSelect"
+      ],
+      "a11y": {
+        "role": "group",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight"
+        ],
+        "announces": [
+          "slide x of n"
+        ]
+      },
+      "states": [
+        "default",
+        "dragging"
+      ],
+      "tokens": [
+        "radius.md",
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "card",
+        "slot": "slide"
+      },
+      {
+        "ref": "aspect-ratio",
+        "slot": "slide",
+        "note": "media ratio"
+      },
+      {
+        "ref": "button",
+        "slot": "controls"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "chart",
+    "title": "Chart",
+    "layer": "component",
+    "summary": "A visual encoding of data — bars, lines, areas, and more — that reveals patterns and comparisons.",
+    "tags": [
+      "data",
+      "visualization",
+      "analytics",
+      "dashboard"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard",
+      "card",
+      "data-table"
+    ],
+    "related": [
+      "data-table",
+      "progress",
+      "card"
+    ],
+    "intent": "A chart encodes data visually so people can perceive trends, comparisons, and\ndistributions faster than reading numbers. It turns a dataset into a shape the eye\ncan interpret, supporting decisions on dashboards and reports.",
+    "api": {
+      "props": [
+        {
+          "name": "type",
+          "type": "enum",
+          "values": [
+            "bar",
+            "line",
+            "area",
+            "pie"
+          ],
+          "default": "bar",
+          "description": "Visual encoding."
+        }
+      ],
+      "slots": [
+        {
+          "name": "series",
+          "required": true
+        },
+        {
+          "name": "axis",
+          "required": false
+        },
+        {
+          "name": "legend",
+          "required": false
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "a11y": {
+        "role": "img",
+        "announces": [
+          "summary",
+          "data table alternative"
+        ]
+      },
+      "states": [
+        "default",
+        "loading",
+        "empty"
+      ],
+      "tokens": [
+        "color.chart.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "legend",
+        "slot": "legend"
+      },
+      {
+        "ref": "tooltip",
+        "slot": "series",
+        "note": "point details"
+      },
+      {
+        "ref": "card",
+        "slot": "surface"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "collapsible",
+    "title": "Collapsible",
+    "layer": "component",
+    "summary": "A single region that expands and collapses to show or hide its content.",
+    "tags": [
+      "disclosure",
+      "content",
+      "progressive-disclosure"
+    ],
+    "traits": [],
+    "usedBy": [
+      "accordion",
+      "sidebar",
+      "card",
+      "form"
+    ],
+    "related": [
+      "accordion",
+      "popover"
+    ],
+    "intent": "A collapsible is a single show/hide region controlled by a trigger. It defers\nsecondary detail until the user asks for it — a \"show more\", an optional form\nsection, an expandable row of detail — keeping the default view clean.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the region is expanded."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "required": true
+        },
+        {
+          "name": "content",
+          "required": true
+        }
+      ],
+      "events": [
+        "onToggle"
+      ],
+      "a11y": {
+        "keyboard": [
+          "Enter",
+          "Space"
+        ],
+        "announces": [
+          "expanded"
+        ]
+      },
+      "states": [
+        "collapsed",
+        "expanded"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "trigger"
+      }
+    ],
+    "implementation": "Collapsible.res"
+  },
+  {
+    "id": "combobox",
+    "title": "Combobox",
+    "layer": "component",
+    "summary": "A text input paired with a filtered list of suggestions for selecting a value.",
+    "tags": [
+      "form",
+      "selection",
+      "search",
+      "autocomplete"
+    ],
+    "traits": [
+      "dismissible",
+      "anchored",
+      "typeahead"
+    ],
+    "usedBy": [
+      "form",
+      "field",
+      "command",
+      "data-table"
+    ],
+    "related": [
+      "select",
+      "command",
+      "input",
+      "dropdown-menu"
+    ],
+    "intent": "A combobox combines a text input with a dynamically filtered list, letting users\neither type to narrow options or browse and pick one. It scales selection to large\noption sets where a plain select would be unwieldy, and supports free-form entry\nwhen allowed.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Selected value."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "slots": [
+        {
+          "name": "input",
+          "required": true
+        },
+        {
+          "name": "option",
+          "required": true
+        },
+        {
+          "name": "empty",
+          "required": false
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "events": [
+        "onChange",
+        "onInput"
+      ],
+      "a11y": {
+        "role": "combobox",
+        "keyboard": [
+          "ArrowDown",
+          "ArrowUp",
+          "Enter",
+          "Escape"
+        ],
+        "announces": [
+          "expanded",
+          "active option"
+        ]
+      },
+      "states": [
+        "closed",
+        "open",
+        "loading",
+        "empty",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "input",
+        "slot": "input"
+      },
+      {
+        "ref": "popover",
+        "slot": "surface"
+      },
+      {
+        "ref": "scroll-area",
+        "slot": "option",
+        "note": "long lists"
+      },
+      {
+        "ref": "badge",
+        "slot": "input",
+        "note": "multi-select tokens"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "command",
+    "title": "Command Palette",
+    "layer": "component",
+    "summary": "A searchable list of commands and destinations for fast, keyboard-driven navigation and action.",
+    "tags": [
+      "navigation",
+      "search",
+      "productivity",
+      "keyboard"
+    ],
+    "traits": [
+      "dismissible",
+      "focus-trap"
+    ],
+    "usedBy": [
+      "dashboard",
+      "navbar"
+    ],
+    "related": [
+      "combobox",
+      "dialog",
+      "dropdown-menu"
+    ],
+    "intent": "A command palette gives power users a single, keyboard-first surface to search\nacross commands, navigation targets, and entities, then execute or jump with a\nkeystroke. It collapses deep menus into one fast query box, usually summoned by a\nshortcut from anywhere in the app.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the palette is shown."
+        }
+      ],
+      "slots": [
+        {
+          "name": "input",
+          "required": true
+        },
+        {
+          "name": "group",
+          "required": false
+        },
+        {
+          "name": "item",
+          "required": true
+        },
+        {
+          "name": "empty",
+          "required": false
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "events": [
+        "onSelect"
+      ],
+      "a11y": {
+        "role": "dialog",
+        "keyboard": [
+          "Tab",
+          "ArrowDown",
+          "ArrowUp",
+          "Enter",
+          "Escape"
+        ],
+        "announces": [
+          "active command"
+        ]
+      },
+      "states": [
+        "closed",
+        "open",
+        "empty"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.lg"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "input",
+        "slot": "input"
+      },
+      {
+        "ref": "scroll-area",
+        "slot": "item"
+      },
+      {
+        "ref": "dialog",
+        "slot": "surface"
+      },
+      {
+        "ref": "kbd",
+        "slot": "item",
+        "note": "shortcut hints"
+      },
+      {
+        "ref": "separator",
+        "slot": "group"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "comment",
+    "title": "Comment",
+    "layer": "component",
+    "summary": "A single unit of user-authored discussion, with author, content, and actions.",
+    "tags": [
+      "social",
+      "discussion",
+      "content",
+      "thread"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "list",
+      "card",
+      "avatar"
+    ],
+    "intent": "A comment is one contribution to a discussion — who said it, what they said, when,\nand what you can do about it (reply, react, edit). It's the repeating unit that\ncomposes threads and activity feeds, so its clarity about authorship and timing,\nand its handling of nesting and moderation, shape the whole conversation.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "author",
+          "required": true
+        },
+        {
+          "name": "body",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "required": false
+        },
+        {
+          "name": "composer",
+          "required": false
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "avatar",
+        "slot": "author"
+      },
+      {
+        "ref": "badge",
+        "slot": "author",
+        "props": {
+          "variant": "soft"
+        },
+        "note": "role"
+      },
+      {
+        "ref": "link",
+        "slot": "body"
+      },
+      {
+        "ref": "button",
+        "slot": "actions"
+      },
+      {
+        "ref": "icon-button",
+        "slot": "actions"
+      },
+      {
+        "ref": "textarea",
+        "slot": "composer"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "context-menu",
+    "title": "Context Menu",
+    "layer": "component",
+    "summary": "A menu of actions relevant to a specific element, opened by right-click or long-press.",
+    "tags": [
+      "menu",
+      "actions",
+      "contextual",
+      "overlay"
+    ],
+    "traits": [
+      "dismissible",
+      "anchored",
+      "roving-focus"
+    ],
+    "usedBy": [
+      "data-table",
+      "sidebar",
+      "card"
+    ],
+    "related": [
+      "dropdown-menu",
+      "menubar",
+      "popover"
+    ],
+    "intent": "A context menu offers actions specific to the element the user targeted, summoned\nin place by right-click (or long-press on touch). It surfaces object-specific\ncommands exactly where the user is working, without permanently occupying screen\nspace.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "slots": [
+        {
+          "name": "item",
+          "required": true
+        },
+        {
+          "name": "separator",
+          "required": false
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "events": [
+        "onSelect"
+      ],
+      "a11y": {
+        "role": "menu",
+        "keyboard": [
+          "ArrowUp",
+          "ArrowDown",
+          "Enter",
+          "Escape"
+        ],
+        "announces": [
+          "active item"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "popover",
+        "slot": "surface"
+      },
+      {
+        "ref": "separator",
+        "slot": "item"
+      },
+      {
+        "ref": "kbd",
+        "slot": "item",
+        "note": "shortcut hints"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "data-table",
+    "title": "Data Table",
+    "layer": "component",
+    "summary": "An interactive table for exploring rows of structured data with sorting, filtering, and paging.",
+    "tags": [
+      "data",
+      "table",
+      "list",
+      "crud",
+      "enterprise"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard",
+      "settings"
+    ],
+    "related": [
+      "table",
+      "pagination",
+      "chart",
+      "card"
+    ],
+    "intent": "A data table lets users explore and act on collections of structured records:\nsort, filter, paginate, select, and trigger row actions. It extends the static\ntable into a working surface for datasets too large to read at once, common in\nadmin and analytics contexts.",
+    "api": {
+      "props": [
+        {
+          "name": "sortable",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "selectable",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "slots": [
+        {
+          "name": "column",
+          "required": true
+        },
+        {
+          "name": "row",
+          "required": true
+        },
+        {
+          "name": "toolbar",
+          "required": false
+        },
+        {
+          "name": "pagination",
+          "required": false
+        }
+      ],
+      "events": [
+        "onSort",
+        "onSelect",
+        "onPage"
+      ],
+      "a11y": {
+        "role": "table",
+        "keyboard": [
+          "Tab",
+          "Space"
+        ],
+        "announces": [
+          "sort state",
+          "selection"
+        ]
+      },
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "sorted",
+        "selected"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "table",
+        "slot": "row"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "row",
+        "note": "row selection"
+      },
+      {
+        "ref": "input",
+        "slot": "toolbar",
+        "note": "filter"
+      },
+      {
+        "ref": "combobox",
+        "slot": "toolbar",
+        "note": "column filter"
+      },
+      {
+        "ref": "pagination",
+        "slot": "pagination"
+      },
+      {
+        "ref": "dropdown-menu",
+        "slot": "toolbar",
+        "note": "column options"
+      },
+      {
+        "ref": "button",
+        "slot": "toolbar"
+      },
+      {
+        "ref": "badge",
+        "slot": "row",
+        "note": "cell status"
+      },
+      {
+        "ref": "skeleton",
+        "slot": "row",
+        "note": "loading"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "date-picker",
+    "title": "Date Picker",
+    "layer": "component",
+    "summary": "A field that lets users enter or choose a date (or range) via typing and a calendar.",
+    "tags": [
+      "form",
+      "date",
+      "selection",
+      "input"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "field",
+      "data-table"
+    ],
+    "related": [
+      "calendar",
+      "input",
+      "popover",
+      "combobox"
+    ],
+    "intent": "A date picker helps users provide a date (or range) accurately by combining a\ntyped field with a calendar for browsing. It balances speed for those who know the\ndate with visual context for those who need to see the month, and it enforces valid\nranges and formats.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Selected date."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "slots": [
+        {
+          "name": "input",
+          "required": true
+        },
+        {
+          "name": "calendar",
+          "required": true
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "combobox",
+        "keyboard": [
+          "ArrowDown",
+          "Enter",
+          "Escape"
+        ],
+        "announces": [
+          "selected date"
+        ]
+      },
+      "states": [
+        "closed",
+        "open",
+        "disabled",
+        "error"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "input",
+        "slot": "input"
+      },
+      {
+        "ref": "calendar",
+        "slot": "calendar"
+      },
+      {
+        "ref": "popover",
+        "slot": "surface"
+      },
+      {
+        "ref": "button",
+        "slot": "calendar",
+        "note": "clear/today"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "dialog",
+    "title": "Dialog",
+    "layer": "component",
+    "summary": "A modal overlay that focuses the user on a self-contained task or piece of content.",
+    "tags": [
+      "overlay",
+      "modal",
+      "focus",
+      "task"
+    ],
+    "traits": [
+      "dismissible",
+      "focus-trap"
+    ],
+    "usedBy": [
+      "form",
+      "data-table",
+      "dashboard",
+      "command"
+    ],
+    "related": [
+      "alert-dialog",
+      "sheet",
+      "drawer",
+      "popover"
+    ],
+    "intent": "A dialog overlays the page to give a focused, self-contained space for a task or\ncontent — a form, details, a confirmation with body content — while dimming and\ndisabling the rest of the interface. It concentrates attention without navigating\naway, then returns the user exactly where they were.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the dialog is shown."
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "required": true
+        },
+        {
+          "name": "body",
+          "required": true
+        },
+        {
+          "name": "footer",
+          "required": false
+        }
+      ],
+      "events": [
+        "onOpenChange"
+      ],
+      "a11y": {
+        "role": "dialog",
+        "keyboard": [
+          "Tab",
+          "Escape"
+        ],
+        "announces": [
+          "name"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.lg"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "scroll-area",
+        "slot": "body",
+        "note": "scrolls long content"
+      },
+      {
+        "ref": "separator",
+        "slot": "footer",
+        "note": "divides body and actions"
+      },
+      {
+        "ref": "button",
+        "slot": "footer",
+        "props": {
+          "variant": "primary"
+        }
+      }
+    ],
+    "implementation": "Dialog.res"
+  },
+  {
+    "id": "drawer",
+    "title": "Drawer",
+    "layer": "component",
+    "summary": "A panel that slides in from a screen edge, often swipe-driven, for content or actions.",
+    "tags": [
+      "overlay",
+      "panel",
+      "mobile",
+      "gesture"
+    ],
+    "traits": [
+      "dismissible",
+      "focus-trap"
+    ],
+    "usedBy": [
+      "navbar",
+      "dashboard",
+      "data-table"
+    ],
+    "related": [
+      "sheet",
+      "dialog",
+      "sidebar",
+      "popover"
+    ],
+    "intent": "A drawer slides content in from an edge of the screen — commonly the bottom on\ntouch — keeping partial context visible and inviting gesture-driven dismissal. It\nsuits mobile-first flows and secondary content that should feel attached to the\ncurrent screen rather than replacing it.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "side",
+          "type": "enum",
+          "values": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ],
+          "default": "right",
+          "description": "Edge it slides from."
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "required": false
+        },
+        {
+          "name": "body",
+          "required": true
+        },
+        {
+          "name": "footer",
+          "required": false
+        }
+      ],
+      "events": [
+        "onOpenChange"
+      ],
+      "a11y": {
+        "role": "dialog",
+        "keyboard": [
+          "Tab",
+          "Escape"
+        ],
+        "announces": [
+          "name"
+        ]
+      },
+      "states": [
+        "closed",
+        "open",
+        "dragging"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.lg"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "scroll-area",
+        "slot": "body"
+      },
+      {
+        "ref": "separator",
+        "slot": "footer"
+      },
+      {
+        "ref": "button",
+        "slot": "footer",
+        "props": {
+          "variant": "primary"
+        }
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "dropdown-menu",
+    "title": "Dropdown Menu",
+    "layer": "component",
+    "summary": "A button-triggered menu of actions, revealed in a floating list.",
+    "tags": [
+      "menu",
+      "actions",
+      "overlay",
+      "navigation"
+    ],
+    "traits": [
+      "dismissible",
+      "anchored",
+      "roving-focus",
+      "typeahead"
+    ],
+    "usedBy": [
+      "navbar",
+      "data-table",
+      "card",
+      "sidebar",
+      "toolbar"
+    ],
+    "related": [
+      "context-menu",
+      "menubar",
+      "popover",
+      "select"
+    ],
+    "intent": "A dropdown menu attaches a list of actions to a button, revealing them on demand\nso a surface can offer many operations without clutter. It's the workhorse for\n\"more actions\", account menus, and overflow — an explicitly triggered, keyboard-\nnavigable menu of commands.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "required": true
+        },
+        {
+          "name": "item",
+          "required": true
+        },
+        {
+          "name": "separator",
+          "required": false
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "events": [
+        "onSelect"
+      ],
+      "a11y": {
+        "role": "menu",
+        "keyboard": [
+          "ArrowUp",
+          "ArrowDown",
+          "Enter",
+          "Escape"
+        ],
+        "announces": [
+          "active item"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "popover",
+        "slot": "surface"
+      },
+      {
+        "ref": "separator",
+        "slot": "item"
+      },
+      {
+        "ref": "kbd",
+        "slot": "item",
+        "note": "shortcut hints"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "item",
+        "note": "checkable items"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "empty-state",
+    "title": "Empty State",
+    "layer": "component",
+    "summary": "A placeholder shown when there is no content yet, guiding the user toward a first action.",
+    "tags": [
+      "feedback",
+      "onboarding",
+      "guidance",
+      "zero-data"
+    ],
+    "traits": [],
+    "usedBy": [
+      "data-table",
+      "dashboard",
+      "card",
+      "search"
+    ],
+    "related": [
+      "skeleton",
+      "alert",
+      "card"
+    ],
+    "intent": "An empty state fills the void when there's no content — a new list, no search\nresults, a cleared inbox — turning a dead end into guidance. It explains why the\nspace is empty and points to the next useful action, so absence of data doesn't\nfeel like a broken screen.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "icon",
+          "required": false
+        },
+        {
+          "name": "title",
+          "required": true
+        },
+        {
+          "name": "description",
+          "required": false
+        },
+        {
+          "name": "action",
+          "required": false
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "aspect-ratio",
+        "slot": "icon",
+        "note": "illustration"
+      },
+      {
+        "ref": "typography",
+        "slot": "title"
+      },
+      {
+        "ref": "button",
+        "slot": "action",
+        "props": {
+          "variant": "primary"
+        }
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "field",
+    "title": "Field",
+    "layer": "component",
+    "summary": "A wrapper that pairs a form control with its label, help text, and validation message.",
+    "tags": [
+      "form",
+      "control",
+      "layout",
+      "validation"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "sign-in",
+      "settings"
+    ],
+    "related": [
+      "form",
+      "label",
+      "input"
+    ],
+    "intent": "A field is the connective wrapper that turns a bare control into a complete,\naccessible form element: label, the control itself, optional helper text, and\nvalidation feedback — all wired together. It standardizes structure, spacing, and\nthe label/description/error associations so every control behaves consistently.",
+    "api": {
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "",
+          "description": "Names the control."
+        },
+        {
+          "name": "for",
+          "type": "string",
+          "default": "",
+          "description": "id of the control it labels."
+        },
+        {
+          "name": "hint",
+          "type": "string",
+          "default": "",
+          "description": "Help or error text."
+        }
+      ],
+      "slots": [
+        {
+          "name": "control",
+          "required": true,
+          "description": "The wrapped input/select/etc."
+        },
+        {
+          "name": "label",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "a11y": {
+        "announces": [
+          "name",
+          "description",
+          "error"
+        ]
+      },
+      "states": [
+        "default",
+        "error"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "font.weight.medium"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "label",
+        "slot": "label"
+      },
+      {
+        "ref": "input",
+        "slot": "control"
+      },
+      {
+        "ref": "textarea",
+        "slot": "control"
+      },
+      {
+        "ref": "select",
+        "slot": "control"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "control"
+      },
+      {
+        "ref": "radio-group",
+        "slot": "control"
+      },
+      {
+        "ref": "switch",
+        "slot": "control"
+      }
+    ],
+    "implementation": "Field.res"
+  },
+  {
+    "id": "footer",
+    "title": "Footer",
+    "layer": "component",
+    "summary": "A page-closing region with secondary navigation, legal, and trust information.",
+    "tags": [
+      "navigation",
+      "layout",
+      "wayfinding",
+      "legal"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "dashboard",
+      "pricing"
+    ],
+    "related": [
+      "navbar",
+      "sidebar"
+    ],
+    "intent": "A footer closes the page with the content users look for at the end: secondary\nnavigation, legal and policy links, contact and social, and trust signals. It is\nthe conventional home for everything that doesn't belong in primary navigation but\nshould be reliably findable, anchoring the bottom of nearly every marketing and\ncontent page.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "brand",
+          "required": false
+        },
+        {
+          "name": "links",
+          "required": true
+        },
+        {
+          "name": "legal",
+          "required": false
+        }
+      ],
+      "a11y": {
+        "role": "contentinfo"
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "logo",
+        "slot": "brand"
+      },
+      {
+        "ref": "link",
+        "slot": "links"
+      },
+      {
+        "ref": "separator",
+        "slot": "legal"
+      },
+      {
+        "ref": "input",
+        "slot": "links",
+        "note": "newsletter"
+      },
+      {
+        "ref": "button",
+        "slot": "links"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "form",
+    "title": "Form",
+    "layer": "component",
+    "summary": "A structured set of fields that collects, validates, and submits user input toward a goal.",
+    "tags": [
+      "form",
+      "input",
+      "validation",
+      "data-entry"
+    ],
+    "traits": [],
+    "usedBy": [
+      "sign-in",
+      "settings",
+      "dialog",
+      "landing-page"
+    ],
+    "related": [
+      "field",
+      "input",
+      "dialog"
+    ],
+    "intent": "A form gathers structured input from a user, validates it, and submits it to\naccomplish a goal — signing in, creating a record, updating settings. It\norchestrates fields, guidance, validation, and submission into one coherent,\naccessible flow, minimizing effort and error.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "fields",
+          "required": true
+        },
+        {
+          "name": "validation",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "required": true
+        }
+      ],
+      "events": [
+        "onSubmit"
+      ],
+      "a11y": {
+        "announces": [
+          "errors",
+          "submitting"
+        ]
+      },
+      "states": [
+        "default",
+        "submitting",
+        "success",
+        "error"
+      ],
+      "tokens": [
+        "color.action.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "field",
+        "slot": "fields",
+        "note": "each label + control + message"
+      },
+      {
+        "ref": "input",
+        "slot": "fields"
+      },
+      {
+        "ref": "textarea",
+        "slot": "fields"
+      },
+      {
+        "ref": "select",
+        "slot": "fields"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "fields"
+      },
+      {
+        "ref": "radio-group",
+        "slot": "fields"
+      },
+      {
+        "ref": "switch",
+        "slot": "fields"
+      },
+      {
+        "ref": "alert",
+        "slot": "validation",
+        "note": "error summary"
+      },
+      {
+        "ref": "button",
+        "slot": "actions",
+        "props": {
+          "type": "submit",
+          "variant": "primary"
+        }
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "hover-card",
+    "title": "Hover Card",
+    "layer": "component",
+    "summary": "A rich preview surface revealed when a pointer rests on a trigger.",
+    "tags": [
+      "overlay",
+      "preview",
+      "contextual",
+      "hover"
+    ],
+    "traits": [
+      "anchored"
+    ],
+    "usedBy": [
+      "navbar",
+      "card",
+      "data-table"
+    ],
+    "related": [
+      "tooltip",
+      "popover",
+      "card"
+    ],
+    "intent": "A hover card shows a richer preview — a person's profile, a link's summary, an\nitem's details — when the pointer rests on a trigger. It offers a peek of related\ninformation without a click or navigation, richer than a plain tooltip but lighter\nthan opening a page.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "trigger",
+          "required": true
+        },
+        {
+          "name": "content",
+          "required": true
+        },
+        {
+          "name": "surface",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "a11y": {
+        "announces": [
+          "preview"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "popover",
+        "slot": "surface"
+      },
+      {
+        "ref": "avatar",
+        "slot": "content"
+      },
+      {
+        "ref": "typography",
+        "slot": "content"
+      },
+      {
+        "ref": "button",
+        "slot": "content"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "input-group",
+    "title": "Input Group",
+    "layer": "component",
+    "summary": "An input combined with adjacent add-ons or controls that act as one composite control.",
+    "tags": [
+      "form",
+      "input",
+      "layout",
+      "control"
+    ],
+    "traits": [],
+    "usedBy": [
+      "form",
+      "field",
+      "navbar",
+      "data-table"
+    ],
+    "related": [
+      "input",
+      "field",
+      "button-group"
+    ],
+    "intent": "An input group binds an input with adjacent add-ons — a prefix/suffix, an icon, a\nunit, a select, or a button — into one composite control. It gives the value\ncontext (currency symbol, protocol, unit) or an attached action (search, copy,\napply) while reading as a single, cohesive field.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "addon",
+          "required": false
+        },
+        {
+          "name": "input",
+          "required": true
+        }
+      ],
+      "states": [
+        "default",
+        "focus-visible",
+        "disabled"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "input",
+        "slot": "input"
+      },
+      {
+        "ref": "button",
+        "slot": "addon"
+      },
+      {
+        "ref": "select",
+        "slot": "addon"
+      },
+      {
+        "ref": "badge",
+        "slot": "addon"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "list",
+    "title": "List",
+    "layer": "component",
+    "summary": "A vertical sequence of related items, each a compact row of content and actions.",
+    "tags": [
+      "collection",
+      "rows",
+      "content",
+      "navigation"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard",
+      "settings",
+      "sidebar"
+    ],
+    "related": [
+      "table",
+      "data-table",
+      "card"
+    ],
+    "intent": "A list presents a set of related items as a vertical stack of rows, each showing\na compact summary and optional actions. It suits object-like items scanned top to\nbottom — messages, files, people, notifications — where a single primary attribute\nleads and a table's columns would be overkill.",
+    "api": {
+      "props": [
+        {
+          "name": "interactive",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether rows are selectable/clickable."
+        }
+      ],
+      "slots": [
+        {
+          "name": "item",
+          "required": true
+        }
+      ],
+      "a11y": {
+        "role": "list",
+        "keyboard": [
+          "ArrowUp",
+          "ArrowDown"
+        ]
+      },
+      "states": [
+        "default",
+        "hover",
+        "selected"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "avatar",
+        "slot": "item"
+      },
+      {
+        "ref": "badge",
+        "slot": "item"
+      },
+      {
+        "ref": "button",
+        "slot": "item",
+        "note": "row action"
+      },
+      {
+        "ref": "icon-button",
+        "slot": "item",
+        "note": "row action"
+      },
+      {
+        "ref": "separator",
+        "slot": "item",
+        "note": "between rows"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "item",
+        "note": "selection"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "menubar",
+    "title": "Menubar",
+    "layer": "component",
+    "summary": "A horizontal bar of top-level menus exposing an application's commands.",
+    "tags": [
+      "menu",
+      "commands",
+      "application",
+      "navigation"
+    ],
+    "traits": [
+      "anchored",
+      "roving-focus",
+      "typeahead"
+    ],
+    "usedBy": [
+      "dashboard"
+    ],
+    "related": [
+      "dropdown-menu",
+      "navigation-menu",
+      "context-menu"
+    ],
+    "intent": "A menubar presents an application's commands as a persistent horizontal row of\ntop-level menus (File, Edit, View…), each opening a list of grouped actions. It\nmirrors the desktop-application menu model, giving power users a comprehensive,\npredictable home for commands.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "menu",
+          "required": true
+        },
+        {
+          "name": "item",
+          "required": true
+        }
+      ],
+      "events": [
+        "onSelect"
+      ],
+      "a11y": {
+        "role": "menubar",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowDown",
+          "Enter",
+          "Escape"
+        ],
+        "announces": [
+          "active item"
+        ]
+      },
+      "states": [
+        "default",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "dropdown-menu",
+        "slot": "menu"
+      },
+      {
+        "ref": "separator",
+        "slot": "item"
+      },
+      {
+        "ref": "kbd",
+        "slot": "item",
+        "note": "shortcut hints"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "navbar",
+    "title": "Navbar",
+    "layer": "component",
+    "summary": "A persistent top-level bar that anchors identity and primary navigation across a product.",
+    "tags": [
+      "navigation",
+      "header",
+      "layout",
+      "wayfinding"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "dashboard",
+      "settings"
+    ],
+    "related": [
+      "sidebar",
+      "tabs",
+      "breadcrumb",
+      "footer"
+    ],
+    "intent": "A navbar is the primary wayfinding surface of a product. It stays present across\nscreens to answer three questions at a glance: _where am I_, _where can I go_,\nand _what can I do from anywhere_. It anchors brand identity and the top level of\nthe information architecture, and it hosts the handful of global actions (search,\naccount, primary call to action) that should be reachable from every page.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "brand",
+          "required": true
+        },
+        {
+          "name": "nav",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "required": false
+        },
+        {
+          "name": "account",
+          "required": false
+        }
+      ],
+      "a11y": {
+        "role": "navigation",
+        "announces": [
+          "current section"
+        ]
+      },
+      "states": [
+        "default",
+        "collapsed"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "logo",
+        "slot": "brand",
+        "note": "links home"
+      },
+      {
+        "ref": "link",
+        "slot": "nav"
+      },
+      {
+        "ref": "input",
+        "slot": "actions",
+        "note": "search"
+      },
+      {
+        "ref": "button",
+        "slot": "actions",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "dropdown-menu",
+        "slot": "account"
+      },
+      {
+        "ref": "avatar",
+        "slot": "account"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "navigation-menu",
+    "title": "Navigation Menu",
+    "layer": "component",
+    "summary": "A primary navigation control whose items can open rich flyout panels of links.",
+    "tags": [
+      "navigation",
+      "menu",
+      "wayfinding",
+      "flyout"
+    ],
+    "traits": [
+      "anchored",
+      "roving-focus"
+    ],
+    "usedBy": [
+      "navbar",
+      "landing-page"
+    ],
+    "related": [
+      "navbar",
+      "menubar",
+      "dropdown-menu",
+      "tabs"
+    ],
+    "intent": "A navigation menu presents a product's primary destinations, where top-level items\ncan reveal flyout panels grouping related links (a \"mega menu\"). It scales site\nnavigation beyond a flat row, organizing many destinations into browsable\ncategories while keeping the top level clean.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "item",
+          "required": true
+        },
+        {
+          "name": "content",
+          "required": false
+        }
+      ],
+      "events": [
+        "onSelect"
+      ],
+      "a11y": {
+        "role": "navigation",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "Enter",
+          "Escape"
+        ],
+        "announces": [
+          "expanded"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "link",
+        "slot": "item"
+      },
+      {
+        "ref": "popover",
+        "slot": "content",
+        "note": "flyout"
+      },
+      {
+        "ref": "separator",
+        "slot": "content"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "pagination",
+    "title": "Pagination",
+    "layer": "component",
+    "summary": "Controls for moving through content split across multiple pages.",
+    "tags": [
+      "navigation",
+      "data",
+      "list",
+      "paging"
+    ],
+    "traits": [],
+    "usedBy": [
+      "data-table",
+      "table",
+      "dashboard"
+    ],
+    "related": [
+      "data-table",
+      "table",
+      "breadcrumb"
+    ],
+    "intent": "Pagination breaks a long set of results into pages and gives users controls to\nmove among them. It bounds how much loads and renders at once, and lets users\norient themselves (\"page 3 of 20\") within a large collection.",
+    "api": {
+      "props": [
+        {
+          "name": "page",
+          "type": "number",
+          "default": "1",
+          "description": "Current page."
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "default": "1",
+          "description": "Total pages."
+        }
+      ],
+      "slots": [
+        {
+          "name": "control",
+          "required": true,
+          "description": "Prev/next and page links."
+        }
+      ],
+      "events": [
+        "onPageChange"
+      ],
+      "a11y": {
+        "role": "navigation",
+        "keyboard": [
+          "Enter"
+        ],
+        "announces": [
+          "current page"
+        ]
+      },
+      "states": [
+        "default",
+        "disabled"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "control"
+      },
+      {
+        "ref": "link",
+        "slot": "control"
+      },
+      {
+        "ref": "select",
+        "slot": "control",
+        "note": "page size"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "popover",
+    "title": "Popover",
+    "layer": "component",
+    "summary": "A floating surface anchored to a trigger, holding contextual content or controls.",
+    "tags": [
+      "overlay",
+      "contextual",
+      "floating",
+      "container"
+    ],
+    "traits": [
+      "dismissible",
+      "anchored"
+    ],
+    "usedBy": [
+      "combobox",
+      "select",
+      "date-picker",
+      "dropdown-menu",
+      "tooltip",
+      "hover-card",
+      "navigation-menu"
+    ],
+    "related": [
+      "tooltip",
+      "dropdown-menu",
+      "dialog",
+      "hover-card"
+    ],
+    "intent": "A popover is a general-purpose floating surface anchored to a trigger, used to\npresent contextual content or lightweight controls near what they relate to. It is\nthe shared foundation many overlays build on (menus, selects, date pickers), and\non its own it holds small interactive content without the weight of a modal dialog.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "required": true
+        },
+        {
+          "name": "content",
+          "required": true
+        }
+      ],
+      "events": [
+        "onOpenChange"
+      ],
+      "a11y": {
+        "keyboard": [
+          "Escape"
+        ],
+        "announces": [
+          "expanded"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "trigger"
+      },
+      {
+        "ref": "scroll-area",
+        "slot": "content"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "resizable",
+    "title": "Resizable Panels",
+    "layer": "component",
+    "summary": "Adjacent panels separated by draggable handles that let users redistribute space.",
+    "tags": [
+      "layout",
+      "panels",
+      "split",
+      "workspace"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard",
+      "data-table"
+    ],
+    "related": [
+      "sidebar",
+      "scroll-area",
+      "separator"
+    ],
+    "intent": "Resizable panels divide a region into two or more areas separated by draggable\nhandles, letting users decide how to split available space — a file tree beside an\neditor, a list beside a detail pane. It hands layout control to the user for\nworkspace-style interfaces where preferred proportions vary.",
+    "api": {
+      "props": [
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "description": "Axis panels split along."
+        }
+      ],
+      "slots": [
+        {
+          "name": "panel",
+          "required": true
+        },
+        {
+          "name": "handle",
+          "required": true
+        }
+      ],
+      "events": [
+        "onResize"
+      ],
+      "a11y": {
+        "role": "separator",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowUp",
+          "ArrowDown"
+        ],
+        "announces": [
+          "size"
+        ]
+      },
+      "states": [
+        "default",
+        "dragging",
+        "focus-visible"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "separator",
+        "slot": "handle"
+      },
+      {
+        "ref": "scroll-area",
+        "slot": "panel"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "search",
+    "title": "Search",
+    "layer": "component",
+    "summary": "An input-led pattern for querying content, with suggestions, clearing, and results.",
+    "tags": [
+      "search",
+      "input",
+      "query",
+      "navigation",
+      "filter"
+    ],
+    "traits": [],
+    "usedBy": [
+      "navbar",
+      "data-table",
+      "dashboard"
+    ],
+    "related": [
+      "combobox",
+      "command",
+      "input"
+    ],
+    "intent": "Search lets a person find content by typing a query. Beyond the field itself, the\npattern covers the affordances that make searching productive: a clear entry point,\na way to clear the query, live suggestions or recent searches, and a predictable\nresults and empty state. It's how users cut through volume to the one thing they\nwant.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Query text."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "Search",
+          "description": "Empty hint."
+        }
+      ],
+      "slots": [
+        {
+          "name": "input",
+          "required": true
+        },
+        {
+          "name": "suggestions",
+          "required": false
+        },
+        {
+          "name": "clear",
+          "required": false
+        }
+      ],
+      "events": [
+        "onSearch",
+        "onInput"
+      ],
+      "a11y": {
+        "role": "searchbox",
+        "keyboard": [
+          "Enter",
+          "Escape",
+          "ArrowDown"
+        ],
+        "announces": [
+          "results count"
+        ]
+      },
+      "states": [
+        "default",
+        "focus-visible",
+        "loading",
+        "empty"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "input",
+        "slot": "input"
+      },
+      {
+        "ref": "icon",
+        "slot": "input"
+      },
+      {
+        "ref": "icon-button",
+        "slot": "clear"
+      },
+      {
+        "ref": "button",
+        "slot": "input"
+      },
+      {
+        "ref": "list",
+        "slot": "suggestions"
+      },
+      {
+        "ref": "empty-state",
+        "slot": "suggestions",
+        "note": "no results"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "select",
+    "title": "Select",
+    "layer": "component",
+    "summary": "A control that opens a list for choosing one option (or several) from a defined set.",
+    "tags": [
+      "form",
+      "selection",
+      "dropdown",
+      "control"
+    ],
+    "traits": [
+      "dismissible",
+      "anchored",
+      "roving-focus",
+      "typeahead"
+    ],
+    "usedBy": [
+      "form",
+      "field",
+      "data-table",
+      "pagination"
+    ],
+    "related": [
+      "combobox",
+      "dropdown-menu",
+      "radio-group"
+    ],
+    "intent": "A select lets users choose from a defined set of options by opening a list and\npicking one (or several). It conserves space compared to showing all options and\nsuits sets too long for radios but not large enough to need typed filtering.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Selected value."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "required": true
+        },
+        {
+          "name": "option",
+          "required": true
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "listbox",
+        "keyboard": [
+          "ArrowDown",
+          "ArrowUp",
+          "Enter",
+          "Escape",
+          "Home",
+          "End"
+        ],
+        "announces": [
+          "selected option"
+        ]
+      },
+      "states": [
+        "closed",
+        "open",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "popover",
+        "slot": "trigger"
+      },
+      {
+        "ref": "scroll-area",
+        "slot": "option"
+      },
+      {
+        "ref": "separator",
+        "slot": "option",
+        "note": "groups"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "option",
+        "note": "multi-select"
+      }
+    ],
+    "implementation": "Select.res"
+  },
+  {
+    "id": "sheet",
+    "title": "Sheet",
+    "layer": "component",
+    "summary": "A panel that slides in from a screen edge for secondary content or tasks alongside the page.",
+    "tags": [
+      "overlay",
+      "panel",
+      "side",
+      "task"
+    ],
+    "traits": [
+      "dismissible",
+      "focus-trap"
+    ],
+    "usedBy": [
+      "dashboard",
+      "data-table",
+      "settings"
+    ],
+    "related": [
+      "dialog",
+      "drawer",
+      "sidebar",
+      "popover"
+    ],
+    "intent": "A sheet slides a panel in from an edge of the screen (commonly the side) to host\nsecondary content or a task while keeping the page context adjacent. It's roomier\nthan a popover and less interruptive than a centered dialog — ideal for details,\nfilters, or edit forms that relate to what's on screen.",
+    "api": {
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "side",
+          "type": "enum",
+          "values": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ],
+          "default": "right",
+          "description": "Edge it slides from."
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "required": false
+        },
+        {
+          "name": "body",
+          "required": true
+        },
+        {
+          "name": "footer",
+          "required": false
+        }
+      ],
+      "events": [
+        "onOpenChange"
+      ],
+      "a11y": {
+        "role": "dialog",
+        "keyboard": [
+          "Tab",
+          "Escape"
+        ],
+        "announces": [
+          "name"
+        ]
+      },
+      "states": [
+        "closed",
+        "open"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.lg"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "scroll-area",
+        "slot": "body"
+      },
+      {
+        "ref": "separator",
+        "slot": "footer"
+      },
+      {
+        "ref": "button",
+        "slot": "footer",
+        "props": {
+          "variant": "primary"
+        }
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "sidebar",
+    "title": "Sidebar",
+    "layer": "component",
+    "summary": "A persistent vertical navigation region alongside the main content of an application.",
+    "tags": [
+      "navigation",
+      "layout",
+      "application",
+      "wayfinding"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard",
+      "settings"
+    ],
+    "related": [
+      "navbar",
+      "navigation-menu",
+      "sheet",
+      "drawer"
+    ],
+    "intent": "A sidebar provides persistent, vertically-organized navigation beside an\napplication's content, scaling to many sections and nested groups. It's the primary\nwayfinding surface for product/app shells where a horizontal navbar would run out\nof room, keeping destinations always visible or a click away.",
+    "api": {
+      "props": [
+        {
+          "name": "collapsed",
+          "type": "boolean",
+          "default": "false",
+          "description": "Whether the rail is collapsed."
+        }
+      ],
+      "slots": [
+        {
+          "name": "header",
+          "required": false
+        },
+        {
+          "name": "nav",
+          "required": true
+        },
+        {
+          "name": "footer",
+          "required": false
+        }
+      ],
+      "a11y": {
+        "role": "navigation",
+        "keyboard": [
+          "ArrowUp",
+          "ArrowDown"
+        ],
+        "announces": [
+          "current section"
+        ]
+      },
+      "states": [
+        "expanded",
+        "collapsed"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "link",
+        "slot": "nav"
+      },
+      {
+        "ref": "button",
+        "slot": "nav"
+      },
+      {
+        "ref": "collapsible",
+        "slot": "nav",
+        "note": "nav groups"
+      },
+      {
+        "ref": "avatar",
+        "slot": "footer"
+      },
+      {
+        "ref": "separator",
+        "slot": "nav"
+      },
+      {
+        "ref": "badge",
+        "slot": "nav",
+        "note": "counts"
+      },
+      {
+        "ref": "scroll-area",
+        "slot": "nav"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "stat",
+    "title": "Stat",
+    "layer": "component",
+    "summary": "A compact display of a single key metric with its label and optional trend.",
+    "tags": [
+      "data",
+      "metric",
+      "kpi",
+      "dashboard"
+    ],
+    "traits": [],
+    "usedBy": [
+      "dashboard"
+    ],
+    "related": [
+      "card",
+      "chart"
+    ],
+    "intent": "A stat surfaces one number that matters — revenue, active users, conversion rate —\nwith just enough context to interpret it: a label, and often a change indicator or\na tiny trend. It turns a single figure into a glanceable signal, the building block\nthat tiles into a dashboard's metric row.",
+    "api": {
+      "props": [
+        {
+          "name": "trend",
+          "type": "enum",
+          "values": [
+            "up",
+            "down",
+            "flat"
+          ],
+          "default": "flat",
+          "description": "Direction of change."
+        }
+      ],
+      "slots": [
+        {
+          "name": "label",
+          "required": true
+        },
+        {
+          "name": "value",
+          "required": true
+        },
+        {
+          "name": "delta",
+          "required": false
+        }
+      ],
+      "a11y": {
+        "announces": [
+          "label and value"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.status.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "typography",
+        "slot": "value"
+      },
+      {
+        "ref": "badge",
+        "slot": "delta"
+      },
+      {
+        "ref": "icon",
+        "slot": "label"
+      },
+      {
+        "ref": "chart",
+        "slot": "value",
+        "note": "sparkline"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "table",
+    "title": "Table",
+    "layer": "component",
+    "summary": "A grid of rows and columns for presenting structured, comparable data.",
+    "tags": [
+      "data",
+      "table",
+      "structure",
+      "comparison"
+    ],
+    "traits": [],
+    "usedBy": [
+      "data-table",
+      "dashboard",
+      "card"
+    ],
+    "related": [
+      "data-table",
+      "card",
+      "chart"
+    ],
+    "intent": "A table arranges structured data into rows and columns so values align for easy\nscanning and comparison across records and attributes. It is the clearest way to\npresent tabular information where relationships between columns matter; the\ninteractive **data-table** builds on it.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "header",
+          "required": true
+        },
+        {
+          "name": "row",
+          "required": true
+        },
+        {
+          "name": "caption",
+          "required": false
+        }
+      ],
+      "a11y": {
+        "role": "table",
+        "announces": [
+          "row and column headers"
+        ]
+      },
+      "states": [
+        "default",
+        "empty"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "typography",
+        "slot": "header"
+      },
+      {
+        "ref": "badge",
+        "slot": "row",
+        "note": "cell status"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "row",
+        "note": "selection"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "tabs",
+    "title": "Tabs",
+    "layer": "component",
+    "summary": "A set of labeled sections where selecting a tab reveals its associated panel in place.",
+    "tags": [
+      "navigation",
+      "content",
+      "sections",
+      "in-page"
+    ],
+    "traits": [
+      "roving-focus"
+    ],
+    "usedBy": [
+      "dashboard",
+      "settings",
+      "card"
+    ],
+    "related": [
+      "accordion",
+      "toggle-group",
+      "navigation-menu"
+    ],
+    "intent": "Tabs divide related content into peer sections and let users switch between them in\nplace, showing one panel at a time. They organize a moderate amount of content\nwithout navigation or scrolling, keeping the user in the same context while they\nmove between views of the same subject.",
+    "api": {
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "default": "",
+          "description": "Active tab id."
+        },
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "description": "Layout axis."
+        }
+      ],
+      "slots": [
+        {
+          "name": "tab",
+          "required": true
+        },
+        {
+          "name": "panel",
+          "required": true
+        }
+      ],
+      "events": [
+        "onChange"
+      ],
+      "a11y": {
+        "role": "tablist",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "Home",
+          "End"
+        ],
+        "announces": [
+          "selected tab"
+        ]
+      },
+      "states": [
+        "default",
+        "selected",
+        "focus-visible",
+        "disabled"
+      ],
+      "tokens": [
+        "color.action.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "separator",
+        "slot": "tab",
+        "note": "under the tablist"
+      },
+      {
+        "ref": "badge",
+        "slot": "tab",
+        "note": "counts"
+      }
+    ],
+    "implementation": "Tabs.res"
+  },
+  {
+    "id": "toast",
+    "title": "Toast",
+    "layer": "component",
+    "summary": "A brief, self-dismissing message that confirms an action or reports a background event.",
+    "tags": [
+      "feedback",
+      "notification",
+      "transient",
+      "status"
+    ],
+    "traits": [
+      "dismissible"
+    ],
+    "usedBy": [
+      "dashboard",
+      "form",
+      "data-table"
+    ],
+    "related": [
+      "alert",
+      "alert-dialog",
+      "badge"
+    ],
+    "intent": "A toast briefly surfaces a low-friction message — \"Saved\", \"Copied\", \"Upload\nfailed\" — then dismisses itself, confirming an action or reporting a background\nevent without interrupting the user's flow. It's ephemeral and non-blocking, the\nopposite of a dialog.",
+    "api": {
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "info",
+          "description": "Severity."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "5000",
+          "description": "Auto-dismiss delay (ms)."
+        }
+      ],
+      "slots": [
+        {
+          "name": "title",
+          "required": true
+        },
+        {
+          "name": "description",
+          "required": false
+        },
+        {
+          "name": "action",
+          "required": false
+        }
+      ],
+      "events": [
+        "onDismiss"
+      ],
+      "a11y": {
+        "role": "status",
+        "keyboard": [
+          "Escape"
+        ],
+        "announces": [
+          "message"
+        ]
+      },
+      "states": [
+        "entering",
+        "visible",
+        "leaving"
+      ],
+      "tokens": [
+        "color.status.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "action"
+      },
+      {
+        "ref": "progress",
+        "slot": "description",
+        "note": "auto-dismiss timer"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "toolbar",
+    "title": "Toolbar",
+    "layer": "component",
+    "summary": "A grouped row of controls that act on the current view or selection.",
+    "tags": [
+      "actions",
+      "controls",
+      "editor",
+      "grouping"
+    ],
+    "traits": [
+      "roving-focus"
+    ],
+    "usedBy": [
+      "data-table",
+      "dashboard"
+    ],
+    "related": [
+      "button-group",
+      "menubar",
+      "navbar"
+    ],
+    "intent": "A toolbar gathers the controls that act on the current context — a document,\ncanvas, selection, or list — into one consistent strip. It keeps frequently used\nactions visible and within reach, grouped by relationship, so users can operate\nwithout hunting through menus.",
+    "api": {
+      "props": [
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "description": "Layout axis."
+        }
+      ],
+      "slots": [
+        {
+          "name": "control",
+          "required": true
+        },
+        {
+          "name": "separator",
+          "required": false
+        }
+      ],
+      "a11y": {
+        "role": "toolbar",
+        "keyboard": [
+          "ArrowLeft",
+          "ArrowRight",
+          "Home",
+          "End"
+        ],
+        "announces": [
+          "active control"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.md"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "button",
+        "slot": "control"
+      },
+      {
+        "ref": "icon-button",
+        "slot": "control"
+      },
+      {
+        "ref": "toggle",
+        "slot": "control"
+      },
+      {
+        "ref": "toggle-group",
+        "slot": "control"
+      },
+      {
+        "ref": "separator",
+        "slot": "separator"
+      },
+      {
+        "ref": "dropdown-menu",
+        "slot": "control",
+        "note": "overflow"
+      },
+      {
+        "ref": "input",
+        "slot": "control",
+        "note": "inline search"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "tooltip",
+    "title": "Tooltip",
+    "layer": "component",
+    "summary": "A brief text label that appears on hover or focus to clarify an element.",
+    "tags": [
+      "overlay",
+      "hint",
+      "help",
+      "contextual"
+    ],
+    "traits": [
+      "anchored"
+    ],
+    "usedBy": [
+      "button",
+      "navbar",
+      "sidebar",
+      "toggle",
+      "data-table"
+    ],
+    "related": [
+      "hover-card",
+      "popover",
+      "kbd"
+    ],
+    "intent": "A tooltip shows a short, plain-text hint about an element when the user hovers or\nfocuses it — the meaning of an icon button, a truncated label, an extra detail. It\nsupplies supplementary clarification without permanently occupying space, and must\nnever carry essential or interactive content.",
+    "api": {
+      "props": [
+        {
+          "name": "content",
+          "type": "string",
+          "default": "",
+          "description": "The label text."
+        }
+      ],
+      "slots": [
+        {
+          "name": "trigger",
+          "required": true
+        }
+      ],
+      "a11y": {
+        "role": "tooltip",
+        "keyboard": [
+          "Escape"
+        ],
+        "announces": [
+          "label"
+        ]
+      },
+      "states": [
+        "hidden",
+        "visible"
+      ],
+      "tokens": [
+        "color.neutral.*",
+        "radius.sm"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "popover",
+        "slot": "trigger",
+        "note": "positioning"
+      }
+    ],
+    "implementation": "Tooltip.res"
+  },
+  {
+    "id": "cta-section",
+    "title": "CTA Section",
+    "layer": "block",
+    "summary": "A focused section that restates the primary action to drive conversion.",
+    "tags": [
+      "marketing",
+      "landing",
+      "section",
+      "conversion"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "pricing"
+    ],
+    "related": [
+      "hero",
+      "footer"
+    ],
+    "intent": "A CTA section is a focused band, usually near the end of a page, that restates the\none action you want the visitor to take. After they've scrolled the argument, it\ngives momentum a place to land — a clear prompt and a single button (or a short\nlead-capture) — without the distraction of surrounding content.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "headline",
+          "required": true
+        },
+        {
+          "name": "action",
+          "required": true
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.action.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "typography",
+        "slot": "headline"
+      },
+      {
+        "ref": "button",
+        "slot": "action",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "input",
+        "slot": "action",
+        "note": "inline signup"
+      },
+      {
+        "ref": "link",
+        "slot": "action"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "faq",
+    "title": "FAQ",
+    "layer": "block",
+    "summary": "A list of common questions with expandable answers that removes last-mile objections.",
+    "tags": [
+      "marketing",
+      "landing",
+      "content",
+      "support",
+      "disclosure"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "pricing"
+    ],
+    "related": [
+      "accordion",
+      "empty-state"
+    ],
+    "intent": "An FAQ answers the questions that block a decision — pricing details, limits,\nsecurity, cancellation — in one scannable place. By surfacing common objections and\nanswering them plainly, it removes friction late in the funnel and reduces support\nload, letting users self-serve the reassurance they need.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "question",
+          "required": true
+        },
+        {
+          "name": "answer",
+          "required": true
+        }
+      ],
+      "a11y": {
+        "announces": [
+          "expanded"
+        ]
+      },
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "accordion",
+        "slot": "question"
+      },
+      {
+        "ref": "link",
+        "slot": "answer"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "feature-grid",
+    "title": "Feature Grid",
+    "layer": "block",
+    "summary": "A grid of concise, icon-led items that communicate a product's key features or benefits.",
+    "tags": [
+      "marketing",
+      "landing",
+      "section",
+      "features"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page"
+    ],
+    "related": [
+      "card",
+      "list"
+    ],
+    "intent": "A feature grid presents a product's key features or benefits as a scannable set of\nshort, parallel items — each an icon, a title, and a sentence. It lets a visitor\ngrasp the breadth of what's offered at a glance, framed as outcomes for the user\nrather than a raw list of capabilities.",
+    "api": {
+      "props": [
+        {
+          "name": "columns",
+          "type": "number",
+          "default": "3",
+          "description": "Items per row on wide viewports."
+        }
+      ],
+      "slots": [
+        {
+          "name": "feature",
+          "required": true,
+          "description": "Icon + title + description."
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "icon",
+        "slot": "feature"
+      },
+      {
+        "ref": "card",
+        "slot": "feature"
+      },
+      {
+        "ref": "typography",
+        "slot": "feature"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "hero",
+    "title": "Hero",
+    "layer": "block",
+    "summary": "A prominent opening section that states the value proposition and the primary call to action.",
+    "tags": [
+      "marketing",
+      "landing",
+      "section",
+      "conversion"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "pricing"
+    ],
+    "related": [
+      "cta-section",
+      "navbar"
+    ],
+    "intent": "A hero is the first thing a visitor sees: a large opening section that states, in\na few words, what the product is and why it matters, and offers the single most\nimportant next step. It has one job — communicate the value proposition and get\nthe user to act — so everything in it earns its place toward that goal.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "eyebrow",
+          "required": false
+        },
+        {
+          "name": "headline",
+          "required": true
+        },
+        {
+          "name": "subhead",
+          "required": false
+        },
+        {
+          "name": "actions",
+          "required": true
+        },
+        {
+          "name": "media",
+          "required": false
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "typography",
+        "slot": "headline"
+      },
+      {
+        "ref": "badge",
+        "slot": "eyebrow"
+      },
+      {
+        "ref": "button",
+        "slot": "actions",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "link",
+        "slot": "actions"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "pricing-table",
+    "title": "Pricing Table",
+    "layer": "block",
+    "summary": "A side-by-side comparison of plans and their features to help a visitor choose.",
+    "tags": [
+      "marketing",
+      "pricing",
+      "comparison",
+      "conversion"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "pricing"
+    ],
+    "related": [
+      "pricing",
+      "card",
+      "table"
+    ],
+    "intent": "A pricing table lays out plans side by side so a visitor can compare what each\ncosts and includes, then choose. It makes differences legible at a glance,\nhighlights a recommended plan to guide the decision, and answers the practical\nquestions — price, billing period, and what's in each tier — that gate a purchase.",
+    "api": {
+      "props": [
+        {
+          "name": "interval",
+          "type": "enum",
+          "values": [
+            "monthly",
+            "yearly"
+          ],
+          "default": "monthly",
+          "description": "Billing period toggle."
+        }
+      ],
+      "slots": [
+        {
+          "name": "plan",
+          "required": true
+        },
+        {
+          "name": "feature",
+          "required": true
+        }
+      ],
+      "events": [
+        "onSelectPlan"
+      ],
+      "states": [
+        "default",
+        "highlighted"
+      ],
+      "tokens": [
+        "color.action.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "card",
+        "slot": "plan"
+      },
+      {
+        "ref": "badge",
+        "slot": "plan",
+        "note": "most popular"
+      },
+      {
+        "ref": "button",
+        "slot": "plan",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "switch",
+        "slot": "plan",
+        "note": "billing toggle"
+      },
+      {
+        "ref": "toggle-group",
+        "slot": "plan",
+        "note": "billing toggle"
+      },
+      {
+        "ref": "table",
+        "slot": "feature"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "testimonial",
+    "title": "Testimonial",
+    "layer": "block",
+    "summary": "A customer quote with attribution that builds trust through credible social proof.",
+    "tags": [
+      "marketing",
+      "landing",
+      "section",
+      "social-proof",
+      "trust"
+    ],
+    "traits": [],
+    "usedBy": [
+      "landing-page",
+      "pricing"
+    ],
+    "related": [
+      "card",
+      "hero"
+    ],
+    "intent": "A testimonial presents a real customer's words to build trust: a quote paired with\nwho said it. Its power comes from credibility and specificity — a named person,\ntheir role and company, and a concrete outcome — which reassures prospects far\nmore than the brand describing itself.",
+    "api": {
+      "props": [],
+      "slots": [
+        {
+          "name": "quote",
+          "required": true
+        },
+        {
+          "name": "attribution",
+          "required": true
+        },
+        {
+          "name": "avatar",
+          "required": false
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": [
+        "color.neutral.*"
+      ]
+    },
+    "composition": [
+      {
+        "ref": "avatar",
+        "slot": "attribution"
+      },
+      {
+        "ref": "card",
+        "slot": "quote"
+      },
+      {
+        "ref": "badge",
+        "slot": "attribution"
+      },
+      {
+        "ref": "typography",
+        "slot": "quote"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "dashboard",
+    "title": "Dashboard",
+    "layer": "page",
+    "summary": "An at-a-glance overview page that surfaces key metrics, status, and entry points to act.",
+    "tags": [
+      "analytics",
+      "overview",
+      "application",
+      "data"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "settings",
+      "data-table",
+      "chart"
+    ],
+    "intent": "A dashboard gives users an at-a-glance understanding of the state of a system and\nfast paths to act on it. It answers \"how are things, and what needs my attention?\"\nby arranging the most important metrics, trends, and recent activity into a\nscannable overview, with drill-downs to the detail behind each summary.",
+    "api": null,
+    "composition": [
+      {
+        "ref": "navbar",
+        "slot": "chrome"
+      },
+      {
+        "ref": "sidebar",
+        "slot": "chrome"
+      },
+      {
+        "ref": "breadcrumb",
+        "slot": "chrome"
+      },
+      {
+        "ref": "toolbar",
+        "slot": "content"
+      },
+      {
+        "ref": "card",
+        "slot": "content"
+      },
+      {
+        "ref": "stat",
+        "slot": "content"
+      },
+      {
+        "ref": "chart",
+        "slot": "content"
+      },
+      {
+        "ref": "data-table",
+        "slot": "content"
+      },
+      {
+        "ref": "list",
+        "slot": "content"
+      },
+      {
+        "ref": "empty-state",
+        "slot": "content",
+        "note": "no data"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "landing-page",
+    "title": "Landing Page",
+    "layer": "page",
+    "summary": "A standalone marketing page designed to convert a focused audience toward a single primary action.",
+    "tags": [
+      "marketing",
+      "conversion",
+      "page",
+      "funnel"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "dashboard",
+      "pricing",
+      "sign-in"
+    ],
+    "intent": "A landing page exists to move a specific audience toward **one primary action** —\nsign up, request a demo, start a trial, buy. Unlike a general home page, it is\npurpose-built and self-contained: every section builds the argument for that one\naction, and distractions that don't serve it are removed. Success is measured by\nconversion, so clarity and momentum matter more than exhaustiveness.",
+    "api": null,
+    "composition": [
+      {
+        "ref": "navbar",
+        "slot": "chrome"
+      },
+      {
+        "ref": "hero",
+        "slot": "content"
+      },
+      {
+        "ref": "feature-grid",
+        "slot": "content"
+      },
+      {
+        "ref": "testimonial",
+        "slot": "content"
+      },
+      {
+        "ref": "pricing-table",
+        "slot": "content"
+      },
+      {
+        "ref": "faq",
+        "slot": "content"
+      },
+      {
+        "ref": "cta-section",
+        "slot": "content"
+      },
+      {
+        "ref": "footer",
+        "slot": "chrome"
+      },
+      {
+        "ref": "button",
+        "slot": "content"
+      },
+      {
+        "ref": "input",
+        "slot": "content"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "pricing",
+    "title": "Pricing Page",
+    "layer": "page",
+    "summary": "A page that presents plans and their value to help a visitor choose and convert.",
+    "tags": [
+      "marketing",
+      "conversion",
+      "plans",
+      "pricing"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "landing-page",
+      "card"
+    ],
+    "intent": "A pricing page helps a visitor compare plans and choose the right one, then act.\nIt has to make value and differences legible at a glance, reduce the anxiety of\ncommitting, and guide most people toward the intended plan — all while answering\nthe practical questions (billing period, limits, what's included) that block a\ndecision.",
+    "api": null,
+    "composition": [
+      {
+        "ref": "navbar",
+        "slot": "chrome"
+      },
+      {
+        "ref": "card",
+        "slot": "content"
+      },
+      {
+        "ref": "badge",
+        "slot": "content"
+      },
+      {
+        "ref": "switch",
+        "slot": "content",
+        "note": "billing toggle"
+      },
+      {
+        "ref": "toggle-group",
+        "slot": "content",
+        "note": "billing toggle"
+      },
+      {
+        "ref": "button",
+        "slot": "content"
+      },
+      {
+        "ref": "table",
+        "slot": "content"
+      },
+      {
+        "ref": "accordion",
+        "slot": "content"
+      },
+      {
+        "ref": "faq",
+        "slot": "content"
+      },
+      {
+        "ref": "footer",
+        "slot": "chrome"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "settings",
+    "title": "Settings",
+    "layer": "page",
+    "summary": "A page for viewing and changing a user's or system's configuration, organized into sections.",
+    "tags": [
+      "configuration",
+      "preferences",
+      "forms",
+      "account"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "dashboard",
+      "form"
+    ],
+    "intent": "A settings page lets users view and adjust configuration — account, profile,\nnotifications, billing, security — organized so a specific option is easy to find\nand safe to change. It groups many controls into coherent sections and makes the\nstate of each setting, and how changes are saved, unmistakable.",
+    "api": null,
+    "composition": [
+      {
+        "ref": "sidebar",
+        "slot": "chrome"
+      },
+      {
+        "ref": "tabs",
+        "slot": "content"
+      },
+      {
+        "ref": "navigation-menu",
+        "slot": "chrome"
+      },
+      {
+        "ref": "form",
+        "slot": "content"
+      },
+      {
+        "ref": "field",
+        "slot": "content"
+      },
+      {
+        "ref": "input",
+        "slot": "content"
+      },
+      {
+        "ref": "switch",
+        "slot": "content"
+      },
+      {
+        "ref": "select",
+        "slot": "content"
+      },
+      {
+        "ref": "radio-group",
+        "slot": "content"
+      },
+      {
+        "ref": "button",
+        "slot": "content"
+      },
+      {
+        "ref": "separator",
+        "slot": "content"
+      },
+      {
+        "ref": "alert",
+        "slot": "content"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "sign-in",
+    "title": "Sign In",
+    "layer": "page",
+    "summary": "A focused page that authenticates a returning user with minimal friction.",
+    "tags": [
+      "auth",
+      "authentication",
+      "form",
+      "account",
+      "security"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "form",
+      "settings"
+    ],
+    "intent": "A sign-in page authenticates a returning user and gets them into the product with\nas little friction as possible. It is a focused, single-purpose screen: collect\ncredentials (or start a passwordless/again-party flow), handle errors clearly, and\nprovide the escape hatches — reset password, alternate methods, and the path to\nsign up.",
+    "api": null,
+    "composition": [
+      {
+        "ref": "form",
+        "slot": "content"
+      },
+      {
+        "ref": "field",
+        "slot": "content"
+      },
+      {
+        "ref": "input",
+        "slot": "content"
+      },
+      {
+        "ref": "input-otp",
+        "slot": "content"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "content"
+      },
+      {
+        "ref": "button",
+        "slot": "content",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "link",
+        "slot": "content"
+      },
+      {
+        "ref": "alert",
+        "slot": "content"
+      },
+      {
+        "ref": "separator",
+        "slot": "content",
+        "note": "social divider"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "authentication",
+    "title": "Authentication",
+    "layer": "flow",
+    "summary": "A multi-step journey that verifies a user's identity to grant access to the product.",
+    "tags": [
+      "auth",
+      "security",
+      "flow",
+      "account",
+      "journey"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "sign-in",
+      "onboarding",
+      "checkout"
+    ],
+    "intent": "Authentication is the journey that establishes who the user is and lets them in.\nIt spans more than one screen — enter credentials, verify a second factor, recover\na forgotten password, or complete a passwordless step — and its job is to be\nsecure without being hostile: minimal friction for legitimate users, clear\nrecovery paths, and honest, non-leaky handling of failures.",
+    "api": null,
+    "composition": [
+      {
+        "ref": "sign-in",
+        "slot": "step"
+      },
+      {
+        "ref": "form",
+        "slot": "step"
+      },
+      {
+        "ref": "field",
+        "slot": "step"
+      },
+      {
+        "ref": "input",
+        "slot": "step"
+      },
+      {
+        "ref": "input-otp",
+        "slot": "step",
+        "note": "verification"
+      },
+      {
+        "ref": "button",
+        "slot": "step",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "alert",
+        "slot": "step"
+      },
+      {
+        "ref": "link",
+        "slot": "step"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "checkout",
+    "title": "Checkout",
+    "layer": "flow",
+    "summary": "A step-by-step flow that collects the details needed to complete a purchase.",
+    "tags": [
+      "commerce",
+      "payment",
+      "flow",
+      "conversion",
+      "journey"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "pricing",
+      "onboarding"
+    ],
+    "intent": "Checkout is the journey from \"I want this\" to a completed purchase. It collects the\nnecessary details — contact, shipping, and payment — confirms the order, and\nprocesses it, all while protecting a fragile moment: every unnecessary field,\nsurprise cost, or unclear error is a chance to abandon. Its job is to reduce\nfriction and build confidence right up to \"place order.\"",
+    "api": null,
+    "composition": [
+      {
+        "ref": "form",
+        "slot": "step"
+      },
+      {
+        "ref": "field",
+        "slot": "step"
+      },
+      {
+        "ref": "input",
+        "slot": "step"
+      },
+      {
+        "ref": "radio-group",
+        "slot": "step",
+        "note": "shipping/payment"
+      },
+      {
+        "ref": "list",
+        "slot": "step",
+        "note": "order summary"
+      },
+      {
+        "ref": "card",
+        "slot": "step"
+      },
+      {
+        "ref": "button",
+        "slot": "step",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "alert",
+        "slot": "step"
+      },
+      {
+        "ref": "progress",
+        "slot": "chrome",
+        "note": "step indicator"
+      }
+    ],
+    "implementation": null
+  },
+  {
+    "id": "onboarding",
+    "title": "Onboarding",
+    "layer": "flow",
+    "summary": "A guided sequence that gets a new user from first login to first meaningful value.",
+    "tags": [
+      "activation",
+      "flow",
+      "first-run",
+      "journey"
+    ],
+    "traits": [],
+    "usedBy": [],
+    "related": [
+      "authentication",
+      "checkout"
+    ],
+    "intent": "Onboarding carries a brand-new user from their first login to the moment the\nproduct delivers value (\"aha\"). It gathers just enough setup to personalize the\nexperience, teaches the few things needed to start, and removes the blank-slate\nparalysis of an empty account — all while letting motivated users skip ahead. Its\nsuccess metric is activation, not completion for its own sake.",
+    "api": null,
+    "composition": [
+      {
+        "ref": "progress",
+        "slot": "chrome",
+        "note": "step indicator"
+      },
+      {
+        "ref": "form",
+        "slot": "step"
+      },
+      {
+        "ref": "field",
+        "slot": "step"
+      },
+      {
+        "ref": "button",
+        "slot": "step",
+        "props": {
+          "variant": "primary"
+        }
+      },
+      {
+        "ref": "empty-state",
+        "slot": "step"
+      },
+      {
+        "ref": "card",
+        "slot": "step"
+      },
+      {
+        "ref": "dialog",
+        "slot": "step",
+        "note": "welcome"
+      },
+      {
+        "ref": "checkbox",
+        "slot": "step"
+      }
+    ],
+    "implementation": null
+  }
+]
