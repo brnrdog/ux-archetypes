@@ -22,7 +22,10 @@ let matches = (a, q) =>
   a.summary->String.toLowerCase->String.includes(q)
 
 // Global UI state shared across the shell.
-let sidebarOpen = Signal.make(true)
+// Sidebar is an in-flow rail on desktop and a slide-over drawer on mobile;
+// start open only when there's room for the rail.
+let isDesktop: unit => bool = %raw(`() => window.innerWidth >= 1024`)
+let sidebarOpen = Signal.make(isDesktop())
 let spotlightOpen = Signal.make(false)
 
 module LayerBadge = {
@@ -89,7 +92,7 @@ module Composition = {
           each={Prop.static(slots)}
           render={slot => {
             let inSlot = parts->Array.filter(p => p.slot == slot)
-            <div class="rounded-xl border border-neutral-200 bg-surface p-4">
+            <div class="rounded-xl border border-neutral-200 bg-surface p-4 shadow-sm">
               <div class="font-mono text-xs uppercase tracking-wide text-neutral-400">
                 <View.Text> slot </View.Text>
               </div>
@@ -211,8 +214,12 @@ module Sidebar = {
   @jsx.component
   let make = () => {
     let cls = Computed.make(() =>
-      "shrink-0 overflow-hidden border-r border-neutral-200 bg-neutral-50 transition-[width] duration-200 ease-out " ++ (
-        Signal.get(sidebarOpen) ? "w-64" : "w-0"
+      // Mobile: fixed drawer that slides in from the left below the topbar.
+      // Desktop (lg): an in-flow rail that collapses its width.
+      "fixed bottom-0 left-0 top-14 z-40 w-64 shrink-0 overflow-hidden border-r border-neutral-200 bg-neutral-50 transition-transform duration-200 ease-out lg:static lg:top-0 lg:transition-[width] " ++ (
+        Signal.get(sidebarOpen)
+          ? "translate-x-0 lg:w-64"
+          : "-translate-x-full lg:w-0 lg:translate-x-0"
       )
     )
     <aside class={Prop.signal(cls)}>
@@ -256,11 +263,11 @@ module Topbar = {
       </Router.Link>
       <div class="flex flex-1 justify-center">
         <button
-          class="flex w-full max-w-sm items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:bg-neutral-100"
+          class="flex w-full min-w-0 max-w-sm items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:bg-neutral-100"
           onClick={_ => Signal.set(spotlightOpen, true)}>
           <span> <View.Text> "🔍" </View.Text> </span>
-          <span class="flex-1 text-left"> <View.Text> "Search archetypes…" </View.Text> </span>
-          <Kbd> <View.Text> "⌘K" </View.Text> </Kbd>
+          <span class="flex-1 truncate text-left"> <View.Text> "Search archetypes…" </View.Text> </span>
+          <span class="hidden sm:block"> <Kbd> <View.Text> "⌘K" </View.Text> </Kbd> </span>
         </button>
       </div>
       <Link
@@ -406,9 +413,9 @@ module Home = {
       }
     <div>
       <div class="hero-wash border-b border-neutral-200">
-        <div class="mx-auto max-w-4xl px-8 pb-12 pt-16">
+        <div class="mx-auto max-w-4xl px-5 pb-12 pt-10 sm:px-8 sm:pt-16">
           <Badge variant=#outline> <View.Text> "Monochrome · Xote · ReScript" </View.Text> </Badge>
-          <h1 class="mt-6 text-5xl font-bold leading-[1.05] tracking-tight text-neutral-900">
+          <h1 class="mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-neutral-900 sm:text-5xl">
             <View.Text> "User Experience" </View.Text>
             <br />
             <span class="text-neutral-400"> <View.Text> "Archetypes" </View.Text> </span>
@@ -428,7 +435,7 @@ module Home = {
           </div>
         </div>
       </div>
-      <div class="mx-auto max-w-4xl px-8 py-12">
+      <div class="mx-auto max-w-4xl px-5 sm:px-8 py-12">
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-5">
           {stat("element", "Elements")}
           {stat("component", "Components")}
@@ -487,7 +494,7 @@ module Guide = {
 
   @jsx.component
   let make = () =>
-    <div class="mx-auto max-w-3xl px-8 py-14">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 py-14">
       <Badge variant=#outline> <View.Text> "Get started" </View.Text> </Badge>
       <h1 class="mt-5 text-4xl font-bold tracking-tight text-neutral-900">
         <View.Text> "UX Archetypes" </View.Text>
@@ -602,7 +609,7 @@ module Preview = {
   let make = (~id) =>
     switch Examples.get(id) {
     | Some(node) =>
-      <div class="preview-surface flex min-h-48 items-center justify-center rounded-2xl border border-neutral-200 p-10">
+      <div class="preview-surface flex min-h-48 items-center justify-center rounded-2xl border border-neutral-200 p-10 shadow-sm">
         {node}
       </div>
     | None =>
@@ -618,7 +625,7 @@ module Preview = {
 module NotFound = {
   @jsx.component
   let make = () =>
-    <div class="mx-auto max-w-3xl px-8 py-16">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 py-16">
       <h1 class="text-2xl font-bold text-neutral-900"> <View.Text> "Archetype not found" </View.Text> </h1>
       <Router.Link to="/" class="mt-4 inline-block text-sm underline underline-offset-4">
         <View.Text> "← Back to overview" </View.Text>
@@ -723,7 +730,7 @@ module Detail = {
     switch byId(id) {
     | None => <NotFound />
     | Some(a) =>
-      <div class="mx-auto max-w-3xl px-8 py-12">
+      <div class="mx-auto max-w-3xl px-5 sm:px-8 py-12">
         <nav class="flex items-center gap-2 text-xs text-neutral-400">
           <Router.Link to="/" class="hover:text-neutral-700"> <View.Text> "Overview" </View.Text> </Router.Link>
           <span> <View.Text> "/" </View.Text> </span>
@@ -793,7 +800,7 @@ module TraitDetail = {
     switch traitById(id) {
     | None => <NotFound />
     | Some(t) =>
-      <div class="mx-auto max-w-3xl px-8 py-12">
+      <div class="mx-auto max-w-3xl px-5 sm:px-8 py-12">
         <nav class="flex items-center gap-2 text-xs text-neutral-400">
           <Router.Link to="/" class="hover:text-neutral-700"> <View.Text> "Overview" </View.Text> </Router.Link>
           <span> <View.Text> "/" </View.Text> </span>
@@ -865,13 +872,13 @@ module Tokens = {
         Signal.get(Settings.overridesVersion)->ignore
         Settings.currentValue(t)
       })
-      <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-surface p-3">
+      <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-surface p-3 shadow-sm transition-colors hover:border-neutral-300">
         {t.sample == "color"
           ? <input
               type_="color"
               value={Prop.signal(live)}
               onInput={e => Settings.applyToken(t, Ui.inputValue(e))}
-              class="size-10 shrink-0 cursor-pointer rounded-md border border-neutral-200 bg-transparent"
+              class="size-11 shrink-0 cursor-pointer rounded-lg border border-neutral-200 bg-transparent"
             />
           : <Sample t />}
         <div class="min-w-0 flex-1">
@@ -897,7 +904,7 @@ module Tokens = {
 
   @jsx.component
   let make = () =>
-    <div class="mx-auto max-w-3xl px-8 py-12">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 py-12">
       <nav class="flex items-center gap-2 text-xs text-neutral-400">
         <Router.Link to="/" class="hover:text-neutral-700"> <View.Text> "Overview" </View.Text> </Router.Link>
         <span> <View.Text> "/" </View.Text> </span>
@@ -941,6 +948,14 @@ let make = () => {
     Settings.syncColorScheme()
     None
   })
+  // On mobile, close the drawer whenever the route changes.
+  Effect.run(() => {
+    Signal.get(Router.location())->ignore
+    if !isDesktop() {
+      Signal.set(sidebarOpen, false)
+    }
+    None
+  })
   let routes = Router.routes([
     {pattern: "/", render: _ => <Home />},
     {pattern: "/guide", render: _ => <Guide />},
@@ -952,6 +967,13 @@ let make = () => {
     <Topbar />
     <div class="flex min-h-0 flex-1">
       <Sidebar />
+      // Dim the page behind the mobile drawer.
+      <View.Show when_={Prop.signal(sidebarOpen)}>
+        <div
+          class="fixed inset-0 top-14 z-30 bg-neutral-900/40 lg:hidden"
+          onClick={_ => Signal.set(sidebarOpen, false)}
+        />
+      </View.Show>
       <main class="min-w-0 flex-1 overflow-y-auto"> {routes} </main>
     </div>
     <Spotlight />

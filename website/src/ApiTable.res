@@ -22,7 +22,7 @@ let code = (v: string) =>
 
 @jsx.component
 let make = (~api: ArchetypesData.apiContract) =>
-  <section class="mt-10 rounded-2xl border border-neutral-200 bg-surface p-6">
+  <section class="mt-10 rounded-2xl border border-neutral-200 bg-surface p-6 shadow-sm">
     <div class="flex items-center gap-2">
       <h2 class="text-lg font-semibold tracking-tight text-neutral-900">
         <View.Text> "API" </View.Text>
@@ -92,7 +92,7 @@ let make = (~api: ArchetypesData.apiContract) =>
               <li class="flex flex-wrap items-baseline gap-2">
                 {code(sl.name)}
                 <View.Show when_={Prop.static(sl.required)}>
-                  <span class="text-xs font-medium text-neutral-500">
+                  <span class="rounded-full border border-neutral-300 px-1.5 text-[10px] font-semibold uppercase tracking-wide text-neutral-500">
                     <View.Text> "required" </View.Text>
                   </span>
                 </View.Show>

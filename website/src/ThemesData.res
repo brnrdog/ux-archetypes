@@ -74,6 +74,13 @@ let all: array<theme> = [
     tokens: [("color.neutral.50", "#fff1f2"), ("color.neutral.100", "#ffe4e6"), ("color.neutral.200", "#fecdd3"), ("color.neutral.700", "#be123c"), ("color.neutral.800", "#9f1239"), ("color.neutral.900", "#881337"), ("color.neutral.950", "#4c0519"), ("color.action.default", "#e11d48"), ("color.action.hover", "#be123c"), ("color.action.onAction", "#ffffff"), ("color.status.info", "#0891b2"), ("color.status.success", "#65a30d"), ("color.status.warning", "#d97706"), ("color.status.danger", "#dc2626"), ("radius.sm", "0.5rem"), ("radius.md", "0.75rem"), ("radius.lg", "1rem"), ("radius.xl", "1.5rem"), ("radius.2xl", "2rem"), ("radius.3xl", "2.5rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
     darkTokens: [("color.neutral.0", "#1c0a10"), ("color.neutral.50", "#2a0f18"), ("color.neutral.100", "#381420"), ("color.neutral.200", "#4f1f30")],
   },
+  {
+    id: "candy",
+    label: "Candy",
+    swatches: ["#db2777", "#2563eb", "#16a34a", "#d97706", "#dc2626"],
+    tokens: [("color.neutral.50", "#fdf2f8"), ("color.neutral.100", "#fce7f3"), ("color.neutral.200", "#fbcfe8"), ("color.neutral.700", "#be185d"), ("color.neutral.800", "#9d174d"), ("color.neutral.900", "#831843"), ("color.neutral.950", "#500724"), ("color.action.default", "#db2777"), ("color.action.hover", "#be185d"), ("color.action.onAction", "#ffffff"), ("color.status.info", "#2563eb"), ("color.status.success", "#16a34a"), ("color.status.warning", "#d97706"), ("color.status.danger", "#dc2626"), ("radius.sm", "0.625rem"), ("radius.md", "0.875rem"), ("radius.lg", "1.125rem"), ("radius.xl", "1.5rem"), ("radius.2xl", "2rem"), ("radius.3xl", "2.5rem"), ("font.family.sans", "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif")],
+    darkTokens: [("color.neutral.0", "#1a0a12"), ("color.neutral.50", "#260f1b"), ("color.neutral.100", "#331425"), ("color.neutral.200", "#4a1f34")],
+  },
 ]
 
 // Orthogonal light/dark mode overlays, applied on top of any theme.
