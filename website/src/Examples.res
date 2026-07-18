@@ -159,19 +159,19 @@ module SpinnerEx = {
     </div>
 }
 
-module Skeleton = {
+module SkeletonEx = {
   @jsx.component
   let make = () =>
     <div class="max-w-sm space-y-3">
       <div class="flex items-center gap-3">
-        <div class="size-10 animate-pulse rounded-full bg-neutral-200" />
+        <Skeleton shape=#circle extraClass="size-10" />
         <div class="flex-1 space-y-2">
-          <div class="h-3 w-1/2 animate-pulse rounded bg-neutral-200" />
-          <div class="h-3 w-1/3 animate-pulse rounded bg-neutral-200" />
+          <Skeleton extraClass="w-1/2" />
+          <Skeleton extraClass="w-1/3" />
         </div>
       </div>
-      <div class="h-3 w-full animate-pulse rounded bg-neutral-200" />
-      <div class="h-3 w-5/6 animate-pulse rounded bg-neutral-200" />
+      <Skeleton extraClass="w-full" />
+      <Skeleton extraClass="w-5/6" />
     </div>
 }
 
@@ -233,7 +233,7 @@ module Typography = {
     </div>
 }
 
-module RadioGroup = {
+module RadioGroupEx = {
   @jsx.component
   let make = () => {
     let value = Signal.make("express")
@@ -242,143 +242,68 @@ module RadioGroup = {
       ("express", "Express", "1–2 business days"),
       ("overnight", "Overnight", "Next business day"),
     ]
-    <fieldset class="max-w-sm space-y-2">
-      <legend class="mb-1 text-sm font-medium text-neutral-800"> <View.Text> "Shipping speed" </View.Text> </legend>
-      <View.For
-        each={Prop.static(opts)}
-        render={item => {
-          let (id, title, desc) = item
-          let rowCls = Computed.make(() =>
-            "flex cursor-pointer items-start gap-3 rounded-md border p-3 transition-colors " ++ (
-              Signal.get(value) == id
-                ? "border-neutral-900 bg-neutral-50"
-                : "border-neutral-200 hover:border-neutral-300"
-            )
-          )
-          let ring = Computed.make(() =>
-            "mt-0.5 flex size-4 items-center justify-center rounded-full border " ++ (
-              Signal.get(value) == id ? "border-neutral-900" : "border-neutral-300"
-            )
-          )
-          let dot = Computed.make(() =>
-            "size-2 rounded-full " ++ (Signal.get(value) == id ? "bg-neutral-900" : "bg-transparent")
-          )
-          <label class={Prop.signal(rowCls)} onClick={_ => Signal.set(value, id)}>
-            <span class={Prop.signal(ring)}> <span class={Prop.signal(dot)} /> </span>
-            <span>
-              <span class="block text-sm font-medium text-neutral-800"> <View.Text> {title} </View.Text> </span>
-              <span class="block text-xs text-neutral-500"> <View.Text> {desc} </View.Text> </span>
-            </span>
-          </label>
-        }}
-      />
-    </fieldset>
+    <RadioGroup value options=opts legend="Shipping speed" extraClass="max-w-sm" />
   }
 }
 
-module Toggle = {
+module ToggleEx = {
   @jsx.component
   let make = () => {
     let on = Signal.make(true)
-    let cls = Computed.make(() =>
-      "inline-flex size-10 items-center justify-center rounded-md text-sm font-semibold transition-colors " ++ (
-        Signal.get(on)
-          ? "bg-neutral-900 text-neutral-0"
-          : "border border-neutral-300 bg-surface text-neutral-700 hover:bg-neutral-100"
-      )
-    )
-    <button class={Prop.signal(cls)} onClick={_ => Signal.update(on, v => !v)}>
+    <Toggle pressed=on>
       <span class="italic"> <View.Text> "B" </View.Text> </span>
-    </button>
+    </Toggle>
   }
 }
 
-module ToggleGroup = {
+module ToggleGroupEx = {
   @jsx.component
   let make = () => {
     let value = Signal.make("center")
     let opts = [("left", "Left"), ("center", "Center"), ("right", "Right")]
-    <div class="inline-flex overflow-hidden rounded-md border border-neutral-300">
-      <View.For
-        each={Prop.static(opts)}
-        render={item => {
-          let (id, label) = item
-          let cls = Computed.make(() =>
-            "border-l border-neutral-300 px-4 py-2 text-sm transition-colors first:border-l-0 " ++ (
-              Signal.get(value) == id
-                ? "bg-neutral-900 text-neutral-0"
-                : "bg-surface text-neutral-700 hover:bg-neutral-100"
-            )
-          )
-          <button class={Prop.signal(cls)} onClick={_ => Signal.set(value, id)}>
-            <View.Text> {label} </View.Text>
-          </button>
-        }}
-      />
-    </div>
+    <ToggleGroup value options=opts />
   }
 }
 
-module AspectRatio = {
+module AspectRatioEx = {
   @jsx.component
   let make = () => {
-    let box = "flex items-center justify-center overflow-hidden rounded-lg bg-neutral-200 text-sm font-medium text-neutral-500"
+    let box = "flex h-full items-center justify-center text-sm font-medium text-neutral-500"
     <div class="flex flex-wrap items-start gap-4">
       <div class="w-56">
-        <div class={box ++ " aspect-video"}> <View.Text> "16 : 9" </View.Text> </div>
+        <AspectRatio ratio="16/9" extraClass="rounded-lg bg-neutral-200">
+          <div class={box}> <View.Text> "16 : 9" </View.Text> </div>
+        </AspectRatio>
       </div>
       <div class="w-32">
-        <div class={box ++ " aspect-square"}> <View.Text> "1 : 1" </View.Text> </div>
+        <AspectRatio ratio="1/1" extraClass="rounded-lg bg-neutral-200">
+          <div class={box}> <View.Text> "1 : 1" </View.Text> </div>
+        </AspectRatio>
       </div>
     </div>
   }
 }
 
-module ScrollArea = {
+module ScrollAreaEx = {
   @jsx.component
   let make = () => {
     let rows = Array.fromInitializer(~length=24, i => "Row " ++ Int.toString(i + 1))
-    <div class="h-44 w-64 overflow-y-auto rounded-md border border-neutral-200">
+    <ScrollArea extraClass="h-44 w-64 rounded-md border border-neutral-200">
       <ul class="divide-y divide-neutral-100 text-sm">
         <View.For
           each={Prop.static(rows)}
           render={r => <li class="px-3 py-2 text-neutral-700"> <View.Text> {r} </View.Text> </li>}
         />
       </ul>
-    </div>
+    </ScrollArea>
   }
 }
 
-module InputOtp = {
+module InputOtpEx = {
   @jsx.component
   let make = () => {
     let code = Signal.make("")
-    let slots = Array.fromInitializer(~length=6, i => i)
-    <label class="relative inline-flex gap-2">
-      <input
-        class="absolute inset-0 z-10 cursor-pointer opacity-0"
-        type_="text"
-        maxLength=6
-        onInput={e => {
-          let digits =
-            Ui.inputValue(e)->String.replaceRegExp(%re("/[^0-9]/g"), "")->String.slice(~start=0, ~end=6)
-          Signal.set(code, digits)
-        }}
-      />
-      <View.For
-        each={Prop.static(slots)}
-        render={i => {
-          let cls = Computed.make(() => {
-            let len = Signal.get(code)->String.length
-            "flex size-11 items-center justify-center rounded-md border text-lg font-semibold text-neutral-900 " ++ (
-              len == i ? "border-neutral-900 ring-1 ring-neutral-900" : "border-neutral-300"
-            )
-          })
-          let ch = Computed.make(() => Signal.get(code)->String.charAt(i))
-          <span class={Prop.signal(cls)}> <View.Text> {ch} </View.Text> </span>
-        }}
-      />
-    </label>
+    <InputOtp value=code />
   }
 }
 
@@ -1973,17 +1898,17 @@ let get = (id: string): option<View.node> =>
   | "slider" => Some(<SliderEx />)
   | "progress" => Some(<ProgressEx />)
   | "spinner" => Some(<SpinnerEx />)
-  | "skeleton" => Some(<Skeleton />)
+  | "skeleton" => Some(<SkeletonEx />)
   | "separator" => Some(<SeparatorEx />)
   | "label" => Some(<Label />)
   | "kbd" => Some(<KbdEx />)
   | "typography" => Some(<Typography />)
-  | "radio-group" => Some(<RadioGroup />)
-  | "toggle" => Some(<Toggle />)
-  | "toggle-group" => Some(<ToggleGroup />)
-  | "aspect-ratio" => Some(<AspectRatio />)
-  | "scroll-area" => Some(<ScrollArea />)
-  | "input-otp" => Some(<InputOtp />)
+  | "radio-group" => Some(<RadioGroupEx />)
+  | "toggle" => Some(<ToggleEx />)
+  | "toggle-group" => Some(<ToggleGroupEx />)
+  | "aspect-ratio" => Some(<AspectRatioEx />)
+  | "scroll-area" => Some(<ScrollAreaEx />)
+  | "input-otp" => Some(<InputOtpEx />)
   | "card" => Some(<Card />)
   | "alert" => Some(<AlertEx />)
   | "tabs" => Some(<TabsEx />)
