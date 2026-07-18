@@ -237,6 +237,7 @@ module Sidebar = {
           <div class="mb-4 space-y-0.5">
             {link("/guide", "Get Started")}
             {link("/showcase", "Examples")}
+            {link("/kitchen-sink", "Kitchen Sink")}
             {link("/tokens", "Design Tokens")}
           </div>
         }
@@ -432,6 +433,9 @@ module Home = {
             </Router.Link>
             <Router.Link to="/tokens">
               <Button variant=#secondary size=#lg> <View.Text> "Design tokens" </View.Text> </Button>
+            </Router.Link>
+            <Router.Link to="/kitchen-sink">
+              <Button variant=#ghost size=#lg> <View.Text> "Kitchen sink" </View.Text> </Button>
             </Router.Link>
           </div>
         </div>
@@ -939,6 +943,59 @@ module Tokens = {
     </div>
 }
 
+// A single-page contact sheet: every element and component rendered live in a
+// masonry mosaic. Each tile frames the spec's real example and links to its
+// full detail page. Purely a gallery view — the examples stay interactive.
+module KitchenSink = {
+  module Tile = {
+    @jsx.component
+    let make = (~a: spec) =>
+      <div class={Ui.card ++ " mb-4 break-inside-avoid overflow-hidden transition-colors hover:border-neutral-300"}>
+        <div class="preview-surface flex max-h-72 min-h-36 items-center justify-center overflow-hidden p-6">
+          {switch Examples.get(a.id) {
+          | Some(node) => node
+          | None =>
+            <span class="text-xs text-neutral-400"> <View.Text> "Spec only" </View.Text> </span>
+          }}
+        </div>
+        <div class="flex items-center justify-between gap-2 border-t border-neutral-200 bg-surface px-3 py-2">
+          <Router.Link
+            to={"/a/" ++ a.id}
+            class="min-w-0 flex-1 truncate text-sm font-medium text-neutral-800 underline-offset-4 hover:text-neutral-900 hover:underline">
+            <View.Text> {a.title} </View.Text>
+          </Router.Link>
+          <span class="shrink-0"> <LayerBadge layer={a.layer} /> </span>
+        </div>
+      </div>
+  }
+
+  @jsx.component
+  let make = () => {
+    // Elements first, then components — the two layers the library covers.
+    let items = Array.concat(inLayer("element"), inLayer("component"))
+    let count = layer => inLayer(layer)->Array.length->Int.toString
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-12">
+      <nav class="flex items-center gap-2 text-xs text-neutral-400">
+        <Router.Link to="/" class="hover:text-neutral-700"> <View.Text> "Overview" </View.Text> </Router.Link>
+        <span> <View.Text> "/" </View.Text> </span>
+        <span class="text-neutral-700"> <View.Text> "Kitchen Sink" </View.Text> </span>
+      </nav>
+      <div class="mt-4 flex flex-wrap items-end justify-between gap-3">
+        <h1 class="text-3xl font-bold tracking-tight text-neutral-900"> <View.Text> "Kitchen Sink" </View.Text> </h1>
+        <span class="text-sm tabular-nums text-neutral-500">
+          <View.Text> {count("element") ++ " elements · " ++ count("component") ++ " components"} </View.Text>
+        </span>
+      </div>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-neutral-600">
+        <View.Text> "Every element and component rendered live on one page. Tiles stay interactive — click a title to open its full spec and contract." </View.Text>
+      </p>
+      <div class="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 2xl:columns-4">
+        <View.For each={Prop.static(items)} by={a => a.id} render={a => <Tile a />} />
+      </div>
+    </div>
+  }
+}
+
 @jsx.component
 let make = () => {
   // Global ⌘K opens the spotlight search.
@@ -961,6 +1018,7 @@ let make = () => {
     {pattern: "/", render: _ => <Home />},
     {pattern: "/guide", render: _ => <Guide />},
     {pattern: "/showcase", render: _ => <Showcase />},
+    {pattern: "/kitchen-sink", render: _ => <KitchenSink />},
     {pattern: "/tokens", render: _ => <Tokens />},
     {pattern: "/a/:id", render: params => <Detail id={params->Dict.get("id")->Option.getOr("")} />},
     {pattern: "/t/:id", render: params => <TraitDetail id={params->Dict.get("id")->Option.getOr("")} />},
