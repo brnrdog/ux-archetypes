@@ -3,7 +3,7 @@
 // token-driven (semantic utilities — bg-surface, text-ink, bg-action…), so
 // switching the theme from the top bar re-skins every mock live.
 
-// A chip that links to an spec's detail page — names the parts a mock is
+// A chip that links to a spec's detail page — names the parts a mock is
 // built from.
 module Chip = {
   @jsx.component

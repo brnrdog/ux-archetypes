@@ -4,9 +4,22 @@
   "description": "Accessible UI components for Xote/ReScript that implement the Xpecs contracts. Styled against @xpecs/tokens; prop types are generated from the spec API contracts, so the implementation can't drift from the spec.",
   "license": "MIT",
   "author": "brnrdog",
-  "keywords": ["rescript", "xote", "components", "ui", "design-system", "ux-archetypes", "accessibility"],
+  "keywords": [
+    "rescript",
+    "xote",
+    "components",
+    "ui",
+    "design-system",
+    "ux-archetypes",
+    "accessibility"
+  ],
   "type": "module",
-  "files": ["src", "lib/ocaml", "rescript.json", "README.md"],
+  "files": [
+    "src",
+    "lib/ocaml",
+    "rescript.json",
+    "README.md"
+  ],
   "scripts": {
     "contracts": "node scripts/generate-contracts.mjs",
     "build": "npm run contracts && rescript build",
@@ -25,5 +38,8 @@
     "type": "git",
     "url": "https://github.com/brnrdog/ux-archetypes",
     "directory": "packages/xote"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

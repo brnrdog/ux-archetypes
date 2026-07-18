@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Only one release run at a time.
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write # npm provenance
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: npm ci
+
+      # Opens/updates a "Version Packages" PR when changesets are pending;
+      # when that PR is merged (no changesets left), runs `npm run release`
+      # to build and publish the changed packages to npm.
+      - name: Create Release PR or publish
+        uses: changesets/action@v1
+        with:
+          version: npm run version
+          publish: npm run release
+          commit: "chore: version packages"
+          title: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

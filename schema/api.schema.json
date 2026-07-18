@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/brnrdog/ux-archetypes/schema/api.schema.json",
   "title": "UI Spec API contract",
-  "description": "Machine-readable interface contract embedded as a `json` fenced block under the `## API` heading of an spec document. Skin-agnostic: it names the axes of variation, structural slots, events, accessibility expectations, and the design-token roles the spec consumes. Implementations are validated against it.",
+  "description": "Machine-readable interface contract embedded as a `json` fenced block under the `## API` heading of a spec document. Skin-agnostic: it names the axes of variation, structural slots, events, accessibility expectations, and the design-token roles the spec consumes. Implementations are validated against it.",
   "type": "object",
   "additionalProperties": false,
   "properties": {

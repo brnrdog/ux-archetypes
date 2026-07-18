@@ -1,6 +1,6 @@
 // Generates src/ResponsiveData.res from the framework's responsive-pattern
 // vocabulary (../../responsive/patterns.json) so the website can render human
-// labels/descriptions for the pattern ids an spec's contract references.
+// labels/descriptions for the pattern ids a spec's contract references.
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";

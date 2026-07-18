@@ -1,5 +1,5 @@
 // App shell: a topbar with spotlight search (⌘K), a collapsible sidebar of every
-// spec, and a router that renders the overview or an spec detail page.
+// spec, and a router that renders the overview or a spec detail page.
 
 open SpecsData
 
@@ -533,7 +533,7 @@ module Guide = {
         </div>
       </Section>
 
-      <Section title="What's in an spec">
+      <Section title="What's in a spec">
         <p>
           <View.Text> "Open " </View.Text>
           <Router.Link to="/a/button" class="text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900"> <View.Text> "Button" </View.Text> </Router.Link>

@@ -4,12 +4,17 @@
   "description": "A technology-agnostic collection of User Experience Specs: reusable definitions of UI patterns for humans and AI agents, spanning elements, components, blocks, pages, and flows.",
   "workspaces": [
     "packages/*",
+    "skill",
     "website"
   ],
   "scripts": {
     "index": "node scripts/generate-index.mjs",
     "skill": "node scripts/generate-skill.mjs",
-    "build:tokens": "npm run build --workspace @xpecs/tokens"
+    "build:tokens": "npm run build --workspace @xpecs/tokens",
+    "build:packages": "npm run build --workspace @xpecs/tokens && npm run build --workspace @xpecs/xote && npm run build --workspace @xpecs/skill",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "npm run build:packages && changeset publish"
   },
   "license": "MIT",
   "author": "brnrdog",
@@ -26,10 +31,10 @@
   "files": [
     "specs",
     "traits",
+    "responsive",
     "templates",
     "schema",
     "tokens",
-    "skill",
     "INDEX.md",
     "CHANGELOG.md",
     "VERSION",
@@ -38,5 +43,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/brnrdog/ux-archetypes"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.1"
   }
 }

@@ -57,7 +57,7 @@ for (const { id, layer, raw } of records) {
   for (const p of parts) {
     checkedRefs++;
     if (!ids.has(p.ref)) {
-      console.log(`✗ ${id}: composition ref \`${p.ref}\` does not resolve to an spec`);
+      console.log(`✗ ${id}: composition ref \`${p.ref}\` does not resolve to a spec`);
       failures++;
     }
     checkedSlots++;

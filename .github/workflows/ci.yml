@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # Build the publishable packages (tokens → xote → skill).
+      - name: Build packages
+        run: npm run build:packages
+
+      # Build the website, which runs every conformance gate (npm run checks).
+      - name: Build website + run gates
+        run: npm run build --workspace xpecs-website

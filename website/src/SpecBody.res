@@ -1,4 +1,4 @@
-// Renders an spec's full spec. The spec is pre-rendered to HTML at build
+// Renders a spec's full spec. The spec is pre-rendered to HTML at build
 // time (scripts/generate-registry.mjs) from the markdown source, so here we
 // inject it into a scoped `.ux-prose` container after the node mounts.
 let setHtmlById: (string, string) => unit = %raw(`(id, html) => setTimeout(() => { const el = document.getElementById(id); if (el) el.innerHTML = html; }, 0)`)

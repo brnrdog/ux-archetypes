@@ -19,13 +19,13 @@
     "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
     "keys": {
       "type": "array",
-      "description": "Keyboard keys an spec must support to legitimately claim this trait. Checked against each spec's API a11y.keyboard.",
+      "description": "Keyboard keys a spec must support to legitimately claim this trait. Checked against each spec's API a11y.keyboard.",
       "items": { "type": "string" }
     },
     "match": {
       "type": "string",
       "enum": ["all", "any"],
-      "description": "Whether an spec must declare all of `keys` or at least one."
+      "description": "Whether a spec must declare all of `keys` or at least one."
     }
   }
 }

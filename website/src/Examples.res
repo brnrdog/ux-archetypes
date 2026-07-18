@@ -1,5 +1,5 @@
 // Live Xote implementations of the specs. Each example is a small,
-// self-contained component. `get` maps an spec id to its example node
+// self-contained component. `get` maps a spec id to its example node
 // (returning None when only the written spec exists yet).
 
 module ButtonEx = {
@@ -472,7 +472,7 @@ module AccordionEx = {
   let make = () => {
     let value = Signal.make(["what"])
     let items = [
-      ("what", "What is an spec?", "A technology-agnostic definition of a UI pattern, described in words."),
+      ("what", "What is a spec?", "A technology-agnostic definition of a UI pattern, described in words."),
       ("framework", "Is it tied to a framework?", "No. Each spec maps onto any stack — this site happens to use Xote."),
       ("contribute", "Can I contribute?", "Yes. Copy the template, fill every section, and open a pull request."),
     ]

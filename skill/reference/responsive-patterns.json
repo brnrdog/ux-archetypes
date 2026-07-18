@@ -1,5 +1,5 @@
 {
-  "$description": "The canonical vocabulary of responsive reflow patterns — the ways an spec restructures as available width changes. Spec API contracts reference a pattern id in `responsive.reflow[].pattern` instead of re-describing the behavior in prose, the same way behaviors are captured as traits. Breakpoints where a pattern kicks in are referenced by id from tokens.json `breakpoint.*`. Consumed by the website, the conformance gate, and the Agent Skill.",
+  "$description": "The canonical vocabulary of responsive reflow patterns — the ways a spec restructures as available width changes. Spec API contracts reference a pattern id in `responsive.reflow[].pattern` instead of re-describing the behavior in prose, the same way behaviors are captured as traits. Breakpoints where a pattern kicks in are referenced by id from tokens.json `breakpoint.*`. Consumed by the website, the conformance gate, and the Agent Skill.",
   "patterns": {
     "fluid": {
       "label": "Fluid",

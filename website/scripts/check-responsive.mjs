@@ -1,5 +1,5 @@
 // Validates the responsive contract on every implementable spec:
-//   • an spec that carries an `## API` contract must declare `responsive`;
+//   • a spec that carries an `## API` contract must declare `responsive`;
 //   • each `reflow[].pattern` must be a known id in responsive/patterns.json;
 //   • each `reflow[].at`, when present, must be a breakpoint id in tokens.json.
 // Exits non-zero on any violation, so responsiveness can't drift from the

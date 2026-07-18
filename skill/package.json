@@ -1,0 +1,34 @@
+{
+  "name": "@xpecs/skill",
+  "version": "0.1.0",
+  "description": "The Xpecs Agent Skill — UI specs, traits, design tokens, and the responsive vocabulary compiled into a reference an AI coding agent loads to implement UI to the contracts.",
+  "license": "MIT",
+  "author": "brnrdog",
+  "keywords": [
+    "ai",
+    "agent",
+    "skill",
+    "claude",
+    "ux",
+    "specs",
+    "ui",
+    "design-system",
+    "design-tokens"
+  ],
+  "files": [
+    "SKILL.md",
+    "reference"
+  ],
+  "scripts": {
+    "build": "node ../scripts/generate-skill.mjs",
+    "prepack": "node ../scripts/generate-skill.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brnrdog/ux-archetypes",
+    "directory": "skill"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

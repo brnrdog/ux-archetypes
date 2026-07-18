@@ -1,4 +1,4 @@
-// Renders an spec's machine-readable `## API` contract: the prop table,
+// Renders a spec's machine-readable `## API` contract: the prop table,
 // slots, accessibility expectations, states, and token roles. The same contract
 // drives the generated prop types (Contracts.res) and the conformance check, so
 // what you read here is provably what the implementation exposes.

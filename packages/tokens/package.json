@@ -4,10 +4,21 @@
   "description": "Design tokens for Xpecs — CSS custom properties, a Tailwind v4 preset, theme overlays, and a typed JS export. Generated from the framework's W3C DTCG tokens.",
   "license": "MIT",
   "author": "brnrdog",
-  "keywords": ["design-tokens", "css-variables", "tailwind", "theme", "dtcg", "ux-archetypes"],
+  "keywords": [
+    "design-tokens",
+    "css-variables",
+    "tailwind",
+    "theme",
+    "dtcg",
+    "ux-archetypes"
+  ],
   "type": "module",
-  "sideEffects": ["*.css"],
-  "files": ["dist"],
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/tokens.d.ts",
@@ -27,5 +38,8 @@
     "type": "git",
     "url": "https://github.com/brnrdog/ux-archetypes",
     "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

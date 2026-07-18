@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/brnrdog/ux-archetypes/schema/spec.schema.json",
   "title": "UI Spec metadata",
-  "description": "Schema for the YAML frontmatter metadata block of an spec document.",
+  "description": "Schema for the YAML frontmatter metadata block of a spec document.",
   "type": "object",
   "required": ["id", "title", "layer", "version", "status", "summary", "since", "updated"],
   "additionalProperties": false,
