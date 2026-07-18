@@ -48,20 +48,14 @@ module InputEx = {
   }
 }
 
-module Textarea = {
+module TextareaEx = {
   @jsx.component
   let make = () => {
     let value = Signal.make("")
     let count = Computed.make(() => Signal.get(value)->String.length)
     <div class="max-w-sm">
       <Field label="Message" for_="ex-ta">
-        <textarea
-          id="ex-ta"
-          rows=4
-          class={Ui.inputBase ++ " resize-y"}
-          placeholder="Write something…"
-          onInput={e => Signal.set(value, Ui.inputValue(e))}
-        />
+        <Textarea id="ex-ta" rows=4 value placeholder="Write something…" />
       </Field>
       <p class="mt-2 text-right text-xs text-neutral-500">
         <View.Int> {count} </View.Int>
@@ -106,22 +100,11 @@ module AvatarEx = {
   }
 }
 
-module Checkbox = {
+module CheckboxEx = {
   @jsx.component
   let make = () => {
     let on = Signal.make(true)
-    <label class="flex items-start gap-3">
-      <input
-        type_="checkbox"
-        checked={Prop.signal(on)}
-        class="mt-0.5 size-4 accent-neutral-900"
-        onChange={e => Signal.set(on, Ui.checked(e))}
-      />
-      <span>
-        <span class="block text-sm font-medium text-neutral-800"> <View.Text> "Subscribe" </View.Text> </span>
-        <span class="block text-xs text-neutral-500"> <View.Text> "Get product updates by email." </View.Text> </span>
-      </span>
-    </label>
+    <Checkbox checked=on label="Subscribe" description="Get product updates by email." />
   }
 }
 
@@ -133,7 +116,7 @@ module SwitchEx = {
   }
 }
 
-module Slider = {
+module SliderEx = {
   @jsx.component
   let make = () => {
     let value = Signal.make(40)
@@ -142,27 +125,17 @@ module Slider = {
         <span> <View.Text> "Volume" </View.Text> </span>
         <span class="tabular-nums"> <View.Int> {value} </View.Int> <View.Text> "%" </View.Text> </span>
       </div>
-      <input
-        type_="range"
-        min="0"
-        max="100"
-        value={Prop.signal(Computed.make(() => Signal.get(value)->Int.toString))}
-        class="w-full accent-neutral-900"
-        onInput={e => Signal.set(value, Ui.inputValue(e)->Int.fromString->Option.getOr(0))}
-      />
+      <Slider value />
     </div>
   }
 }
 
-module Progress = {
+module ProgressEx = {
   @jsx.component
   let make = () => {
     let value = Signal.make(30)
-    let bar = Computed.make(() => "height:100%;width:" ++ Signal.get(value)->Int.toString ++ "%")
     <div class="max-w-sm space-y-3">
-      <div class="h-2 w-full overflow-hidden rounded-full bg-neutral-200" role="progressbar">
-        <div class="rounded-full bg-neutral-900 transition-all" style={Prop.signal(bar)} />
-      </div>
+      <Progress value />
       <div class="flex gap-2">
         <Button variant=#secondary onClick={_ => Signal.update(value, v => v > 10 ? v - 10 : 0)}>
           <View.Text> "−10" </View.Text>
@@ -1992,13 +1965,13 @@ let get = (id: string): option<View.node> =>
   switch id {
   | "button" => Some(<ButtonEx />)
   | "input" => Some(<InputEx />)
-  | "textarea" => Some(<Textarea />)
+  | "textarea" => Some(<TextareaEx />)
   | "badge" => Some(<BadgeEx />)
   | "avatar" => Some(<AvatarEx />)
-  | "checkbox" => Some(<Checkbox />)
+  | "checkbox" => Some(<CheckboxEx />)
   | "switch" => Some(<SwitchEx />)
-  | "slider" => Some(<Slider />)
-  | "progress" => Some(<Progress />)
+  | "slider" => Some(<SliderEx />)
+  | "progress" => Some(<ProgressEx />)
   | "spinner" => Some(<SpinnerEx />)
   | "skeleton" => Some(<Skeleton />)
   | "separator" => Some(<SeparatorEx />)
