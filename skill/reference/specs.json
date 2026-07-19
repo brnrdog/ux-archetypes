@@ -552,13 +552,20 @@
           "name": "name",
           "type": "string",
           "default": "",
-          "description": "Identifier of the glyph to render."
+          "description": "Identifier of the glyph to render, from the icon set."
         },
         {
           "name": "size",
-          "type": "string",
+          "type": "enum",
+          "values": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ],
           "default": "md",
-          "description": "Rendered size."
+          "description": "Optical size, from a fixed scale."
         },
         {
           "name": "label",
@@ -581,7 +588,7 @@
       ]
     },
     "composition": null,
-    "implementation": null
+    "implementation": "Icon.res"
   },
   {
     "id": "input-otp",

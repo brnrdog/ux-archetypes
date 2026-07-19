@@ -16,6 +16,10 @@ module IconButton = {
   type variant = [#solid | #ghost]
 }
 
+module Icon = {
+  type size = [#xs | #sm | #md | #lg | #xl]
+}
+
 module Link = {
   type variant = [#default | #muted]
 }

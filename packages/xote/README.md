@@ -11,9 +11,28 @@ Styled against [`@xpecs/tokens`](../tokens) via the semantic utilities
 
 ## Components
 
-`Button`, `IconButton`, `Link`, `Badge`, `Avatar`, `Kbd`, `Separator`,
+`Button`, `IconButton`, `Link`, `Badge`, `Avatar`, `Icon`, `Kbd`, `Separator`,
 `Spinner`, `Input`, `Field`, `Switch`, `Alert`, `Accordion`, `Collapsible`,
 `Tabs`, `Tooltip`, `Dialog`, `Select`, `Backdrop`, plus shared `Ui` helpers.
+
+## Icons
+
+`Icon` renders a named glyph from a small, modern **outline icon set** (`Icons`)
+in the Feather / Lucide visual language — every glyph is drawn on a 24×24 grid
+with no fill, 2px strokes, and round caps/joins, so it inherits the surrounding
+text color and optical weight.
+
+```rescript
+<Icon name="search" />                     // decorative (hidden from a11y)
+<Icon name="trash" label="Delete" />       // meaningful (role=img + name)
+<Icon name="check" size=#lg />             // xs · sm · md · lg · xl
+<IconButton label="Edit"> <Icon name="edit" /> </IconButton>
+```
+
+`Icons.names` lists the full set; `Icons.get(name)` returns a glyph's geometry.
+Colour comes from the text (`currentColor`), so `class="text-status-danger"` on
+an ancestor tints the icon. Icon paths are adapted from
+[Feather Icons](https://feathericons.com) (MIT).
 
 ## Install
 

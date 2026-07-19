@@ -1263,10 +1263,10 @@ module IconButtonEx = {
   @jsx.component
   let make = () =>
     <div class="flex items-center gap-2">
-      <IconButton label="Edit"> <View.Text> "✎" </View.Text> </IconButton>
-      <IconButton label="Copy"> <View.Text> "⧉" </View.Text> </IconButton>
-      <IconButton label="Delete"> <View.Text> "🗑" </View.Text> </IconButton>
-      <IconButton label="More options" variant=#solid> <View.Text> "⋯" </View.Text> </IconButton>
+      <IconButton label="Edit"> <Icon name="edit" /> </IconButton>
+      <IconButton label="Copy"> <Icon name="copy" /> </IconButton>
+      <IconButton label="Delete"> <Icon name="trash" /> </IconButton>
+      <IconButton label="More options" variant=#solid> <Icon name="more-horizontal" /> </IconButton>
     </div>
 }
 
@@ -1642,13 +1642,28 @@ module CtaSection = {
 module IconEx = {
   @jsx.component
   let make = () => {
-    let icons = ["🔍", "✎", "🗑", "⚙", "★", "♥", "⬇", "↗"]
-    <div class="flex flex-wrap items-center gap-3 text-neutral-700">
-      <View.For
-        each={Prop.static(icons)}
-        render={g =>
-          <span class="flex size-9 items-center justify-center rounded-md border border-neutral-200 text-base"> <View.Text> {g} </View.Text> </span>}
-      />
+    let icons = ["search", "edit", "trash", "settings", "star", "heart", "download", "external-link"]
+    <div class="space-y-4 text-neutral-700">
+      <div class="flex flex-wrap items-center gap-3">
+        <View.For
+          each={Prop.static(icons)}
+          render={name =>
+            <span class="flex size-9 items-center justify-center rounded-md border border-neutral-200">
+              <Icon name label={name} />
+            </span>}
+        />
+      </div>
+      <div class="flex items-end gap-4 text-neutral-800">
+        <Icon name="calendar" size=#xs />
+        <Icon name="calendar" size=#sm />
+        <Icon name="calendar" size=#md />
+        <Icon name="calendar" size=#lg />
+        <Icon name="calendar" size=#xl />
+      </div>
+      <p class="flex items-center gap-1.5 text-sm text-neutral-600">
+        <Icon name="info" size=#sm />
+        <View.Text> "Icons inherit the surrounding text color and size." </View.Text>
+      </p>
     </div>
   }
 }

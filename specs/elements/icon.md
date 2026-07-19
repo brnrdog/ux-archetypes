@@ -2,17 +2,18 @@
 id: icon
 title: Icon
 layer: element
-version: 1.0.0
+version: 1.1.0
 status: stable
 summary: A small pictographic symbol that conveys meaning or reinforces a label compactly.
 since: 0.4.0
-updated: 2026-07-17
+updated: 2026-07-19
 tags: [symbol, visual, display, glyph]
 aliases: [glyph, pictogram, symbol]
 composedOf: []
 usedBy: [button, icon-button, feature-grid, alert, badge, list, stat]
 related: [icon-button, logo]
 maintainers: [brnrdog]
+implementation: Icon.res
 ---
 
 # Icon
@@ -33,8 +34,8 @@ technology and unfamiliar users can't interpret. Meaning, not ornament, is the b
     "reflow": []
   },
   "props": [
-    {"name":"name","type":"string","default":"","description":"Identifier of the glyph to render."},
-    {"name":"size","type":"string","default":"md","description":"Rendered size."},
+    {"name":"name","type":"string","default":"","description":"Identifier of the glyph to render, from the icon set."},
+    {"name":"size","type":"enum","values":["xs","sm","md","lg","xl"],"default":"md","description":"Optical size, from a fixed scale."},
     {"name":"label","type":"string","default":"","description":"Accessible name; omit to mark decorative."}
   ],
   "a11y": {"role":"img","announces":["name"]},
@@ -67,8 +68,10 @@ technology and unfamiliar users can't interpret. Meaning, not ornament, is the b
 
 ## Variants
 
-- **Outline vs. solid** — a consistent style set.
-- **Sizes** — from an optical size scale.
+- **Outline** — the default style set: a single, modern outline family drawn on a
+  24×24 grid with a uniform stroke and round caps/joins, so glyphs inherit text
+  color and optical weight.
+- **Sizes** — from a fixed optical scale (`xs`, `sm`, `md`, `lg`, `xl`).
 - **Standalone vs. inline** — beside text or on its own.
 
 ## Layout & responsiveness

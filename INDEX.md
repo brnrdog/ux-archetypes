@@ -14,7 +14,7 @@ frontmatter (`npm run index`).
 | [Badge](specs/elements/badge.md) | `badge` | 1.0.0 | stable | A small label that annotates an element with a status, category, or count. |
 | [Button](specs/elements/button.md) | `button` | 1.1.0 | stable | An interactive control that triggers an action or event when activated. |
 | [Checkbox](specs/elements/checkbox.md) | `checkbox` | 1.0.0 | stable | A control for toggling a single option on or off, or selecting several from a set. |
-| [Icon](specs/elements/icon.md) | `icon` | 1.0.0 | stable | A small pictographic symbol that conveys meaning or reinforces a label compactly. |
+| [Icon](specs/elements/icon.md) | `icon` | 1.1.0 | stable | A small pictographic symbol that conveys meaning or reinforces a label compactly. |
 | [Icon Button](specs/elements/icon-button.md) | `icon-button` | 1.0.0 | stable | A compact, icon-only button that triggers an action where space is tight. |
 | [Keyboard Key](specs/elements/kbd.md) | `kbd` | 1.0.0 | stable | An inline representation of a key or key combination the user can press. |
 | [Label](specs/elements/label.md) | `label` | 1.0.0 | stable | A short caption that names a form control and is programmatically bound to it. |
