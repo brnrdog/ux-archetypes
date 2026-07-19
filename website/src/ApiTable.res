@@ -167,13 +167,13 @@ let make = (~api: SpecsData.apiContract) =>
           <div class="mb-3 flex flex-wrap items-center gap-2 text-sm text-neutral-600">
             <View.Show when_={Prop.static(r.container)}>
               <span class="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-2 py-0.5 text-xs">
-                <span class="text-neutral-400"> <View.Text> "◱" </View.Text> </span>
+                <span class="text-neutral-400"> <Icon name="maximize" size=#xs /> </span>
                 <View.Text> "adapts to its container" </View.Text>
               </span>
             </View.Show>
             <View.Show when_={Prop.static(r.minTarget != "")}>
               <span class="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-2 py-0.5 text-xs">
-                <span class="text-neutral-400"> <View.Text> "⊕" </View.Text> </span>
+                <span class="text-neutral-400"> <Icon name="target" size=#xs /> </span>
                 <View.Text> "min target " </View.Text>
                 {code(r.minTarget)}
               </span>

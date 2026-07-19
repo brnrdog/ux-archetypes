@@ -334,12 +334,11 @@ module AlertEx = {
   @jsx.component
   let make = () =>
     <div class="max-w-md space-y-3">
-      <Alert variant=#info icon="i" title="Heads up" description="Your trial ends in 3 days." />
-      <Alert variant=#success icon="✓" title="Changes saved" description="Your profile has been updated." />
-      <Alert variant=#warning icon="!" title="Storage almost full" description="You've used 90% of your quota." />
+      <Alert variant=#info title="Heads up" description="Your trial ends in 3 days." />
+      <Alert variant=#success title="Changes saved" description="Your profile has been updated." />
+      <Alert variant=#warning title="Storage almost full" description="You've used 90% of your quota." />
       <Alert
         variant=#danger
-        icon="!"
         title="Payment failed"
         description="Update your card to keep your subscription active."
       />
@@ -470,7 +469,7 @@ module Pagination = {
       <button
         class={navBtn ++ " border border-neutral-300 text-neutral-700 hover:bg-neutral-100"}
         onClick={_ => Signal.update(page, p => p > 1 ? p - 1 : 1)}>
-        <View.Text> "‹" </View.Text>
+        <Icon name="chevron-left" size=#sm />
       </button>
       <View.For
         each={Prop.static(pages)}
@@ -490,7 +489,7 @@ module Pagination = {
       <button
         class={navBtn ++ " border border-neutral-300 text-neutral-700 hover:bg-neutral-100"}
         onClick={_ => Signal.update(page, p => p < 5 ? p + 1 : 5)}>
-        <View.Text> "›" </View.Text>
+        <Icon name="chevron-right" size=#sm />
       </button>
     </div>
   }
@@ -500,8 +499,8 @@ module EmptyState = {
   @jsx.component
   let make = () =>
     <div class="flex max-w-sm flex-col items-center gap-3 rounded-lg border border-dashed border-neutral-300 p-10 text-center">
-      <div class="flex size-12 items-center justify-center rounded-full bg-neutral-100 text-xl text-neutral-400">
-        <View.Text> "☰" </View.Text>
+      <div class="flex size-12 items-center justify-center rounded-full bg-neutral-100 text-neutral-400">
+        <Icon name="inbox" size=#lg />
       </div>
       <div>
         <p class="font-medium text-neutral-800"> <View.Text> "No projects yet" </View.Text> </p>
@@ -600,7 +599,8 @@ module DropdownMenu = {
     let items = ["Profile", "Billing", "Settings", "Sign out"]
     <div class="relative inline-block">
       <Button variant=#secondary onClick={_ => Signal.update(open_, v => !v)}>
-        <View.Text> "Options ⌄" </View.Text>
+        <View.Text> "Options" </View.Text>
+        <Icon name="chevron-down" size=#sm />
       </Button>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
@@ -760,7 +760,7 @@ module Toast = {
       </Button>
       <View.Show when_={Prop.signal(show)}>
         <div class="absolute bottom-2 right-2 flex w-72 items-start gap-3 rounded-lg border border-neutral-200 bg-surface p-3 shadow-xl">
-          <span class="mt-0.5 font-semibold text-neutral-900"> <View.Text> "✓" </View.Text> </span>
+          <span class="mt-0.5 text-status-success"> <Icon name="check-circle" size=#sm /> </span>
           <div class="flex-1">
             <p class="text-sm font-medium text-neutral-900"> <View.Text> "Changes saved" </View.Text> </p>
             <p class="text-xs text-neutral-500"> <View.Text> "Your profile has been updated." </View.Text> </p>
@@ -836,8 +836,10 @@ module DataTable = {
           onInput={e => Signal.set(query, Ui.inputValue(e))}
         />
         <Button variant=#secondary onClick={_ => Signal.update(asc, v => !v)}>
-          <View.Text> "Sort name " </View.Text>
-          <View.Text> {Computed.make(() => Signal.get(asc) ? "↑" : "↓")} </View.Text>
+          <View.Text> "Sort name" </View.Text>
+          <View.Show when_={Prop.signal(asc)} fallback={<Icon name="arrow-down" size=#sm />}>
+            <Icon name="arrow-up" size=#sm />
+          </View.Show>
         </Button>
       </div>
       <div class="overflow-hidden rounded-lg border border-neutral-200">
@@ -920,12 +922,12 @@ module Carousel = {
         <button
           class="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-surface/90 hover:bg-surface"
           onClick={_ => Signal.update(idx, i => i > 0 ? i - 1 : 0)}>
-          <View.Text> "‹" </View.Text>
+          <Icon name="chevron-left" size=#sm />
         </button>
         <button
           class="absolute right-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-200 bg-surface/90 hover:bg-surface"
           onClick={_ => Signal.update(idx, i => i < total - 1 ? i + 1 : i)}>
-          <View.Text> "›" </View.Text>
+          <Icon name="chevron-right" size=#sm />
         </button>
       </div>
       <div class="mt-3 flex justify-center gap-1.5">
@@ -963,7 +965,7 @@ module Combobox = {
         class={Ui.inputBase ++ " flex items-center justify-between text-left"}
         onClick={_ => Signal.update(open_, v => !v)}>
         <View.Text> {display} </View.Text>
-        <span class="text-neutral-400"> <View.Text> "⌄" </View.Text> </span>
+        <span class="text-neutral-400"> <Icon name="chevron-down" size=#sm /> </span>
       </button>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
@@ -1016,7 +1018,7 @@ module Command = {
           render={o =>
             <li>
               <button class="flex w-full items-center gap-2 rounded px-3 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100">
-                <span class="text-neutral-400"> <View.Text> "›" </View.Text> </span>
+                <span class="text-neutral-400"> <Icon name="chevron-right" size=#sm /> </span>
                 <View.Text> {o} </View.Text>
               </button>
             </li>}
@@ -1035,7 +1037,10 @@ module Calendar = {
     <div class="w-72 rounded-lg border border-neutral-200 p-3">
       <div class="mb-2 flex items-center justify-between px-1">
         <span class="text-sm font-medium text-neutral-900"> <View.Text> "July 2026" </View.Text> </span>
-        <span class="text-xs text-neutral-400"> <View.Text> "‹  ›" </View.Text> </span>
+        <span class="flex items-center gap-2 text-neutral-400">
+          <Icon name="chevron-left" size=#sm />
+          <Icon name="chevron-right" size=#sm />
+        </span>
       </div>
       <div class="grid grid-cols-7 gap-1 text-center">
         <View.For
@@ -1074,7 +1079,7 @@ module DatePicker = {
         class={Ui.inputBase ++ " flex items-center justify-between text-left"}
         onClick={_ => Signal.update(open_, v => !v)}>
         <View.Text> {label} </View.Text>
-        <span class="text-neutral-400"> <View.Text> "📅" </View.Text> </span>
+        <span class="text-neutral-400"> <Icon name="calendar" size=#sm /> </span>
       </button>
       <View.Show when_={Prop.signal(open_)}>
         <Backdrop onClose={() => Signal.set(open_, false)} />
@@ -1173,9 +1178,10 @@ module NavigationMenu = {
     <div class="relative w-full max-w-lg">
       <div class="flex items-center gap-1 rounded-lg border border-neutral-200 bg-surface p-1 text-sm">
         <button
-          class="rounded px-3 py-1.5 text-neutral-700 hover:bg-neutral-100"
+          class="inline-flex items-center gap-1 rounded px-3 py-1.5 text-neutral-700 hover:bg-neutral-100"
           onClick={_ => Signal.update(open_, v => !v)}>
-          <View.Text> "Products ⌄" </View.Text>
+          <View.Text> "Products" </View.Text>
+          <Icon name="chevron-down" size=#sm />
         </button>
         <a class="rounded px-3 py-1.5 text-neutral-700 hover:bg-neutral-100" href="#"> <View.Text> "Pricing" </View.Text> </a>
         <a class="rounded px-3 py-1.5 text-neutral-700 hover:bg-neutral-100" href="#"> <View.Text> "Company" </View.Text> </a>
@@ -1254,7 +1260,10 @@ module LinkEx = {
       <div class="flex gap-4">
         <Link href="#" variant=#muted> <View.Text> "Docs" </View.Text> </Link>
         <Link href="#" variant=#muted> <View.Text> "Pricing" </View.Text> </Link>
-        <Link href="#" newTab=true> <View.Text> "Changelog ↗" </View.Text> </Link>
+        <Link href="#" newTab=true extraClass="inline-flex items-center gap-1">
+          <View.Text> "Changelog" </View.Text>
+          <Icon name="external-link" size=#xs />
+        </Link>
       </div>
     </div>
 }
@@ -1278,9 +1287,9 @@ module Toolbar = {
       <IconButton label="Italic"> <span class="italic"> <View.Text> "I" </View.Text> </span> </IconButton>
       <IconButton label="Underline"> <span class="underline"> <View.Text> "U" </View.Text> </span> </IconButton>
       <Separator orientation=#vertical extraClass="mx-1" />
-      <IconButton label="Align left"> <View.Text> "⇤" </View.Text> </IconButton>
-      <IconButton label="Align center"> <View.Text> "↔" </View.Text> </IconButton>
-      <IconButton label="Align right"> <View.Text> "⇥" </View.Text> </IconButton>
+      <IconButton label="Align left"> <Icon name="align-left" /> </IconButton>
+      <IconButton label="Align center"> <Icon name="align-center" /> </IconButton>
+      <IconButton label="Align right"> <Icon name="align-right" /> </IconButton>
       <div class="ml-auto">
         <Button variant=#primary> <View.Text> "Share" </View.Text> </Button>
       </div>
@@ -1307,7 +1316,7 @@ module List = {
               <p class="text-xs text-neutral-500"> <View.Text> {handle} </View.Text> </p>
             </div>
             <Badge variant=#soft> <View.Text> {role} </View.Text> </Badge>
-            <IconButton label="More"> <View.Text> "⋯" </View.Text> </IconButton>
+            <IconButton label="More"> <Icon name="more-horizontal" /> </IconButton>
           </div>
         }}
       />
@@ -1462,7 +1471,14 @@ module Pricing = {
           <span class="text-sm text-neutral-500"> <View.Text> "/mo" </View.Text> </span>
         </p>
         <ul class="mt-3 space-y-1 text-sm text-neutral-600">
-          <View.For each={Prop.static(feats)} render={f => <li> <View.Text> {"✓ " ++ f} </View.Text> </li>} />
+          <View.For
+            each={Prop.static(feats)}
+            render={f =>
+              <li class="flex items-center gap-2">
+                <Icon name="check" size=#sm extraClass="text-status-success" />
+                <View.Text> {f} </View.Text>
+              </li>}
+          />
         </ul>
         <div class="mt-4">
           <Button variant={recommended ? #primary : #secondary} extraClass="w-full">
@@ -1502,9 +1518,9 @@ module FeatureGrid = {
   @jsx.component
   let make = () => {
     let feats = [
-      ("⚡", "Fast", "Ship in minutes with sensible defaults."),
-      ("🔒", "Secure", "Encryption and SSO out of the box."),
-      ("📈", "Scalable", "Grows from prototype to production."),
+      ("zap", "Fast", "Ship in minutes with sensible defaults."),
+      ("lock", "Secure", "Encryption and SSO out of the box."),
+      ("trending-up", "Scalable", "Grows from prototype to production."),
     ]
     <div class="grid w-full max-w-2xl grid-cols-3 gap-4">
       <View.For
@@ -1512,7 +1528,7 @@ module FeatureGrid = {
         render={item => {
           let (ic, title, desc) = item
           <div class={Ui.card ++ " p-5"}>
-            <div class="flex size-9 items-center justify-center rounded-md bg-neutral-100 text-lg"> <View.Text> {ic} </View.Text> </div>
+            <div class="flex size-9 items-center justify-center rounded-md bg-neutral-100 text-neutral-700"> <Icon name=ic /> </div>
             <p class="mt-3 text-sm font-semibold text-neutral-900"> <View.Text> {title} </View.Text> </p>
             <p class="mt-1 text-sm text-neutral-500"> <View.Text> {desc} </View.Text> </p>
           </div>
@@ -1548,6 +1564,13 @@ module PricingTable = {
       ("SSO", "–", "–", "✓"),
       ("Audit log", "–", "✓", "✓"),
     ]
+    // Cells carry either plain text or a yes/no marker; render markers as icons.
+    let cellNode = v =>
+      switch v {
+      | "✓" => <Icon name="check" size=#sm label="Included" extraClass="mx-auto text-status-success" />
+      | "–" => <Icon name="minus" size=#sm label="Not included" extraClass="mx-auto text-neutral-300" />
+      | _ => <View.Text> v </View.Text>
+      }
     <div class="w-full max-w-2xl overflow-hidden rounded-lg border border-neutral-200">
       <table class="w-full text-sm">
         <thead class="bg-neutral-50">
@@ -1570,9 +1593,9 @@ module PricingTable = {
               let (feat, a, b, c) = r
               <tr>
                 <td class="px-4 py-2 font-medium text-neutral-900"> <View.Text> {feat} </View.Text> </td>
-                <td class="px-4 py-2 text-center"> <View.Text> {a} </View.Text> </td>
-                <td class="px-4 py-2 text-center"> <View.Text> {b} </View.Text> </td>
-                <td class="px-4 py-2 text-center"> <View.Text> {c} </View.Text> </td>
+                <td class="px-4 py-2 text-center"> {cellNode(a)} </td>
+                <td class="px-4 py-2 text-center"> {cellNode(b)} </td>
+                <td class="px-4 py-2 text-center"> {cellNode(c)} </td>
               </tr>
             }}
           />
@@ -1603,13 +1626,16 @@ module Faq = {
         render={item => {
           let (idx, q, a) = item
           let isOpen = Computed.make(() => Signal.get(openId) == idx)
-          let mark = Computed.make(() => Signal.get(openId) == idx ? "−" : "+")
           <div>
             <button
               class="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-neutral-800 hover:bg-neutral-50"
               onClick={_ => Signal.update(openId, c => c == idx ? -1 : idx)}>
               <View.Text> {q} </View.Text>
-              <span class="text-neutral-400"> <View.Text> {mark} </View.Text> </span>
+              <span class="text-neutral-400">
+                <View.Show when_={Prop.signal(isOpen)} fallback={<Icon name="plus" size=#sm />}>
+                  <Icon name="minus" size=#sm />
+                </View.Show>
+              </span>
             </button>
             <View.Show when_={Prop.signal(isOpen)}>
               <p class="px-4 pb-3 text-sm text-neutral-500"> <View.Text> {a} </View.Text> </p>
@@ -1707,7 +1733,10 @@ module StatEx = {
     <div class={Ui.card ++ " w-64 p-4"}>
       <div class="flex items-center justify-between">
         <p class="text-xs text-neutral-500"> <View.Text> "Monthly revenue" </View.Text> </p>
-        <Badge variant=#soft> <View.Text> "▲ 12%" </View.Text> </Badge>
+        <Badge variant=#soft>
+          <Icon name="trending-up" size=#xs extraClass="mr-1" />
+          <View.Text> "12%" </View.Text>
+        </Badge>
       </div>
       <p class="mt-1 text-3xl font-bold text-neutral-900"> <View.Text> "$48.2k" </View.Text> </p>
       <div class="mt-3 flex h-8 items-end gap-1">
@@ -1733,7 +1762,7 @@ module SearchEx = {
     let hasQuery = Computed.make(() => Signal.get(query) != "")
     <div class="relative w-72">
       <div class="flex items-center gap-2 rounded-md border border-neutral-300 bg-surface pl-3 pr-1">
-        <span class="text-neutral-400"> <View.Text> "🔍" </View.Text> </span>
+        <span class="text-neutral-400"> <Icon name="search" size=#sm /> </span>
         <input
           class="flex-1 bg-transparent py-2 text-sm focus:outline-none"
           placeholder="Search…"
@@ -1774,7 +1803,9 @@ module CommentEx = {
   @jsx.component
   let make = () => {
     let liked = Signal.make(false)
-    let likeLabel = Computed.make(() => Signal.get(liked) ? "♥ Liked" : "♡ Like")
+    let likeCls = Computed.make(() =>
+      "inline-flex items-center gap-1 " ++ (Signal.get(liked) ? "text-status-danger" : "hover:text-neutral-900")
+    )
     <div class="w-full max-w-lg">
       <div class="flex gap-3">
         <Avatar initials="AT" size="size-9 text-xs" />
@@ -1788,7 +1819,12 @@ module CommentEx = {
             <View.Text> "Great write-up — the section on reuse really clicked for me. Shipping this to my team." </View.Text>
           </p>
           <div class="mt-2 flex gap-3 text-xs text-neutral-500">
-            <button class="hover:text-neutral-900" onClick={_ => Signal.update(liked, v => !v)}> <View.Text> {likeLabel} </View.Text> </button>
+            <button class={Prop.signal(likeCls)} onClick={_ => Signal.update(liked, v => !v)}>
+              <Icon name="heart" size=#sm />
+              <View.Show when_={Prop.signal(liked)} fallback={<View.Text> "Like" </View.Text>}>
+                <View.Text> "Liked" </View.Text>
+              </View.Show>
+            </button>
             <button class="hover:text-neutral-900"> <View.Text> "Reply" </View.Text> </button>
           </div>
         </div>

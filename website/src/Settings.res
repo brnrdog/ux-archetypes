@@ -215,7 +215,7 @@ module Trigger = {
   @jsx.component
   let make = () =>
     <IconButton label="Theme settings" onClick={_ => Signal.update(open_, v => !v)}>
-      <span class="text-base"> <View.Text> "⚙" </View.Text> </span>
+      <Icon name="settings" />
     </IconButton>
 }
 
@@ -246,10 +246,16 @@ module Panel = {
             )
             <div class="flex items-center gap-0.5 rounded-lg border border-border p-0.5">
               <button class={Prop.signal(seg(false))} onClick={_ => setDark(false)}>
-                <View.Text> "☀ Light" </View.Text>
+                <span class="inline-flex items-center gap-1.5">
+                  <Icon name="sun" size=#sm />
+                  <View.Text> "Light" </View.Text>
+                </span>
               </button>
               <button class={Prop.signal(seg(true))} onClick={_ => setDark(true)}>
-                <View.Text> "☾ Dark" </View.Text>
+                <span class="inline-flex items-center gap-1.5">
+                  <Icon name="moon" size=#sm />
+                  <View.Text> "Dark" </View.Text>
+                </span>
               </button>
             </div>
           }
@@ -317,7 +323,10 @@ module Panel = {
             Signal.set(open_, false)
             Router.push("/tokens", ())
           }}>
-          <View.Text> "Edit individual tokens →" </View.Text>
+          <span class="inline-flex items-center gap-1.5">
+            <View.Text> "Edit individual tokens" </View.Text>
+            <Icon name="arrow-right" size=#sm />
+          </span>
         </button>
 
         <div class="mt-4 flex items-center justify-between border-t border-border pt-3">

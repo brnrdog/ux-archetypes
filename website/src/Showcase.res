@@ -38,7 +38,10 @@ module Frame = {
         <button
           class="shrink-0 rounded-md px-2 py-0.5 text-xs font-medium text-muted transition-colors hover:bg-action-subtle hover:text-ink"
           onClick={_ => Signal.set(full, true)}>
-          <View.Text> "⤢ Fullscreen" </View.Text>
+          <span class="inline-flex items-center gap-1">
+            <Icon name="maximize" size=#xs />
+            <View.Text> "Fullscreen" </View.Text>
+          </span>
         </button>
       </div>
       <div class="max-h-[36rem] overflow-y-auto"> {render()} </div>
@@ -52,7 +55,8 @@ module Frame = {
                 <View.Text> "to exit" </View.Text>
               </span>
               <Button variant=#secondary size=#sm onClick={_ => Signal.set(full, false)}>
-                <View.Text> "Close ✕" </View.Text>
+                <Icon name="x" size=#sm />
+                <View.Text> "Close" </View.Text>
               </Button>
             </span>
           </div>
@@ -71,7 +75,7 @@ module Landing = {
       <a class="text-sm text-muted transition-colors hover:text-ink" href="#"> <View.Text> label </View.Text> </a>
     let feature = (icon, title, desc) =>
       <div class="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-        <div class="flex size-9 items-center justify-center rounded-lg bg-action-subtle text-lg"> <View.Text> icon </View.Text> </div>
+        <div class="flex size-9 items-center justify-center rounded-lg bg-action-subtle text-action"> <Icon name=icon /> </div>
         <p class="mt-3 text-sm font-semibold text-ink"> <View.Text> title </View.Text> </p>
         <p class="mt-1 text-sm text-muted"> <View.Text> desc </View.Text> </p>
       </div>
@@ -86,7 +90,14 @@ module Landing = {
           <span class="text-sm text-muted"> <View.Text> "/mo" </View.Text> </span>
         </p>
         <ul class="mt-3 space-y-1 text-sm text-muted">
-          <View.For each={Prop.static(feats)} render={f => <li> <View.Text> {"✓ " ++ f} </View.Text> </li>} />
+          <View.For
+            each={Prop.static(feats)}
+            render={f =>
+              <li class="flex items-center gap-2">
+                <Icon name="check" size=#sm extraClass="text-status-success" />
+                <View.Text> {f} </View.Text>
+              </li>}
+          />
         </ul>
         <div class="mt-4">
           <Button variant={popular ? #primary : #secondary} extraClass="w-full"> <View.Text> "Choose plan" </View.Text> </Button>
@@ -120,9 +131,9 @@ module Landing = {
       </section>
       // features
       <section class="grid gap-4 px-6 py-10 sm:grid-cols-3">
-        {feature("⚡", "Fast", "Ship in minutes with sensible defaults.")}
-        {feature("🔒", "Secure", "Encryption and SSO out of the box.")}
-        {feature("📈", "Scalable", "Grows from prototype to production.")}
+        {feature("zap", "Fast", "Ship in minutes with sensible defaults.")}
+        {feature("lock", "Secure", "Encryption and SSO out of the box.")}
+        {feature("trending-up", "Scalable", "Grows from prototype to production.")}
       </section>
       // testimonial
       <section class="px-6 pb-10">
@@ -413,7 +424,9 @@ module Checkout = {
             <span class="text-lg font-bold text-ink"> <View.Text> "$164.00" </View.Text> </span>
           </div>
           <Button extraClass="mt-4 w-full"> <View.Text> "Pay $164.00" </View.Text> </Button>
-          <p class="mt-2 text-center text-xs text-muted"> <View.Text> "🔒 Secured by Acme Pay" </View.Text> </p>
+          <p class="mt-2 flex items-center justify-center gap-1 text-center text-xs text-muted">
+          <Icon name="lock" size=#xs />
+          <View.Text> "Secured by Acme Pay" </View.Text> </p>
         </aside>
       </div>
     </div>

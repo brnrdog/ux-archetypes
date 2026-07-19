@@ -257,7 +257,7 @@ module Topbar = {
   let make = () =>
     <header class="flex h-14 shrink-0 items-center gap-3 border-b border-neutral-200 bg-surface px-3">
       <IconButton label="Toggle sidebar" onClick={_ => Signal.update(sidebarOpen, v => !v)}>
-        <span class="text-lg"> <View.Text> "☰" </View.Text> </span>
+        <Icon name="menu" />
       </IconButton>
       <Router.Link to="/" class="flex items-center gap-2">
         <span class="flex size-7 items-center justify-center rounded-lg bg-action text-xs font-bold text-on-action"> <View.Text> "X" </View.Text> </span>
@@ -267,7 +267,7 @@ module Topbar = {
         <button
           class="flex w-full min-w-0 max-w-sm items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:bg-neutral-100"
           onClick={_ => Signal.set(spotlightOpen, true)}>
-          <span> <View.Text> "🔍" </View.Text> </span>
+          <Icon name="search" size=#sm />
           <span class="flex-1 truncate text-left"> <View.Text> "Search specs…" </View.Text> </span>
           <span class="hidden sm:block"> <Kbd> <View.Text> "⌘K" </View.Text> </Kbd> </span>
         </button>
@@ -276,8 +276,9 @@ module Topbar = {
         href="https://github.com/brnrdog/ux-archetypes"
         variant=#muted
         newTab=true
-        extraClass="hidden text-sm sm:block">
-        <View.Text> "GitHub ↗" </View.Text>
+        extraClass="hidden items-center gap-1.5 text-sm sm:inline-flex">
+        <Icon name="github" size=#sm />
+        <View.Text> "GitHub" </View.Text>
       </Link>
       <Settings.Trigger />
     </header>
@@ -333,7 +334,7 @@ module Spotlight = {
         <div class="absolute inset-0 bg-neutral-900/40" onClick={_ => Signal.set(spotlightOpen, false)} />
         <div class="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-neutral-200 bg-surface shadow-lg">
           <div class="flex items-center gap-2 border-b border-neutral-100 px-4">
-            <span class="text-neutral-400"> <View.Text> "🔍" </View.Text> </span>
+            <span class="text-neutral-400"> <Icon name="search" size=#sm /> </span>
             <input
               id="spotlight-input"
               class="w-full bg-transparent py-3.5 text-sm focus:outline-none"
@@ -396,7 +397,7 @@ module Home = {
         </div>
         <div class="mt-2 flex items-center gap-1 text-sm text-neutral-500">
           <View.Text> {title} </View.Text>
-          <span class="opacity-0 transition-opacity group-hover:opacity-100"> <View.Text> "→" </View.Text> </span>
+          <span class="opacity-0 transition-opacity group-hover:opacity-100"> <Icon name="arrow-right" size=#sm /> </span>
         </div>
       </Router.Link>
     }
@@ -429,7 +430,10 @@ module Home = {
           </p>
           <div class="mt-7 flex flex-wrap gap-3">
             <Router.Link to="/guide">
-              <Button variant=#primary size=#lg> <View.Text> "Get started →" </View.Text> </Button>
+              <Button variant=#primary size=#lg>
+                <View.Text> "Get started" </View.Text>
+                <Icon name="arrow-right" size=#sm />
+              </Button>
             </Router.Link>
             <Router.Link to="/tokens">
               <Button variant=#secondary size=#lg> <View.Text> "Design tokens" </View.Text> </Button>
@@ -575,7 +579,7 @@ module Guide = {
           <View.Text> ", not hardcoded colors, so a re-theme is just changing token values. Try the " </View.Text>
           <Router.Link to="/tokens" class="text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-900"> <View.Text> "live token editor" </View.Text> </Router.Link>
           <View.Text> " or the theme presets (the " </View.Text>
-          <span class="font-mono"> <View.Text> "⚙" </View.Text> </span>
+          <Icon name="settings" size=#sm extraClass="inline align-text-bottom" />
           <View.Text> " in the top bar), with light and dark modes." </View.Text>
         </p>
       </Section>
@@ -602,8 +606,9 @@ module Guide = {
         <Router.Link to="/tokens">
           <Button variant=#secondary> <View.Text> "Design tokens" </View.Text> </Button>
         </Router.Link>
-        <Link href="https://github.com/brnrdog/ux-archetypes" newTab=true variant=#muted extraClass="self-center text-sm">
-          <View.Text> "GitHub ↗" </View.Text>
+        <Link href="https://github.com/brnrdog/ux-archetypes" newTab=true variant=#muted extraClass="inline-flex items-center gap-1.5 self-center text-sm">
+          <Icon name="github" size=#sm />
+          <View.Text> "GitHub" </View.Text>
         </Link>
       </div>
     </div>
@@ -632,8 +637,9 @@ module NotFound = {
   let make = () =>
     <div class="mx-auto max-w-3xl px-5 sm:px-8 py-16">
       <h1 class="text-2xl font-bold text-neutral-900"> <View.Text> "Spec not found" </View.Text> </h1>
-      <Router.Link to="/" class="mt-4 inline-block text-sm underline underline-offset-4">
-        <View.Text> "← Back to overview" </View.Text>
+      <Router.Link to="/" class="mt-4 inline-flex items-center gap-1.5 text-sm underline underline-offset-4">
+        <Icon name="arrow-left" size=#sm />
+        <View.Text> "Back to overview" </View.Text>
       </Router.Link>
     </div>
 }
@@ -654,7 +660,6 @@ module ExampleBlock = {
       )
     let isPreview = Computed.make(() => Signal.get(mode) == "preview")
     let isCode = Computed.make(() => Signal.get(mode) == "code")
-    let copyLabel = Computed.make(() => Signal.get(copied) ? "Copied ✓" : "Copy")
     // Close fullscreen on Escape while it is open.
     Effect.run(() => Signal.get(full) ? Some(Ui.onEscape(() => Signal.set(full, false))) : None)
     <div class="mt-10">
@@ -674,14 +679,16 @@ module ExampleBlock = {
         <div class="flex items-center gap-3">
           {hasExample
             ? <Button variant=#secondary size=#sm onClick={_ => Signal.set(full, true)}>
-                <View.Text> "⤢ Fullscreen" </View.Text>
+                <Icon name="maximize" size=#sm />
+                <View.Text> "Fullscreen" </View.Text>
               </Button>
             : View.null()}
           <a
             class="text-xs text-neutral-400 underline underline-offset-4 hover:text-neutral-700"
             href={docUrl(a)}
             target="_blank">
-            <View.Text> "Read the spec ↗" </View.Text>
+            <View.Text> "Read the spec" </View.Text>
+            <Icon name="external-link" size=#xs extraClass="ml-1 inline align-text-bottom" />
           </a>
         </div>
       </div>
@@ -693,13 +700,21 @@ module ExampleBlock = {
         <View.Show when_={Prop.signal(isCode)}>
           <div class="relative">
             <button
-              class="absolute right-2 top-2 z-10 rounded-lg border border-neutral-700 bg-neutral-800 px-2 py-1 text-xs text-neutral-200 transition-colors hover:bg-neutral-700"
+              class="absolute right-2 top-2 z-10 inline-flex items-center gap-1 rounded-lg border border-neutral-700 bg-neutral-800 px-2 py-1 text-xs text-neutral-200 transition-colors hover:bg-neutral-700"
               onClick={_ => {
                 Ui.copyToClipboard(code)
                 Signal.set(copied, true)
                 Ui.setTimeout(() => Signal.set(copied, false), 1500)
               }}>
-              <View.Text> {copyLabel} </View.Text>
+              <View.Show
+                when_={Prop.signal(copied)}
+                fallback={<span class="inline-flex items-center gap-1">
+                  <Icon name="copy" size=#xs />
+                  <View.Text> "Copy" </View.Text>
+                </span>}>
+                <Icon name="check" size=#xs />
+                <View.Text> "Copied" </View.Text>
+              </View.Show>
             </button>
             <pre
               class="max-h-[32rem] overflow-auto rounded-2xl border border-neutral-800 bg-neutral-900 p-4 text-xs leading-relaxed text-neutral-100">
@@ -714,7 +729,8 @@ module ExampleBlock = {
           <div class="flex h-14 shrink-0 items-center justify-between border-b border-neutral-200 px-4">
             <span class="text-sm font-medium text-neutral-900"> <View.Text> {a.title ++ " — live preview"} </View.Text> </span>
             <Button variant=#secondary size=#sm onClick={_ => Signal.set(full, false)}>
-              <View.Text> "Close ✕" </View.Text>
+              <Icon name="x" size=#sm />
+              <View.Text> "Close" </View.Text>
             </Button>
           </div>
           <div class="preview-surface flex flex-1 items-center justify-center overflow-auto p-12">
