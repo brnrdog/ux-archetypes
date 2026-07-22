@@ -19,7 +19,11 @@ const outFile = join(srcDir, "ExampleSource.res");
 const COMPONENTS = [
   "Button", "Badge", "Input", "Field", "Avatar",
   "Switch", "Spinner", "Kbd", "Separator", "Backdrop",
-  "Link", "IconButton",
+  "Link", "IconButton", "Skeleton",
+  // Block-level sections — inlined so a block's snippet shows the full
+  // implementation behind its usage.
+  "PageHeader", "StatGrid", "LogoCloud", "Steps",
+  "ContactSection", "Newsletter", "AnnouncementBar",
 ];
 
 // Read a component file and drop its leading // comment block.

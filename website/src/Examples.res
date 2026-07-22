@@ -1937,6 +1937,122 @@ module CheckoutEx = {
   }
 }
 
+module PageHeaderEx = {
+  @jsx.component
+  let make = () =>
+    <div class="w-full max-w-2xl">
+      <PageHeader
+        title="Deployments"
+        description="Everything your team shipped in the last 30 days."
+        breadcrumb=[("Acme", "#"), ("Production", "#"), ("Deployments", "")]>
+        <Button variant=#secondary size=#sm> <View.Text> "Export" </View.Text> </Button>
+        <Button variant=#primary size=#sm> <View.Text> "New deploy" </View.Text> </Button>
+      </PageHeader>
+    </div>
+}
+
+module StatGridEx = {
+  @jsx.component
+  let make = () => {
+    let loading = Signal.make(false)
+    let stats = [
+      ("Revenue", "$48.2k", "+12% vs. last month", #up),
+      ("Active users", "1,203", "+3% vs. last month", #up),
+      ("Signups", "312", "−5% vs. last month", #down),
+      ("Uptime", "99.98%", "flat vs. last month", #flat),
+    ]
+    <div class="w-full max-w-2xl space-y-3">
+      <View.Show
+        when_={Prop.signal(loading)}
+        fallback={<StatGrid heading="This month" stats />}>
+        <StatGrid heading="This month" stats loading=true />
+      </View.Show>
+      <Button
+        variant=#secondary
+        size=#sm
+        onClick={_ => {
+          Signal.set(loading, true)
+          Ui.setTimeout(() => Signal.set(loading, false), 1500)
+        }}>
+        <View.Text> "Simulate loading" </View.Text>
+      </Button>
+    </div>
+  }
+}
+
+module LogoCloudEx = {
+  @jsx.component
+  let make = () =>
+    <div class="w-full max-w-2xl">
+      <LogoCloud
+        heading="Trusted by teams at"
+        logos=["Acme", "Northwind", "Globex", "Initech", "Umbrella", "Aperture"]
+      />
+    </div>
+}
+
+module StepsEx = {
+  @jsx.component
+  let make = () => {
+    let steps = [
+      ("Connect your repo", "Authorize once; we pick up every branch automatically."),
+      ("Push a commit", "Each push builds, tests, and previews in isolation."),
+      ("Ship it", "Promote the preview to production with one click."),
+    ]
+    <div class="w-full max-w-2xl">
+      <Steps heading="How it works" steps />
+    </div>
+  }
+}
+
+module ContactSectionEx = {
+  @jsx.component
+  let make = () =>
+    <div class="w-full max-w-2xl">
+      <ContactSection
+        heading="Talk to us"
+        description="Questions about specs, tokens, or the agent skill? We reply within one business day."
+        details=[
+          ("mail", "hello@acme.dev", "mailto:hello@acme.dev"),
+          ("github", "acme/support", "https://github.com"),
+        ]
+      />
+    </div>
+}
+
+module NewsletterEx = {
+  @jsx.component
+  let make = () =>
+    <div class="w-full max-w-xl">
+      <Newsletter
+        heading="Get the monthly digest"
+        description="One email a month: new specs, patterns, and releases. No spam."
+        consent="By subscribing you agree to the privacy policy. Unsubscribe anytime."
+      />
+    </div>
+}
+
+module AnnouncementBarEx = {
+  @jsx.component
+  let make = () =>
+    <div class="w-full max-w-2xl space-y-3">
+      <AnnouncementBar
+        variant=#accent
+        message="v2 ships May 4 — everything gets faster."
+        actionLabel="See what's new"
+      />
+      <AnnouncementBar
+        variant=#neutral
+        message="We've updated our terms of service."
+        actionLabel="Read the changes"
+      />
+      <AnnouncementBar
+        variant=#warning
+        message="Scheduled maintenance Sunday 02:00–04:00 UTC."
+      />
+    </div>
+}
+
 let get = (id: string): option<View.node> =>
   switch id {
   | "button" => Some(<ButtonEx />)
@@ -2021,5 +2137,12 @@ let get = (id: string): option<View.node> =>
   | "authentication" => Some(<AuthenticationEx />)
   | "onboarding" => Some(<OnboardingEx />)
   | "checkout" => Some(<CheckoutEx />)
+  | "page-header" => Some(<PageHeaderEx />)
+  | "stat-grid" => Some(<StatGridEx />)
+  | "logo-cloud" => Some(<LogoCloudEx />)
+  | "steps" => Some(<StepsEx />)
+  | "contact-section" => Some(<ContactSectionEx />)
+  | "newsletter" => Some(<NewsletterEx />)
+  | "announcement-bar" => Some(<AnnouncementBarEx />)
   | _ => None
   }
