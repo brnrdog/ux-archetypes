@@ -652,6 +652,7 @@ module ExampleBlock = {
     let full = Signal.make(false)
     let snippet = ExampleSource.get(a.id)
     let hasExample = Examples.get(a.id)->Option.isSome
+    let playground = Playground.get(a.id)
     let tabCls = target =>
       Computed.make(() =>
         "rounded-md px-3 py-1 text-xs font-medium transition-colors " ++ (
@@ -660,6 +661,7 @@ module ExampleBlock = {
       )
     let isPreview = Computed.make(() => Signal.get(mode) == "preview")
     let isCode = Computed.make(() => Signal.get(mode) == "code")
+    let isPlay = Computed.make(() => Signal.get(mode) == "play")
     // Close fullscreen on Escape while it is open.
     Effect.run(() => Signal.get(full) ? Some(Ui.onEscape(() => Signal.set(full, false))) : None)
     <div class="mt-10">
@@ -668,6 +670,13 @@ module ExampleBlock = {
           <button class={Prop.signal(tabCls("preview"))} onClick={_ => Signal.set(mode, "preview")}>
             <View.Text> "Preview" </View.Text>
           </button>
+          {switch playground {
+          | Some(_) =>
+            <button class={Prop.signal(tabCls("play"))} onClick={_ => Signal.set(mode, "play")}>
+              <View.Text> "Playground" </View.Text>
+            </button>
+          | None => View.null()
+          }}
           {switch snippet {
           | Some(_) =>
             <button class={Prop.signal(tabCls("code"))} onClick={_ => Signal.set(mode, "code")}>
@@ -695,6 +704,13 @@ module ExampleBlock = {
       <View.Show when_={Prop.signal(isPreview)}>
         <Preview id={a.id} />
       </View.Show>
+      {switch playground {
+      | Some(def) =>
+        <View.Show when_={Prop.signal(isPlay)}>
+          <Playground.Panel def />
+        </View.Show>
+      | None => View.null()
+      }}
       {switch snippet {
       | Some(code) =>
         <View.Show when_={Prop.signal(isCode)}>
