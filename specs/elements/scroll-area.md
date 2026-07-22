@@ -8,6 +8,7 @@ summary: A container that scrolls overflowing content with consistent, styleable
 since: 0.2.0
 updated: 2026-07-16
 tags: [layout, scroll, container, overflow]
+implementation: ScrollArea.res
 aliases: [scroll-container, scrollbox]
 composedOf: []
 usedBy: [dropdown-menu, command, sidebar, dialog, data-table]

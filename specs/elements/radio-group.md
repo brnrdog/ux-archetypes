@@ -8,6 +8,7 @@ summary: A set of mutually exclusive options from which exactly one can be selec
 since: 0.2.0
 updated: 2026-07-16
 tags: [form, control, selection, single-choice]
+implementation: RadioGroup.res
 aliases: [radio, radio-buttons, option-group]
 composedOf: [label]
 usedBy: [form, field, settings]

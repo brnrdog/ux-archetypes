@@ -8,6 +8,7 @@ summary: A visual indicator of how far a task has advanced toward completion.
 since: 0.2.0
 updated: 2026-07-16
 tags: [feedback, status, loading, progress]
+implementation: Progress.res
 aliases: [progress-bar, meter, loader-bar]
 composedOf: []
 usedBy: [form, card, dialog, data-table, sidebar]

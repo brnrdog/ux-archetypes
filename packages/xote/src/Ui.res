@@ -18,6 +18,11 @@ let eventKey: Dom.event => string = %raw(`(e) => (e && e.key) || ""`)
 // Focus an element by id (deferred a tick so freshly-rendered nodes exist).
 let focusById: string => unit = %raw(`(id) => setTimeout(() => { const el = document.getElementById(id); if (el) el.focus(); }, 0)`)
 
+// Set the DOM `indeterminate` property on a checkbox by id (deferred a tick so
+// freshly-rendered nodes exist). Indeterminate has no HTML attribute — it is
+// property-only, so it can't be expressed as a JSX attribute.
+let setIndeterminateById: (string, bool) => unit = %raw(`(id, v) => setTimeout(() => { const el = document.getElementById(id); if (el) el.indeterminate = v; }, 0)`)
+
 // Register a global Escape handler; returns a disposer.
 let onEscape: (unit => unit) => (unit => unit) = %raw(`(cb) => { const h = (e) => { if (e.key === 'Escape') cb(); }; window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h); }`)
 

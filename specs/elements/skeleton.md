@@ -8,6 +8,7 @@ summary: A placeholder that mirrors the shape of content while it loads.
 since: 0.2.0
 updated: 2026-07-16
 tags: [loading, placeholder, feedback, perceived-performance]
+implementation: Skeleton.res
 aliases: [placeholder, shimmer, loading-placeholder]
 composedOf: []
 usedBy: [card, data-table, list, avatar, dashboard]

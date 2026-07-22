@@ -8,6 +8,7 @@ summary: A multi-line field for entering and editing longer free-form text.
 since: 0.2.0
 updated: 2026-07-16
 tags: [form, field, control, text, multiline]
+implementation: Textarea.res
 aliases: [multiline-input, text-area]
 composedOf: []
 usedBy: [form, field, dialog, card]

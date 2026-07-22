@@ -6,9 +6,12 @@
  * shared tokens. Run `npm run tokens` to regenerate. */
 @import "./tokens.generated.css";
 
-/* Scan the ReScript sources and their compiled output for class names. */
+/* Scan the ReScript sources and their compiled output for class names — the
+ * website's own and the @xpecs/xote component library's, so classes used only
+ * inside a library component (border-status-*, …) still generate utilities. */
 @source "./**/*.res";
 @source "./**/*.res.mjs";
+@source "../../packages/xote/src/**/*.res";
 
 html {
   scroll-behavior: smooth;

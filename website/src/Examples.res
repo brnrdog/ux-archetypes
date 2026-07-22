@@ -111,8 +111,8 @@ module CheckboxEx = {
 module SwitchEx = {
   @jsx.component
   let make = () => {
-    let on = Signal.make(false)
-    <Switch on label="Airplane mode" />
+    let checked = Signal.make(false)
+    <Switch checked label="Airplane mode" />
   }
 }
 
@@ -259,9 +259,17 @@ module ToggleEx = {
 module ToggleGroupEx = {
   @jsx.component
   let make = () => {
-    let value = Signal.make("center")
+    let value = Signal.make(["center"])
+    let format = Signal.make(["bold"])
     let opts = [("left", "Left"), ("center", "Center"), ("right", "Right")]
-    <ToggleGroup value options=opts />
+    <div class="space-y-3">
+      <ToggleGroup value options=opts />
+      <ToggleGroup
+        type_=#multiple
+        value=format
+        options=[("bold", "Bold"), ("italic", "Italic"), ("underline", "Underline")]
+      />
+    </div>
   }
 }
 
@@ -1394,7 +1402,7 @@ module Settings = {
     let row = (text, sig) =>
       <div class="flex items-center justify-between">
         <span class="text-sm text-neutral-800"> <View.Text> {text} </View.Text> </span>
-        <Switch on={sig} />
+        <Switch checked={sig} />
       </div>
     <div class="w-full max-w-lg space-y-5 rounded-lg border border-neutral-200 bg-surface p-6">
       <div>

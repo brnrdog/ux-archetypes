@@ -289,7 +289,7 @@ module Auth = {
         <Field label="Email" for_="sc-email"> <Input id="sc-email" type_="email" placeholder="you@example.com" /> </Field>
         <Field label="Password" for_="sc-pass"> <Input id="sc-pass" type_="password" placeholder="••••••••" /> </Field>
         <div class="flex items-center justify-between text-sm">
-          <Switch on={remember} label="Remember me" />
+          <Switch checked={remember} label="Remember me" />
           <Link href="#"> <View.Text> "Forgot?" </View.Text> </Link>
         </div>
         <Button extraClass="w-full"> <View.Text> "Sign in" </View.Text> </Button>
@@ -323,7 +323,7 @@ module SettingsPage = {
           <p class="text-sm font-medium text-ink"> <View.Text> title </View.Text> </p>
           <p class="text-xs text-muted"> <View.Text> desc </View.Text> </p>
         </div>
-        <Switch on={sig} />
+        <Switch checked={sig} />
       </div>
     <div class="bg-paper text-ink">
       <header class="border-b border-border bg-surface px-6 py-4">

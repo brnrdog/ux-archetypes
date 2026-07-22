@@ -8,6 +8,7 @@ summary: A segmented field for entering a short verification code one character 
 since: 0.2.0
 updated: 2026-07-16
 tags: [form, field, control, verification, security]
+implementation: InputOtp.res
 aliases: [otp-input, pin-input, code-input, verification-code]
 composedOf: []
 usedBy: [form, sign-in, dialog]

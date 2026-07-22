@@ -1,8 +1,13 @@
 // Checkbox — a controlled tick box bound to a signal, with an optional label and
 // description. Implements the `checkbox` spec.
+
+// Unique ids for indeterminate boxes — the DOM property is set post-render.
+let seq = ref(0)
+
 @jsx.component
 let make = (
   ~checked: Signal.t<bool>,
+  ~indeterminate: bool=false,
   ~disabled: bool=false,
   ~required: bool=false,
   ~label: string="",
@@ -16,9 +21,21 @@ let make = (
     | None => ()
     }
   }
+  // `indeterminate` is a property-only DOM state (announced as "mixed"), so an
+  // indeterminate box gets a generated id and the property is set after render.
+  // The browser clears it on the first user toggle, as the spec expects.
+  let id = if indeterminate {
+    seq := seq.contents + 1
+    let id = "xpecs-checkbox-" ++ Int.toString(seq.contents)
+    Ui.setIndeterminateById(id, true)
+    Some(id)
+  } else {
+    None
+  }
   <label class="flex items-start gap-3">
     <input
       type_="checkbox"
+      ?id
       checked={Prop.signal(checked)}
       disabled
       required

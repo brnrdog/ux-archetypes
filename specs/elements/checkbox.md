@@ -8,6 +8,7 @@ summary: A control for toggling a single option on or off, or selecting several 
 since: 0.2.0
 updated: 2026-07-16
 tags: [form, control, selection, boolean]
+implementation: Checkbox.res
 aliases: [check, tickbox]
 composedOf: []
 usedBy: [form, field, data-table, dropdown-menu]

@@ -8,6 +8,7 @@ summary: A control for choosing a value or range by dragging a handle along a tr
 since: 0.2.0
 updated: 2026-07-16
 tags: [form, control, range, input]
+implementation: Slider.res
 aliases: [range, range-slider]
 composedOf: []
 usedBy: [form, field, settings, data-table]

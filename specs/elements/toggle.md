@@ -8,6 +8,7 @@ summary: A two-state button that can be turned on or off, often used in toolbars
 since: 0.2.0
 updated: 2026-07-16
 tags: [control, button, state, toolbar]
+implementation: Toggle.res
 aliases: [toggle-button, pressed-button]
 composedOf: []
 usedBy: [toggle-group, toolbar, menubar]

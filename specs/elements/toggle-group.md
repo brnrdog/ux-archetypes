@@ -8,6 +8,7 @@ summary: A set of toggles acting as a single control for single- or multi-select
 since: 0.2.0
 updated: 2026-07-16
 tags: [control, toolbar, selection, segmented]
+implementation: ToggleGroup.res
 aliases: [segmented-control, button-group-toggle]
 composedOf: [toggle]
 usedBy: [toolbar, menubar, data-table]

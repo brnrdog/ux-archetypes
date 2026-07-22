@@ -1,7 +1,7 @@
 // Alert — an inline message drawing attention to contextual information. The
 // `variant` type comes from the spec's `## API` contract (Contracts.res),
-// so the compiler enforces the spec's allowed severities. Monochrome baseline:
-// severity is conveyed by fill weight, not hue.
+// so the compiler enforces the spec's allowed severities. Severity is conveyed
+// by the semantic status hues (and the glyph, so color is never the only cue).
 @jsx.component
 let make = (
   ~variant: Contracts.Alert.variant=#info,

@@ -8,6 +8,7 @@ summary: A control that toggles a single setting on or off with an immediate eff
 since: 0.2.0
 updated: 2026-07-16
 tags: [form, control, toggle, boolean, setting]
+implementation: Switch.res
 aliases: [toggle-switch, on-off]
 composedOf: [label]
 usedBy: [form, field, settings, sidebar]

@@ -8,6 +8,7 @@ summary: A layout primitive that constrains content to a fixed width-to-height p
 since: 0.2.0
 updated: 2026-07-16
 tags: [layout, media, structure, responsive]
+implementation: AspectRatio.res
 aliases: [ratio-box, media-box]
 composedOf: []
 usedBy: [card, carousel, avatar, landing-page]
