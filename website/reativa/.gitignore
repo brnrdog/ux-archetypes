@@ -1,1 +1,3 @@
+# reativa clone + Melange build output, produced by `npm run reativa`.
+.build/
 _build/

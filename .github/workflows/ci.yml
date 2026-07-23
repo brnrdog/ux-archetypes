@@ -19,6 +19,23 @@ jobs:
       - name: Install
         run: npm ci
 
+      # OCaml toolchain for the reativa (Melange) examples, so the "Reativa"
+      # tab's bundle is compiled and type-checked in CI (not needed for the
+      # local website build, which uses a checked-in placeholder).
+      - name: Set up OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: "5.2"
+          dune-cache: true
+
+      - name: Install Melange toolchain
+        run: opam install -y dune melange mlx
+
+      # Clones reativa (pinned), compiles the .mlx examples inside its dune
+      # project, and bundles the output to website/src/reativa.bundle.js.
+      - name: Build reativa bundle (OCaml → esbuild)
+        run: npm run reativa --workspace xpecs-website
+
       # Build the publishable packages (tokens → xote → skill).
       - name: Build packages
         run: npm run build:packages

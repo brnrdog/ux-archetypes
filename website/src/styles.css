@@ -16,8 +16,9 @@
  * their Tailwind classes as string literals in this bundle — scan it too so
  * any class used only by a reativa example still generates a utility. */
 @source "./reativa.bundle.js";
-/* And the reativa source, so utilities exist even before the bundle is built. */
-@source "../reativa/**/*.mlx";
+/* And the reativa source, so utilities exist even before the bundle is built.
+ * Top-level only — avoid recursing into the .build/ reativa clone. */
+@source "../reativa/*.mlx";
 
 html {
   scroll-behavior: smooth;
