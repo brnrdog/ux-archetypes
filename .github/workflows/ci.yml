@@ -28,11 +28,11 @@ jobs:
           ocaml-compiler: "5.2"
           dune-cache: true
 
-      - name: Install Melange toolchain + reativa
-        run: |
-          opam install -y dune melange mlx
-          opam pin add -y reativa https://github.com/brnrdog/reativa.git
+      - name: Install Melange toolchain
+        run: opam install -y dune melange mlx
 
+      # Clones reativa (pinned), compiles the .mlx examples inside its dune
+      # project, and bundles the output to website/src/reativa.bundle.js.
       - name: Build reativa bundle (OCaml → esbuild)
         run: npm run reativa --workspace xpecs-website
 
