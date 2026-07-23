@@ -35,7 +35,11 @@ let make ?(label = "") ?(disabled = false) ~checked () =
       "button" [ knob_node ]
   in
   let label_cls = if disabled then "flex items-center gap-3 cursor-not-allowed" else "flex items-center gap-3" in
-  <label className=label_cls>
-    (control)
-    (if label = "" then View.empty else <span className="text-sm text-neutral-800">(label)</span>)
-  </label>
+  View.element
+    ~attrs:[ View.Attr.className (View.static label_cls) ]
+    "label"
+    [
+      control;
+      (if label = "" then View.empty
+       else <span className="text-sm text-neutral-800">(label)</span>);
+    ]

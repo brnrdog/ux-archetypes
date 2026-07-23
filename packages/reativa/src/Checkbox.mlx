@@ -51,7 +51,7 @@ let make ?(indeterminate = false) ?(disabled = false) ?(required = false) ?(labe
          else <span className="block text-xs text-neutral-500">(description)</span>)
       </span>
   in
-  <label className="flex items-start gap-3">
-    (input_node)
-    (text_node)
-  </label>
+  View.element
+    ~attrs:[ View.Attr.className (View.static "flex items-start gap-3") ]
+    "label"
+    [ input_node; text_node ]
