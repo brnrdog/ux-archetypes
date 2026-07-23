@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping grow the Xpecs collection. The goal is a set of
+Thanks for helping grow the Prescriptive collection. The goal is a set of
 patterns that stay **consistent**, **stack-agnostic**, and **useful to both
 humans and AI agents**. Consistency is the whole value, so the process is mostly
 about keeping the shape uniform.

@@ -18,7 +18,7 @@ let make = (
 ) => {
   let groupName = if name == "" {
     seq := seq.contents + 1
-    "xpecs-radio-group-" ++ Int.toString(seq.contents)
+    "prescriptive-radio-group-" ++ Int.toString(seq.contents)
   } else {
     name
   }

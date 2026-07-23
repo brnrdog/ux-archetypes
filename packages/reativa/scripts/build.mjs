@@ -32,7 +32,7 @@ const srcDir = resolve(pkgDir, "src");
 const buildDir = resolve(pkgDir, ".build");
 const clone = resolve(buildDir, "reativa");
 // The subdirectory inside the reativa dune project we drop our sources into.
-const exDir = resolve(clone, "xpecs_reativa");
+const exDir = resolve(clone, "prescriptive_reativa");
 const distDir = resolve(pkgDir, "dist");
 
 const sh = (file, args, cwd) => execFileSync(file, args, { cwd, stdio: "inherit" });
@@ -63,7 +63,7 @@ sh("opam", ["exec", "--", "dune", "build", "@melange"], clone);
 //    mirrors the source path under the target dir, so the entry is normally
 //    <target>/<emit-dir>/output/Registry.js — but locate it defensively in case
 //    the nesting differs across dune/melange versions.
-const outputRoot = resolve(clone, "_build/default/xpecs_reativa/output");
+const outputRoot = resolve(clone, "_build/default/prescriptive_reativa/output");
 const findEntry = (dir) => {
   for (const name of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, name.name);

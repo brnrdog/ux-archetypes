@@ -1,7 +1,7 @@
 {
   "name": "@prescriptive/xote",
   "version": "0.1.0",
-  "description": "Accessible UI components for Xote/ReScript that implement the Xpecs contracts. Styled against @prescriptive/tokens; prop types are generated from the spec API contracts, so the implementation can't drift from the spec.",
+  "description": "Accessible UI components for Xote/ReScript that implement the Prescriptive contracts. Styled against @prescriptive/tokens; prop types are generated from the spec API contracts, so the implementation can't drift from the spec.",
   "license": "MIT",
   "author": "brnrdog",
   "keywords": [
@@ -10,7 +10,7 @@
     "components",
     "ui",
     "design-system",
-    "ux-archetypes",
+    "prescriptive",
     "accessibility"
   ],
   "type": "module",
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/brnrdog/ux-archetypes",
+    "url": "https://github.com/brnrdog/prescriptive",
     "directory": "packages/xote"
   },
   "publishConfig": {

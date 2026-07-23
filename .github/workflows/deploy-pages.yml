@@ -35,7 +35,7 @@ jobs:
           node-version: 20
           cache: npm
 
-      # Install the whole workspace so the website can resolve @xpecs/*.
+      # Install the whole workspace so the website can resolve @prescriptive/*.
       - name: Install
         run: npm ci
 
@@ -55,14 +55,14 @@ jobs:
       # Clones reativa (pinned), compiles the .mlx examples inside its dune
       # project, and bundles the output to website/src/reativa.bundle.js.
       - name: Build reativa bundle (OCaml → esbuild)
-        run: npm run reativa --workspace xpecs-website
+        run: npm run reativa --workspace prescriptive-website
 
       # Build the packages the website consumes (tokens → xote), then the site.
       - name: Build packages
         run: npm run build:packages
 
       - name: Build website
-        run: npm run build --workspace xpecs-website
+        run: npm run build --workspace prescriptive-website
         env:
           # Project site path = repository name.
           BASE_PATH: /${{ github.event.repository.name }}/

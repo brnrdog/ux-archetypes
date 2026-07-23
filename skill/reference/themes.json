@@ -1,5 +1,5 @@
 {
-  "$description": "Named theme presets for the Xpecs tokens. A theme carries the palette identity (accent, status, radius, font, and a light-mode tint of the neutral ramp) as a map of token paths to values. `modes` are orthogonal light/dark variants applied on top of any theme: `dark` inverts the neutral ramp so surfaces go dark and text light, while the theme's accent/status/radius/font are preserved. `swatches` are representative colors for a preview chip. Consumed by the website (see website/scripts/generate-themes.mjs) and by any tool that wants ready-made themes.",
+  "$description": "Named theme presets for the Prescriptive tokens. A theme carries the palette identity (accent, status, radius, font, and a light-mode tint of the neutral ramp) as a map of token paths to values. `modes` are orthogonal light/dark variants applied on top of any theme: `dark` inverts the neutral ramp so surfaces go dark and text light, while the theme's accent/status/radius/font are preserved. `swatches` are representative colors for a preview chip. Consumed by the website (see website/scripts/generate-themes.mjs) and by any tool that wants ready-made themes.",
   "modes": {
     "dark": {
       "color.neutral.0": "#100f0d",

@@ -6,7 +6,7 @@ and GitHub Actions. Four packages are published from this monorepo; the
 
 | Package | Contents |
 | ------- | -------- |
-| `xpecs` | The spec catalogue + tokens (the repo root). |
+| `prescriptive` | The spec catalogue + tokens (the repo root). |
 | `@prescriptive/tokens` | CSS variables, Tailwind preset, theme overlays, JS export. |
 | `@prescriptive/xote` | The Xote/ReScript component library. |
 | `@prescriptive/skill` | The Agent Skill (`SKILL.md` + compiled `reference/`). |
@@ -14,7 +14,7 @@ and GitHub Actions. Four packages are published from this monorepo; the
 ## One-time setup
 
 1. **npm scope.** The publishing npm account must own the `@prescriptive` scope
-   (create an org named `xpecs`, or publish under an account that owns it). The
+   (create an org named `prescriptive`, or publish under an account that owns it). The
    scoped packages already declare `publishConfig.access = public`.
 2. **`NPM_TOKEN` secret.** Add a repository secret `NPM_TOKEN` (Settings →
    Secrets → Actions) containing an npm **Automation** token with publish

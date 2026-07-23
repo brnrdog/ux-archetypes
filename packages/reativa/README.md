@@ -1,7 +1,7 @@
 # @prescriptive/reativa
 
 Accessible UI components for **[reativa](https://github.com/brnrdog/reativa)**
-(OCaml + Melange) that implement the [Xpecs](https://github.com/brnrdog/ux-archetypes)
+(OCaml + Melange) that implement the [Prescriptive](https://github.com/brnrdog/prescriptive)
 contracts — the ReasonML/OCaml sibling of
 [`@prescriptive/xote`](../xote). Every element, component, and block is written in
 `.mlx` (JSX-for-OCaml) over `Reativa.View`, styled against

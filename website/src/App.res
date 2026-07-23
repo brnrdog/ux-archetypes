@@ -12,7 +12,7 @@ let traitById = id => TraitsData.all->Array.find(t => t.id == id)
 let specsWithTrait = tid => all->Array.filter(a => a.traits->Array.includes(tid))
 let layerPlural = layer => layer ++ "s"
 let docUrl = a =>
-  "https://github.com/brnrdog/ux-archetypes/blob/main/specs/" ++
+  "https://github.com/brnrdog/prescriptive/blob/main/specs/" ++
   layerPlural(a.layer) ++ "/" ++ a.id ++ ".md"
 
 let matches = (a, q) =>
@@ -261,7 +261,7 @@ module Topbar = {
       </IconButton>
       <Router.Link to="/" class="flex items-center gap-2">
         <span class="flex size-7 items-center justify-center rounded-lg bg-action text-xs font-bold text-on-action"> <View.Text> "X" </View.Text> </span>
-        <span class="hidden text-sm font-semibold tracking-tight text-neutral-900 sm:block"> <View.Text> "Xpecs" </View.Text> </span>
+        <span class="hidden text-sm font-semibold tracking-tight text-neutral-900 sm:block"> <View.Text> "Prescriptive" </View.Text> </span>
       </Router.Link>
       <div class="flex flex-1 justify-center">
         <button
@@ -273,7 +273,7 @@ module Topbar = {
         </button>
       </div>
       <Link
-        href="https://github.com/brnrdog/ux-archetypes"
+        href="https://github.com/brnrdog/prescriptive"
         variant=#muted
         newTab=true
         extraClass="hidden items-center gap-1.5 text-sm sm:inline-flex">
@@ -506,7 +506,7 @@ module Guide = {
     <div class="mx-auto max-w-3xl px-5 sm:px-8 py-14">
       <Badge variant=#outline> <View.Text> "Get started" </View.Text> </Badge>
       <h1 class="mt-5 text-4xl font-bold tracking-tight text-neutral-900">
-        <View.Text> "Xpecs" </View.Text>
+        <View.Text> "Prescriptive" </View.Text>
       </h1>
       <p class="mt-4 text-lg leading-relaxed text-neutral-600">
         <View.Text>
@@ -521,7 +521,7 @@ module Guide = {
       <Section title="Why">
         <p>
           <View.Text>
-            "Most UI is rebuilt from scratch on every project and every framework, and the accessibility and edge cases are reinvented (often incompletely) each time. Xpecs captures the durable part — what a pattern "
+            "Most UI is rebuilt from scratch on every project and every framework, and the accessibility and edge cases are reinvented (often incompletely) each time. Prescriptive captures the durable part — what a pattern "
           </View.Text>
           <em class="text-neutral-900"> <View.Text> "is" </View.Text> </em>
           <View.Text>
@@ -590,9 +590,9 @@ module Guide = {
         <p class="pt-2 font-medium text-neutral-900"> <View.Text> "2 · Consume" </View.Text> </p>
         <p>
           <View.Text> "Install the package (" </View.Text>
-          <code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-[13px] text-neutral-800"> <View.Text> "npm i xpecs" </View.Text> </code>
+          <code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-[13px] text-neutral-800"> <View.Text> "npm i prescriptive" </View.Text> </code>
           <View.Text> ") to read the specs, tokens, and contracts in your build tooling — or add the bundled " </View.Text>
-          <Link href="https://github.com/brnrdog/ux-archetypes/blob/main/skill/SKILL.md" newTab=true> <View.Text> "Agent Skill" </View.Text> </Link>
+          <Link href="https://github.com/brnrdog/prescriptive/blob/main/skill/SKILL.md" newTab=true> <View.Text> "Agent Skill" </View.Text> </Link>
           <View.Text> " so an AI implements to the contracts for you." </View.Text>
         </p>
         <p class="pt-2 font-medium text-neutral-900"> <View.Text> "3 · Implement" </View.Text> </p>
@@ -606,7 +606,7 @@ module Guide = {
         <Router.Link to="/tokens">
           <Button variant=#secondary> <View.Text> "Design tokens" </View.Text> </Button>
         </Router.Link>
-        <Link href="https://github.com/brnrdog/ux-archetypes" newTab=true variant=#muted extraClass="inline-flex items-center gap-1.5 self-center text-sm">
+        <Link href="https://github.com/brnrdog/prescriptive" newTab=true variant=#muted extraClass="inline-flex items-center gap-1.5 self-center text-sm">
           <Icon name="github" size=#sm />
           <View.Text> "GitHub" </View.Text>
         </Link>
@@ -1009,7 +1009,7 @@ module Tokens = {
       </div>
       <p class="mt-4 text-lg leading-relaxed text-neutral-600">
         <View.Text> "The primitives every spec is built on — generated from the framework's " </View.Text>
-        <Link href="https://github.com/brnrdog/ux-archetypes/blob/main/tokens/tokens.json" newTab=true>
+        <Link href="https://github.com/brnrdog/prescriptive/blob/main/tokens/tokens.json" newTab=true>
           <View.Text> "tokens.json" </View.Text>
         </Link>
         <View.Text> ". Edit any value below and watch it cascade through the whole site — the theme is driven entirely by these. Changes persist locally." </View.Text>

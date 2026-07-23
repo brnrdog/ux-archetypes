@@ -1,7 +1,7 @@
 # @prescriptive/xote
 
 Accessible UI components for [Xote](https://xote.dev) / ReScript that implement
-the [Xpecs](https://github.com/brnrdog/ux-archetypes) contracts. Each
+the [Prescriptive](https://github.com/brnrdog/prescriptive) contracts. Each
 component's prop types are **generated from the spec's `## API` contract**
 (`Contracts.res`), so the compiler enforces that the implementation can't drift
 from the spec's allowed values.

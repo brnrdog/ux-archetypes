@@ -1,7 +1,7 @@
 {
   "name": "@prescriptive/reativa",
   "version": "0.1.0",
-  "description": "Accessible UI components for Reativa (OCaml + Melange) that implement the Xpecs contracts — the ReasonML/OCaml sibling of @prescriptive/xote. Styled against @prescriptive/tokens; prop types are generated from the spec API contracts, so the implementation can't drift from the spec.",
+  "description": "Accessible UI components for Reativa (OCaml + Melange) that implement the Prescriptive contracts — the ReasonML/OCaml sibling of @prescriptive/xote. Styled against @prescriptive/tokens; prop types are generated from the spec API contracts, so the implementation can't drift from the spec.",
   "license": "MIT",
   "author": "brnrdog",
   "keywords": [
@@ -12,7 +12,7 @@
     "components",
     "ui",
     "design-system",
-    "ux-archetypes",
+    "prescriptive",
     "accessibility"
   ],
   "type": "module",
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/brnrdog/ux-archetypes",
+    "url": "https://github.com/brnrdog/prescriptive",
     "directory": "packages/reativa"
   },
   "publishConfig": {

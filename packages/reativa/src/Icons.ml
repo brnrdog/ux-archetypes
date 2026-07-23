@@ -1,6 +1,6 @@
 [@@@warning "-a"]
 
-(* Icons — the same small outline icon set as @xpecs/xote's [Icons], in the
+(* Icons — the same small outline icon set as @prescriptive/xote's [Icons], in the
    Feather / Lucide visual language: every glyph is drawn on a 24×24 grid with
    no fill, 2px strokes, and round caps and joins, so it inherits the
    surrounding text color and optical weight. The geometry lives here as data

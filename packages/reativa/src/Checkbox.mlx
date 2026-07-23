@@ -22,7 +22,7 @@ let make ?(indeterminate = false) ?(disabled = false) ?(required = false) ?(labe
   let id =
     if indeterminate then begin
       incr seq;
-      let id = "xpecs-reativa-checkbox-" ^ string_of_int !seq in
+      let id = "prescriptive-reativa-checkbox-" ^ string_of_int !seq in
       Ui.set_indeterminate_by_id id true;
       Some id
     end

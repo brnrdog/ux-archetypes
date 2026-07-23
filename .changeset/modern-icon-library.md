@@ -13,6 +13,6 @@ Add a modern SVG icon library with an `Icon` component.
 - **`@prescriptive/xote`**: `Alert` now renders its `icon` as a glyph from the icon set
   (the prop takes an icon name) and shows a sensible per-variant default when none
   is given.
-- **`xpecs`**: the `icon` element spec now types `size` as an enum and maps its
+- **`prescriptive`**: the `icon` element spec now types `size` as an enum and maps its
   implementation to `Icon.res`, so the component is compiler-checked against the
   contract.

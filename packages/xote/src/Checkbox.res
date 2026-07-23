@@ -26,7 +26,7 @@ let make = (
   // The browser clears it on the first user toggle, as the spec expects.
   let id = if indeterminate {
     seq := seq.contents + 1
-    let id = "xpecs-checkbox-" ++ Int.toString(seq.contents)
+    let id = "prescriptive-checkbox-" ++ Int.toString(seq.contents)
     Ui.setIndeterminateById(id, true)
     Some(id)
   } else {

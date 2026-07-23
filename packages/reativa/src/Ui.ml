@@ -2,7 +2,7 @@
 
 (* Shared monochrome design tokens (Tailwind class strings) and small DOM
    helpers used across the reativa example implementations — the OCaml
-   counterpart of @xpecs/xote's [Ui] module.
+   counterpart of @prescriptive/xote's [Ui] module.
 
    The class strings are the same token-driven Tailwind utilities the Xote
    components use (bg-action, text-on-action, border-status-*, …) so editing a

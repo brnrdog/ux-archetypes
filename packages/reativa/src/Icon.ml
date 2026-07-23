@@ -42,6 +42,6 @@ let make ?(size : Contracts.Icon.size = `md) ?(label = "") ?(extra_class = "") ~
   let markup = Icons.svg ~dims ~extra ~role_attrs body in
   View.dyn (fun () ->
       incr counter;
-      let id = "xpecs-reativa-icon-" ^ string_of_int !counter in
+      let id = "prescriptive-reativa-icon-" ^ string_of_int !counter in
       Ui.set_inner_html_by_id id markup;
       View.element ~attrs:[ View.Attr.id (View.static id) ] "span" [])

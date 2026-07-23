@@ -7,7 +7,7 @@
 @import "./tokens.generated.css";
 
 /* Scan the ReScript sources and their compiled output for class names — the
- * website's own and the @xpecs/xote component library's, so classes used only
+ * website's own and the @prescriptive/xote component library's, so classes used only
  * inside a library component (border-status-*, …) still generate utilities. */
 @source "./**/*.res";
 @source "./**/*.res.mjs";

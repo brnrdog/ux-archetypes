@@ -1,6 +1,6 @@
 # @prescriptive/tokens
 
-The design tokens of [Xpecs](https://github.com/brnrdog/ux-archetypes)
+The design tokens of [Prescriptive](https://github.com/brnrdog/prescriptive)
 as ready-to-consume artifacts — CSS custom properties, a Tailwind v4 preset,
 theme overlays, and a typed JS export. Generated from the framework's W3C DTCG
 source of truth, so they never drift from the specs.

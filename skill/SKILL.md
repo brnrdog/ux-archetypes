@@ -1,9 +1,9 @@
 ---
-name: xpecs
+name: prescriptive
 description: Implement UI to a technology-agnostic spec. Use when building or reviewing user-interface elements, components, page sections, pages, or flows (buttons, inputs, dialogs, tabs, menus, forms, navbars, cards, data tables, etc.), a design system, or design tokens — in any framework. Provides each pattern's interface contract (props, slots, events, states), accessibility and keyboard behavior, structural composition, shared behavior traits, and a themeable design-token system, so the implementation is correct and consistent instead of improvised.
 ---
 
-# Xpecs
+# Prescriptive
 
 A catalogue of **UX specs** — technology-agnostic definitions of UI patterns
 — plus a design-token system. Use it to implement UI **to a contract** rather

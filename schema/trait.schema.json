@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/brnrdog/ux-archetypes/schema/trait.schema.json",
+  "$id": "https://github.com/brnrdog/prescriptive/schema/trait.schema.json",
   "title": "UX Behavior Trait metadata",
   "description": "Frontmatter for a behavior trait — a reusable, cross-cutting interaction contract (dismiss, focus-trap, anchored positioning, roving focus, typeahead) that many specs share instead of re-describing it each time.",
   "type": "object",

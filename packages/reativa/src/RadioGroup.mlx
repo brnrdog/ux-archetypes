@@ -15,7 +15,7 @@ let make ?(legend = "") ?(name = "") ?(orientation : Contracts.RadioGroup.orient
   let group_name =
     if name = "" then begin
       incr seq;
-      "xpecs-reativa-radio-group-" ^ string_of_int !seq
+      "prescriptive-reativa-radio-group-" ^ string_of_int !seq
     end
     else name
   in

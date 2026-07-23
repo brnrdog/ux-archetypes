@@ -34,7 +34,7 @@ jobs:
       # Clones reativa (pinned), compiles the .mlx examples inside its dune
       # project, and bundles the output to website/src/reativa.bundle.js.
       - name: Build reativa bundle (OCaml → esbuild)
-        run: npm run reativa --workspace xpecs-website
+        run: npm run reativa --workspace prescriptive-website
 
       # Build the publishable packages (tokens → xote → skill).
       - name: Build packages
@@ -42,4 +42,4 @@ jobs:
 
       # Build the website, which runs every conformance gate (npm run checks).
       - name: Build website + run gates
-        run: npm run build --workspace xpecs-website
+        run: npm run build --workspace prescriptive-website
